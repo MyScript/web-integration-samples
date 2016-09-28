@@ -26,20 +26,20 @@ Thumbs.db
 ######################
 # Directories
 ######################
-/**/MyScript Math SampleWeb/bower_components
-/**/MyScript Math SampleWeb/node_modules
-/**/MyScript Math SampleWeb/obj
-/**/MyScript Math Sample/obj
-/**/MyScript Math Sample/pkg
-/**/MyScript Math Sample/bin/**/*
-/**/MyScript Math Sample/pkgobj
-/**/MyScript Math SampleWeb/bin
-/**/MyScript Math SampleWeb/node_modules/
-/**/MyScript Math Sample/bin/Release/
-/**/MyScript Math Sample/obj/Debug/TempPE/
-/**/MyScript Math Sample/pkg/
-/**/MyScript Math Sample/pkgobj/
-/**/MyScript Math SampleWeb/SharePointTaskPaneAddInWebFormItem/
-/**/MyScript Math SampleWeb/bower_components/
-/**/MyScript Math SampleWeb/obj/Debug/TempPE/
-/**/MyScript Math SampleWeb/dist/
+/**/*/MyScript Math SampleWeb/bower_components
+/**/*/MyScript Math SampleWeb/node_modules
+/**/*/MyScript Math SampleWeb/obj
+/**/*/MyScript Math Sample/obj
+/**/*/MyScript Math Sample/pkg
+/**/*/MyScript Math Sample/bin/**/*
+/**/*/MyScript Math Sample/pkgobj
+/**/*/MyScript Math SampleWeb/bin
+/**/*/MyScript Math SampleWeb/node_modules/
+/**/*/MyScript Math Sample/bin/Release/
+/**/*/MyScript Math Sample/obj/Debug/TempPE/
+/**/*/MyScript Math Sample/pkg/
+/**/*/MyScript Math Sample/pkgobj/
+/**/*/MyScript Math SampleWeb/SharePointTaskPaneAddInWebFormItem/
+/**/*/MyScript Math SampleWeb/bower_components/
+/**/*/MyScript Math SampleWeb/obj/Debug/TempPE/
+/**/*/MyScript Math SampleWeb/dist/
