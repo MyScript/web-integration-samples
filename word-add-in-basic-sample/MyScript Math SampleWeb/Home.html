@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Word Add-In with Commands Sample</title>
+
+    <script src="Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="Scripts/FabricUI/MessageBanner.js" type="text/javascript"></script>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+
+    <!-- Pour activer le débogage hors connexion à l'aide d'une référence locale à Office.js, utilisez :                        -->
+    <!-- <script src="Scripts/Office/MicrosoftAjax.js" type="text/javascript"></script>  -->
+    <!-- <script src="Scripts/Office/1/office.js" type="text/javascript"></script>  -->
+
+    <link href="Home.css" rel="stylesheet" type="text/css" />
+
+    <!-- Pour plus d'informations sur la structure de l'IU (interface utilisateur) Office, accédez à http://aka.ms/office-ui-fabric. -->
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.1.0/fabric.min.css">
+    <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/2.1.0/fabric.components.min.css">
+    
+    <!-- Pour activer l'utilisation hors connexion de la structure de l'IU (interface utilisateur) Office, utilisez : -->
+    <!-- link rel="stylesheet" href="Content/fabric.min.css" -->
+    <!-- link rel="stylesheet" href="Content/fabric.components.min.css" -->
+
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../bower_components/myscript-math-web/myscript-math-web.html">
+    <style>
+        #contentpan {
+            height: calc(100vh - 50px);
+        }
+
+        myscript-math-web {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="contentpan">
+        <myscript-math-web id="mathInput"
+                           hidebuttons
+                           host="cloud.myscript.com"
+                           applicationkey="ec5e1610-8449-4a42-8149-1591b59f7ebb"
+                           hmackey="9b32e6d3-aca5-4290-a8b6-f6a4dcb952c7"
+                           resulttypes='["LATEX","OFFICEOPENXMLMATH"]'>
+        </myscript-math-web>
+    </div>
+    <button class="ms-Button ms-Button--primary" id="insert-button">Insert</button> 
+    <script>
+       //Office API have to be initialized to be able to insert content to the document
+       Office.initialize = function() {
+           //Adding click behavior on button
+           $('#insert-button').on("click", function() {
+               var mathInput = document.querySelector('myscript-math-web');
+               var ooXmlRes = mathInput.result.OFFICEOPENXMLMATH;
+               if (ooXmlRes) {
+                   // Template is split in a begin and end part to ease the construction of a good officeXml fragment
+                   var officeOpenXmlTemplateStart =
+                       '<?xml version="1.0" encoding="UTF-8"?> <pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage"> <pkg:part pkg:name="/_rels/.rels" pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:padding="512"> <pkg:xmlData> <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"> <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/> </Relationships> </pkg:xmlData> </pkg:part> <pkg:part pkg:name="/word/document.xml" pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"> <pkg:xmlData> <w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"> <w:body> <w:p>';
+                   var officeOpenXmlTemplateEnd = '</w:p> </w:body> </w:document> </pkg:xmlData> </pkg:part> </pkg:package>';
+                   // We remove the xml declaration uneccesary here
+                   ooXmlRes = ooXmlRes.replace('<?xml version="1.0" encoding="UTF-8"?>', '');
+                   //Building the final math document fragment
+                   var officeOpenXmlFragment = officeOpenXmlTemplateStart +
+                       ooXmlRes +
+                       officeOpenXmlTemplateEnd;
+                   // http://dev.office.com/reference/add-ins/shared/document.setselecteddataasync
+                   Office.context.document.setSelectedDataAsync(officeOpenXmlFragment, {
+                       coercionType: Office.CoercionType.Ooxml
+                   });
+               } else {
+                   console.log("No office open xml result");
+               }
+           })
+       };
+    </script>
+</body>
+</html>
