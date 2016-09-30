@@ -1,6 +1,6 @@
-## OfficePlugin Math
+## Word add-in advanced sample
 
-###Installation
+### Installation
 You need to install in your windows box:
 - Viual Studio
 - Office
@@ -10,18 +10,15 @@ You need to install in your windows box:
 
 Checkout https://scm.corp.myscript.com/scm/ws/officeplugins.git
 
-Launch visual by opening MyScript Math Add-in/MyScript Math Add-in.csproj
-
+Launch visual by opening MyScript Math Sample.sln
 
 ### Testing the UI under Linux
-launch `make dev`
-Interaction with offcie will not work of course
 
+`cd MyScript\ Math\ SampleWeb`
+`npm install && bower install`
+`gulp serve`
 
-### Releasing
-
-`make docker` and `make deploy-registry`
-
+Interaction with office will not work of course
 
 ### Learn more
 
