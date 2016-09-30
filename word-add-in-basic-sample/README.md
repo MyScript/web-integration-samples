@@ -6,7 +6,7 @@ Basic sample of mathematical expressions handwriting recognition integration in 
 
 ### Installation
 You need to install in your windows box:
-- Viual Studio
+- Visual Studio
 - Office
 - https://www.visualstudio.com/en-us/features/office-tools-vs.aspx
 - NPM 4.0
