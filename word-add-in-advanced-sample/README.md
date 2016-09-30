@@ -1,5 +1,9 @@
 ## Word add-in advanced sample
 
+Advanced sample of mathematical expressions handwriting recognition integration in a Word add-in.
+
+![](word-addin.gif)
+
 ### Installation
 You need to install in your windows box:
 - Viual Studio
@@ -8,15 +12,15 @@ You need to install in your windows box:
 - NPM 4.0
 - Git
 
-Checkout https://scm.corp.myscript.com/scm/ws/officeplugins.git
+Checkout https://https://github.com/myscript/webcomponents-myscript-web-integration-samples.git
 
 Launch visual by opening MyScript Math Sample.sln
 
 ### Testing the UI under Linux
 
-`cd MyScript\ Math\ SampleWeb`
-`npm install && bower install`
-`gulp serve`
+* `cd MyScript\ Math\ SampleWeb`
+* `npm install && bower install`
+* `gulp serve`
 
 Interaction with office will not work of course
 
