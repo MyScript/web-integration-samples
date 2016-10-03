@@ -320,6 +320,6 @@ only screen and (-o-min-device-pixel-ratio: 13/10),
 only screen and (min-resolution: 120dpi)
 {
     canvas[id^=ms-rendering-canvas] {
-        background: url("./Images/texture.svg") center top;
+        background: url("./Images/texture.svg") center top !important;
     }
 }
