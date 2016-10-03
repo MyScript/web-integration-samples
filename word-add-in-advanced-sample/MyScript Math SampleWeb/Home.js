@@ -93,18 +93,14 @@
     // Copy your strokes to image in Word
     function copyImage() {
         hideMenu();
-        console.log("Copy strokes as an image");
         var imgBase64 = mathInput._myscriptCommonElement._inkPaper.getInkAsPng();
-        console.log(imgBase64);
-        imgBase64 = imgBase64.substring(imgBase64.indexOf(',') + 1);
-        console.log(imgBase64);
-        Office.context.document.setSelectedDataAsync(imgBase64,
-            { coercionType: Office.CoercionType.Image },
-            function (asyncResult) {
-                if (asyncResult.status == Office.AsyncResultStatus.Failed) {
-                    console.log('Error: ' + asyncResult.error.message);
-                }
-            });
+        if(imgBase64) {
+            imgBase64 = imgBase64.substring(imgBase64.indexOf(',') + 1);
+            Office.context.document.setSelectedDataAsync(imgBase64,
+                {coercionType: Office.CoercionType.Image});
+        } else {
+            console.log("Copy strokes as an image failed");
+        }
     }
 
     // Copy your handwriting recognize result to LaTeX in Word
