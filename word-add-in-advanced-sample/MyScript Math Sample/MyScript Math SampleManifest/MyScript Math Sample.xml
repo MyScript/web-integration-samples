@@ -20,7 +20,7 @@
   <DisplayName DefaultValue="MyScript Math Sample" />
   <Description DefaultValue="MyScript Math Sample"/>
 
-  <SupportUrl DefaultValue="https://support.myscript.com" />
+  <SupportUrl DefaultValue="https://dev.myscript.com/support/forum/" />
 
   <!-- Icône de votre complément. Utilisée dans les écrans d'installation et la boîte de dialogue des compléments. -->
   <IconUrl DefaultValue="~remoteAppUrl/Images/Button32x32.png" />
