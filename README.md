@@ -1,42 +1,13 @@
 # MyScript Web Integration Samples
 
-In this repository, you will find **samples** of mathematical expressions handwriting recognition integration.
+In this repository, you will find **integration samples** of myscript web APIs.
 
-To do this we use our myscript-math-web component in web application (whatever the JavaScript library you are using) to bring handwriting recognition. 
+## Integration samples list
+- __[word-add-in-basic-sample](./word-add-in-basic-sample) :__ The most basic integration of [myscript-math-web](https://github.com/MyScript/myscript-math-web) in a Microsoft Word add-in.
+- __[word-add-in-advanced-sample](./word-add-in-advanced-sample) :__ A more complte integration sample of [myscript-math-web](https://github.com/MyScript/myscript-math-web) in a Microsoft Word add-in. You can try it directly in Microsoft Word 2013 or newer version. Complete description available in [Microsoft Office Store]().
 
-It integrates all we need :
-
- * Signal capture,
- * Nice digital ink rendering,
- * Plug with MyScript CDK to bring Math handwriting recognition.
-
-## How to create your own handwriting recognition sample?
-
-You will find a quick tutorial [here](http://addresseDuTuto) to create your own Word add-in that use myscript-math-web.
-
-The aim is to show you how is it easy to add handwriting recognition with our web component.
-
-The word-add-in-basic-sample directory contains a basic sample Word add-in. You must arrive at this result after following our tutorial. 
-
-## Documentation
-
-The API Reference of myscript-math-web component used for creating our samples is available here: [https://myscript.github.io/myscript-math-web/](https://myscript.github.io/myscript-math-web/)
-
-## Contribute
-
-If you wish to contribute to webcomponents-myscript-web-integration-samples, feel free to fork it.
-
-Please sign our [Contributor License Agreement](CONTRIBUTING.md) before submitting your pull request.
-
-If you wish to contribute to myscript-math-web, feel free to fork it, fire `bower install` and use [polyserve](https://github.com/PolymerLabs/polyserve) as an HTTP server. The demo page (in `demo` directory) can help you make your first experimentation.
-
-Please sign our [Contributor License Agreement](CONTRIBUTING.md) before submitting your pull request.
-
-## Share your feedback
-
-Made a cool app with myscript-math-web? We would love to hear about it!
-
-We plan to showcase apps, so let us know by writing to [myapp@myscript.com](mailto://myapp@myscript.com)
+## Try the samples
+Once you have clone this repository, each sub-directories contains a README.md files with instructions to run the sample.
 
 ## License
 
