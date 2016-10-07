@@ -130,7 +130,7 @@
             var officeOpenXmlFragment = officeOpenXmlTemplateStart
                 + ooXmlRes
                 + officeOpenXmlTemplateEnd;
-            //console.log(officeOpenXmlFragment);
+
             Office.context.document.setSelectedDataAsync(officeOpenXmlFragment,
                 { coercionType: Office.CoercionType.Ooxml });
         } else {
