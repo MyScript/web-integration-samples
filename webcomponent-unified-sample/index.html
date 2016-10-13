@@ -182,6 +182,18 @@
             musicInput.removeAttribute('hidden');
             musicInput.clear();
             writeHere.removeAttribute('hidden');
+            musicInput.components = [new MyScript.MusicClefInputComponent({
+                value: {
+                    yAnchor: 160,
+                    octave: 0,
+                    symbol: 'G'
+                },
+                boundingBox: {
+                    x: 5,
+                    y: 72,
+                    height: 140
+                }
+            })];
         });
     });
 
