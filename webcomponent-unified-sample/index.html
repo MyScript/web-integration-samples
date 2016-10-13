@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="manifest" href="manifest.json">
+
+    <meta charset="utf-8"/>
+    <meta name="description" content="">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="MyScript Webdemo Write">
+    <meta name="apple-mobile-web-app-title" content="MyScript Webdemo Write">
+    <meta name="theme-color" content="#00000">
+    <meta name="msapplication-navbutton-color" content="#00000">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-starturl" content="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+
+    <link rel="icon" type="image/png" sizes="96×96" href="./favicon.ico">
+    <link rel="apple-touch-icon" type="image/png" sizes="96×96" href="./assets/img/demo/home_96x96.png">
+
+    <title>MyScript Unified Sample</title>
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise">
+
+    <!--Configuration file used to store identifiers and some parameters-->
+    <script type="text/javascript" src="./configuration.js"></script>
+
+    <!-- End Google Analytics -->
+
+    <!--A WebComponent polyfill is needed to use the web component, has it's not yet well implemented by all browsers-->
+    <script type="text/javascript" src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+    <link rel="import" href="./bower_components/paper-button/paper-button.html">
+    <link rel="import" href="./bower_components/myscript-common-element/myscript-common-element.html">
+    <link rel="import" href="./bower_components/myscript-text-web/myscript-text-web.html">
+    <link rel="import" href="./bower_components/myscript-math-web/myscript-math-web.html">
+
+    <style is="custom-style">
+        body {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            height: 100%;
+            max-height: 100%;
+            overflow-x : hidden;
+        }
+        header {
+            height: 49px;
+            border-bottom: 1px solid #dddddd;
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .write-here{
+            position: absolute;
+            width : 100vw;
+            text-align : center;
+            padding:  0;
+            margin: 48vh auto 0;
+            transform: translateY(-50%);
+            font-family: 'Waiting for the Sunrise', cursive;
+            font-size: 40px;
+            z-index: 1;
+        }
+        #textInput, #mathInput, #graphicsInput, #musicInput{
+            height : calc(100vh - 50px);
+        }
+    </style>
+</head>
+<body touch-action="none">
+<header>
+    <paper-button id="textButton"><iron-icon src="./assets/img/demo/myscript-text.svg"></iron-icon></paper-button>
+    <paper-button id="mathButton"><iron-icon src="./assets/img/demo/myscript-math.svg"></iron-icon></paper-button>
+    <paper-button id="graphicsButton"><iron-icon src="./assets/img/demo/myscript-shape.svg"></iron-icon></paper-button>
+    <paper-button id="musicButton"><iron-icon src="./assets/img/demo/myscript-music.svg"></iron-icon></paper-button>
+</header>
+<div id="content">
+    <div class="write-here">Write here</div>
+    <myscript-text-web id="textInput"
+                       host="webdemoapi.myscript.com"
+                       applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
+                       hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+    ></myscript-text-web>
+    <myscript-math-web id="mathInput"
+                       host="webdemoapi.myscript.com"
+                       applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
+                       hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+                       hidden
+    ></myscript-math-web>
+    <myscript-common-element id="graphicsInput"
+                             host="webdemoapi.myscript.com"
+                             protocol="REST"
+                             applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
+                             hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+                             type="SHAPE"
+                             typeset="true"
+                             hidden
+    ></myscript-common-element>
+    <myscript-common-element id="musicInput"
+                             host="webdemoapi.myscript.com"
+                             protocol="REST"
+                             applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
+                             hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+                             type="MUSIC"
+                             hidden
+    ></myscript-common-element>
+</div>
+</body>
+<script>
+(function (document) {
+    'use strict';
+
+    window.addEventListener('WebComponentsReady', function () {
+
+        var writeHere = document.querySelector('.write-here');
+
+        var textInput = document.getElementById('textInput'),
+            mathInput = document.getElementById('mathInput'),
+            graphicsInput = document.getElementById('graphicsInput'),
+            musicInput = document.getElementById('musicInput');
+
+        var textButton = document.getElementById('textButton'),
+            mathButton = document.getElementById('mathButton'),
+            graphicsButton = document.getElementById('graphicsButton'),
+            musicButton = document.getElementById('musicButton');
+
+
+
+        // Small piece of code to hide the write here message
+        textInput.addEventListener('pointerdown', function () {
+            if (writeHere) {
+                writeHere.setAttribute('hidden', 'true');
+            }
+        });
+        mathInput.addEventListener('pointerdown', function () {
+            if (writeHere) {
+                writeHere.setAttribute('hidden', 'true');
+            }
+        });
+        graphicsInput.addEventListener('pointerdown', function () {
+            if (writeHere) {
+                writeHere.setAttribute('hidden', 'true');
+            }
+        });
+        musicInput.addEventListener('pointerdown', function () {
+            if (writeHere) {
+                writeHere.setAttribute('hidden', 'true');
+            }
+        });
+
+        textButton.addEventListener('tap', function () {
+            textInput.removeAttribute('hidden');
+            mathInput.setAttribute('hidden', 'true');
+            graphicsInput.setAttribute('hidden', 'true');
+            musicInput.setAttribute('hidden', 'true');
+            textInput.delete();
+            writeHere.removeAttribute('hidden');
+        });
+        mathButton.addEventListener('tap', function () {
+            textInput.setAttribute('hidden', 'true');
+            mathInput.removeAttribute('hidden');
+            graphicsInput.setAttribute('hidden', 'true');
+            musicInput.setAttribute('hidden', 'true');
+            mathInput.delete();
+            writeHere.removeAttribute('hidden');
+
+        });
+        graphicsButton.addEventListener('tap', function () {
+            textInput.setAttribute('hidden', 'true');
+            mathInput.setAttribute('hidden', 'true');
+            graphicsInput.removeAttribute('hidden');
+            musicInput.setAttribute('hidden', 'true');
+            graphicsInput.clear();
+            writeHere.removeAttribute('hidden');
+        });
+        musicButton.addEventListener('tap', function () {
+            textInput.setAttribute('hidden', 'true');
+            mathInput.setAttribute('hidden', 'true');
+            graphicsInput.setAttribute('hidden', 'true');
+            musicInput.removeAttribute('hidden');
+            musicInput.clear();
+            writeHere.removeAttribute('hidden');
+        });
+    });
+
+})(document);
+</script>
+</html>

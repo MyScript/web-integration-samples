@@ -1,0 +1,15 @@
+{
+    "name": "MyScript Unified Web Component Sample",
+    "short_name": "MyScript Unified Sample",
+    "icons": [
+        {
+            "src": "/assets/img/demo/home_96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFFFFF"
+}
