@@ -1,32 +1,12 @@
 <!doctype html>
 <html>
 <head>
-    <link rel="manifest" href="manifest.json">
-
-    <meta charset="utf-8"/>
-    <meta name="description" content="">
-
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="MyScript Webdemo Write">
-    <meta name="apple-mobile-web-app-title" content="MyScript Webdemo Write">
-    <meta name="theme-color" content="#00000">
-    <meta name="msapplication-navbutton-color" content="#00000">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="msapplication-starturl" content="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
 
     <link rel="icon" type="image/png" sizes="96×96" href="./favicon.ico">
-    <link rel="apple-touch-icon" type="image/png" sizes="96×96" href="./assets/img/demo/home_96x96.png">
 
     <title>MyScript Unified Sample</title>
 
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise">
-
-    <!--Configuration file used to store identifiers and some parameters-->
-    <script type="text/javascript" src="./configuration.js"></script>
-
-    <!-- End Google Analytics -->
 
     <!--A WebComponent polyfill is needed to use the web component, has it's not yet well implemented by all browsers-->
     <script type="text/javascript" src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -67,14 +47,17 @@
         #textInput, #mathInput, #graphicsInput, #musicInput{
             height : calc(100vh - 50px);
         }
+        paper-button[toggles][active] {
+            background: rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body touch-action="none">
 <header>
-    <paper-button id="textButton"><iron-icon src="./assets/img/demo/myscript-text.svg"></iron-icon></paper-button>
-    <paper-button id="mathButton"><iron-icon src="./assets/img/demo/myscript-math.svg"></iron-icon></paper-button>
-    <paper-button id="graphicsButton"><iron-icon src="./assets/img/demo/myscript-shape.svg"></iron-icon></paper-button>
-    <paper-button id="musicButton"><iron-icon src="./assets/img/demo/myscript-music.svg"></iron-icon></paper-button>
+    <paper-button id="textButton" toggles><iron-icon src="./assets/img/demo/myscript-text.svg"></iron-icon></paper-button>
+    <paper-button id="mathButton" toggles><iron-icon src="./assets/img/demo/myscript-math.svg"></iron-icon></paper-button>
+    <paper-button id="graphicsButton" toggles><iron-icon src="./assets/img/demo/myscript-shape.svg"></iron-icon></paper-button>
+    <paper-button id="musicButton" toggles><iron-icon src="./assets/img/demo/myscript-music.svg"></iron-icon></paper-button>
 </header>
 <div id="content">
     <div class="write-here">Write here</div>
@@ -126,7 +109,7 @@
             graphicsButton = document.getElementById('graphicsButton'),
             musicButton = document.getElementById('musicButton');
 
-
+        textButton.active = true;
 
         // Small piece of code to hide the write here message
         textInput.addEventListener('pointerdown', function () {
@@ -151,6 +134,11 @@
         });
 
         textButton.addEventListener('tap', function () {
+            textButton.active = true;
+            mathButton.active = false;
+            graphicsButton.active = false;
+            musicButton.active = false;
+
             textInput.removeAttribute('hidden');
             mathInput.setAttribute('hidden', 'true');
             graphicsInput.setAttribute('hidden', 'true');
@@ -159,6 +147,10 @@
             writeHere.removeAttribute('hidden');
         });
         mathButton.addEventListener('tap', function () {
+            textButton.active = false;
+            mathButton.active = true;
+            graphicsButton.active = false;
+            musicButton.active = false;
             textInput.setAttribute('hidden', 'true');
             mathInput.removeAttribute('hidden');
             graphicsInput.setAttribute('hidden', 'true');
@@ -168,6 +160,10 @@
 
         });
         graphicsButton.addEventListener('tap', function () {
+            textButton.active = false;
+            mathButton.active = false;
+            graphicsButton.active = true;
+            musicButton.active = false;
             textInput.setAttribute('hidden', 'true');
             mathInput.setAttribute('hidden', 'true');
             graphicsInput.removeAttribute('hidden');
@@ -176,6 +172,10 @@
             writeHere.removeAttribute('hidden');
         });
         musicButton.addEventListener('tap', function () {
+            textButton.active = false;
+            mathButton.active = false;
+            graphicsButton.active = false;
+            musicButton.active = true;
             textInput.setAttribute('hidden', 'true');
             mathInput.setAttribute('hidden', 'true');
             graphicsInput.setAttribute('hidden', 'true');
