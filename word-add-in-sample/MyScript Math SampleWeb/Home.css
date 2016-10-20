@@ -91,9 +91,9 @@ canvas[id^=ms-rendering-canvas] {
 }
 
 /****************************************************
- export/undo/redo/trash buttons
+ insert/undo/redo/trash buttons
  ****************************************************/
-.ms-Button.ms-Button--exporttrashundoredo {
+.ms-Button.ms-Button--inserttrashundoredo {
     color: #fff;
     background: #106EBE;
     width: 36px;
@@ -108,11 +108,11 @@ canvas[id^=ms-rendering-canvas] {
     padding: 8px 9px 10px;
 }
 
-.ms-Button.ms-Button--exporttrashundoredo:hover{
+.ms-Button.ms-Button--inserttrashundoredo:hover{
     background: #005A9E;
 }
 
-.ms-Button.ms-Button--exporttrashundoredo .ms-Button-label {
+.ms-Button.ms-Button--inserttrashundoredo .ms-Button-label {
     color: #fff;
 }
 
@@ -124,15 +124,15 @@ canvas[id^=ms-rendering-canvas] {
     z-index: 2;
 }
 
-.exportbuttons {
+.insertbuttons {
     position: absolute;
     margin: 9px;
     z-index: 2;
     display: flex;
 }
 
-.icon-export:before{
-    background: url(./Images/button/export.svg) center center / 18px 18px no-repeat;
+.icon-insert:before{
+    background: url(./Images/button/insert.svg) center center / 18px 18px no-repeat;
     content: "";
     display: inline-block;
     position: relative;

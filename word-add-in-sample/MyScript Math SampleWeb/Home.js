@@ -9,7 +9,7 @@
         // We use jquery to simplify the code
         $(document).ready(function () {
            // Initialize Word features
-           document.querySelector('#export').addEventListener("pointerdown", copyOfficeOpenXmlMath);
+           document.querySelector('#insert').addEventListener("pointerdown", copyOfficeOpenXmlMath);
         });
     };
 
