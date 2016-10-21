@@ -7,14 +7,13 @@ var fs = require('fs'),
     jshint = require('gulp-jshint'),
     plumber = require('gulp-plumber'),
     historyApiFallback = require('connect-history-api-fallback'),
-    path = require('path'),
     del = require('del'),
     jscs = require('gulp-jscs');
 
 var bower = JSON.parse(fs.readFileSync('bower.json'));
 
 var buildTask = function (dest) {
-    return gulp.src(['*.js','*.html','*.css','*bower_components/**/*', '*Content/**/*', '*Images/**/*', '*Properties/**/*', '*Scripts/**/*',"web.*"], { "base" : "." })
+    return gulp.src(['!gulpfile.js','*.js','*.html','*.css','*bower_components/**/*','*Images/**/*','*Scripts/**/*'], { "base" : "." })
         .pipe(gulp.dest(dest));
 };
 
