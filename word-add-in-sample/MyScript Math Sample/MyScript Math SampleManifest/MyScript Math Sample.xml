@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!--Created:ce44715c-8c4e-446b-879c-ea9ebe0f09c8-->
-<OfficeApp 
-          xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-          xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" 
+<OfficeApp
+          xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
           xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
           xsi:type="TaskPaneApp">
 
@@ -20,19 +20,11 @@
   <DisplayName DefaultValue="MyScript Math Sample" />
   <Description DefaultValue="MyScript Math Sample"/>
 
-  <SupportUrl DefaultValue="https://dev.myscript.com/support/forum/" />
-
   <!-- Icône de votre complément. Utilisée dans les écrans d'installation et la boîte de dialogue des compléments. -->
   <IconUrl DefaultValue="~remoteAppUrl/Images/Button32x32.png" />
 
-  <!-- Domaines autorisés durant la navigation. Par exemple, si vous utilisez ShowTaskpane et un lien href, la navigation n'est autorisée que si le domaine figure sur cette liste. -->
-  <AppDomains>
-    <AppDomain>AppDomain1</AppDomain>
-    <AppDomain>AppDomain2</AppDomain>
-    <AppDomain>AppDomain3</AppDomain>
-  </AppDomains>
-  <!--Fin des paramètres de base. -->
-  
+  <SupportUrl DefaultValue="https://dev.myscript.com/support/forum/" />
+
   <!--Début de l'intégration du mode TaskPane. Cette section est utilisée en l'absence de VersionOverrides ou si la version du client Office ne prend pas en charge les commandes du complément. -->
   <Hosts>
     <Host Name="Document" />
@@ -46,7 +38,7 @@
 
   <!-- Début de l'intégration du mode Commandes de complément. -->
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
-    
+
     <!-- Le nœud Hôtes est obligatoire. -->
     <Hosts>
       <!-- Chaque hôte peut avoir un ensemble distinct de commandes. -->
@@ -113,7 +105,7 @@
         </DesktopFormFactor>
       </Host>
     </Hosts>
-    
+
     <!-- Vous pouvez utiliser les ressources indépendamment des hôtes et des facteurs de forme. -->
     <Resources>
       <bt:Images>
