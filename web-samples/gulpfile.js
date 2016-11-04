@@ -1,14 +1,9 @@
 'use strict';
 
-var fs = require('fs'),
-    browserSync = require('browser-sync'),
+var browserSync = require('browser-sync'),
     reload = browserSync.reload,
     gulp = require('gulp-param')(require('gulp'), process.argv),
-    jshint = require('gulp-jshint'),
-    plumber = require('gulp-plumber'),
-    historyApiFallback = require('connect-history-api-fallback'),
-    path = require('path'),
-    del = require('del');
+    historyApiFallback = require('connect-history-api-fallback');
 
 
 var watchTask = function () {

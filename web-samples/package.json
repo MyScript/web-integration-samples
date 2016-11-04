@@ -1,7 +1,7 @@
 {
-  "name": "webcomponent-unified-sample",
+  "name": "web-samples",
   "version": "1.0.0",
-  "description": "MyScript Web components unified sample",
+  "description": "MyScript Web samples",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,17 +16,7 @@
     "bower": "1.4.x",
     "browser-sync": "2.11.0",
     "connect-history-api-fallback": "1.1.0",
-    "del": "2.2.0",
-    "fs": "0.0.2",
     "gulp": "3.9.0",
-    "gulp-jshint": "2.0.0",
-    "gulp-load-plugins": "1.1.0",
-    "gulp-param": "0.6.4",
-    "gulp-plumber": "1.0.1",
-    "gulp-replace": "0.5.4",
-    "jshint": "2.8.x",
-    "mocha": "2.2.x",
-    "run-sequence": "1.1.5",
-    "sinon": "1.15.x"
+    "gulp-param": "0.6.4"
   }
 }
