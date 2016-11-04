@@ -1,4 +1,4 @@
-# MyScript Unified Sample
+# MyScript Web Samples
 
 ## Description
 
@@ -16,7 +16,7 @@ MyScript Unified Sample allow you to understand the easy way to integrate ours w
 The following must be installed:
 
 * A valid MyScript CDK account (you can use your trial version)
-* A local HTTP server: [polyserve](https://github.com/polymerlabs/polyserve)
+* A local HTTP server: [Python SimpleHTTPServer](http://stackoverflow.com/a/4351609/2961452)
 * [Node.js](https://nodejs.org/en/)
 * [Git](http://git-scm.com/)
 * [Bower](http://bower.io/)
@@ -247,7 +247,7 @@ To generate your own keys, see the [Registration]() section.
 
 Type the following command: 
 
-            polyserve
+            python -m SimpleHTTPServer 8080
             
 10) Ready to go! Now start up your preferred browser and open http://localhost:8080 
 
