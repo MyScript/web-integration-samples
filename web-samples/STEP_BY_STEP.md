@@ -2,9 +2,9 @@
 
 ## Description
 
-MyScript Web Samples enable you to easily integrate our web components in a simple webpage. Use your stylus, your finger or even your mouse! Convert your text, equation, graphics, music and use the recognition results as you want. Delete elements by using a simple erase gesture. Use the buttons to undo or redo an action or to clear the add-in screen.
+MyScript Web Samples enable you to easily integrate our web components in a simple webpage. Use your stylus, your finger or even your mouse! Convert your text, equation, graphics, music and use the recognition results as you want. Delete elements by using a simple erase gesture. Use the buttons to undo or redo an action or to clear the screen.
 
-This is a step by step tutorial when you integrate MyScript Web Components as dependencies.
+This is a step-by-step tutorial to integrate MyScript Web Components as dependencies.
 
 ## Features
 
@@ -17,12 +17,13 @@ This is a step by step tutorial when you integrate MyScript Web Components as de
 
 The following must be installed:
 
-* A valid MyScript CDK account (you can use a free starter pack)
+* a valid MyScript CDK account (you can use a free starter pack)
 * [Node.js](https://nodejs.org/en/)
 * [Bower](http://bower.io/)
         
 
-## Getting Started
+## Get Started
+
 1) Create a directory for your project.
 
 2) In a command line terminal, go to the project folder and type the following lines to download the MyScript Math web component into your project:
@@ -234,8 +235,10 @@ To generate your own keys, see the [Registration]() section.
             })(document);
 
 
-9) Launch server by typing the following command: 
+9) Type the following command to launch the server: 
 
             npm run-script run
             
-10) Ready to go! Now start up your preferred browser and open http://localhost:8000 
+10) Open [http://localhost:8000](http://localhost:8000) in your browser.
+
+You are now ready to go!
