@@ -4,7 +4,7 @@
   "description": "MyScript Web samples",
   "main": "index.html",
   "scripts": {
-    "run": "echo \"Run local server\" && ./node_modules/http-server/bin/http-server -p 8000 -c-1",
+    "run": "echo \"Run local server\" && run http-server -p 8000 -c-1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yohann.streibel@myscript.com",
@@ -13,12 +13,15 @@
   "engines": {
     "node": ">=6.3.0"
   },
+  "dependencies": {
+    "cross-run": "^1.0.1",
+    "http-server": "^0.9.0"
+  },
   "devDependencies": {
     "bower": "1.4.x",
     "browser-sync": "2.11.0",
     "connect-history-api-fallback": "1.1.0",
     "gulp": "3.9.0",
-    "gulp-param": "0.6.4",
-    "http-server": "^0.9.0"
+    "gulp-param": "0.6.4"
   }
 }
