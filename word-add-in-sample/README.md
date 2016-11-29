@@ -7,7 +7,7 @@ That’s where we offer added value, with a JavaScript plugin for Word: MyScript
 Try it it directly from the [office store]() only take __5 minutes__ to grab the sources and launch this sample in word.
 
 
-![](word-addin.gif)
+![](word-addin.gif =800x375)
 
 ## Installation
 
