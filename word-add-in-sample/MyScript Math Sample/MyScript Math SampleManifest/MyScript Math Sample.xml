@@ -23,7 +23,7 @@
   <!-- Icône de votre complément. Utilisée dans les écrans d'installation et la boîte de dialogue des compléments. -->
   <IconUrl DefaultValue="~remoteAppUrl/Images/Button32x32.png" />
 
-  <SupportUrl DefaultValue="https://dev.myscript.com/support/forum/" />
+  <SupportUrl DefaultValue="https://dev.myscript.com/forums/topic/about-myscript-math-sample-microsoft-word-plugin/" />
 
   <!--Début de l'intégration du mode TaskPane. Cette section est utilisée en l'absence de VersionOverrides ou si la version du client Office ne prend pas en charge les commandes du complément. -->
   <Hosts>
