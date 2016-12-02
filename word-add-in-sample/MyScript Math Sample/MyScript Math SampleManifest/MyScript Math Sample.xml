@@ -18,7 +18,7 @@
   <DefaultLocale>en-US</DefaultLocale>
   <!-- Nom d'affichage de votre complément. Utilisé dans le Store et à divers endroits de l'interface utilisateur Office, par exemple la boîte de dialogue des compléments. -->
   <DisplayName DefaultValue="MyScript Math Sample" />
-  <Description DefaultValue="MyScript Math Sample"/>
+  <Description DefaultValue="Add mathematical equations to your Word document in a simple and intuitive way."/>
 
   <!-- Icône de votre complément. Utilisée dans les écrans d'installation et la boîte de dialogue des compléments. -->
   <IconUrl DefaultValue="~remoteAppUrl/Images/Button32x32.png" />
