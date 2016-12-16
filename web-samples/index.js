@@ -73,11 +73,11 @@
 
         textButton.addEventListener('tap', function () {
             setButtonsStates(true, false, false, false);
-            textInput.delete();
+            textInput.clear();
         });
         mathButton.addEventListener('tap', function () {
             setButtonsStates(false, true, false, false);
-            mathInput.delete();
+            mathInput.clear();
         });
         graphicsButton.addEventListener('tap', function () {
             setButtonsStates(false, false, true, false);
@@ -85,8 +85,9 @@
         });
         musicButton.addEventListener('tap', function () {
             setButtonsStates(false, false, false, true);
-            musicInput.clear();
             initMusic(musicInput, musicXML);
+            musicInput.clear();
+            musicInput.notifyResize();
         });
     });
 

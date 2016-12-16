@@ -80,13 +80,16 @@ This is a step-by-step tutorial to integrate MyScript Web Components as dependen
                       align-items: center;
                       justify-content: center;
                   }
+                  .write-here-wrapper{
+                      position: relative;
+                  }
                   .write-here{
                       position: absolute;
                       width : 100vw;
                       text-align : center;
                       padding:  0;
-                      margin: 48vh auto 0;
-                      transform: translateY(-50%);
+                      margin: -33px auto 0;
+                      top: 50%;
                       font-family: 'Waiting for the Sunrise', cursive;
                       font-size: 40px;
                       z-index: 1;
@@ -118,35 +121,37 @@ This is a step-by-step tutorial to integrate MyScript Web Components as dependen
                <paper-button id="musicButton" toggles><iron-icon src="./assets/img/demo/myscript-music.svg"></iron-icon></paper-button>
            </header>
            <div id="content">
-               <div class="write-here">Write here</div>
-               <myscript-text-web id="textInput"
-                                  host="webdemoapi.myscript.com"
-                                  applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                                  hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
-               ></myscript-text-web>
-               <myscript-math-web id="mathInput"
-                                  host="webdemoapi.myscript.com"
-                                  applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                                  hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
-                                  hidden
-               ></myscript-math-web>
-               <myscript-common-element id="graphicsInput"
-                                        host="webdemoapi.myscript.com"
-                                        protocol="REST"
-                                        applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                                        hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
-                                        type="SHAPE"
-                                        typeset="true"
-                                        hidden
-               ></myscript-common-element>
-               <myscript-common-element id="musicInput"
-                                        host="webdemoapi.myscript.com"
-                                        protocol="REST"
-                                        applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                                        hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
-                                        type="MUSIC"
-                                        hidden
-               ></myscript-common-element>
+               <div class="write-here-wrapper">
+                   <div class="write-here">Write here</div>
+                   <myscript-text-web id="textInput"
+                                      host="webdemoapi.myscript.com"
+                                      applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
+                                      hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+                   ></myscript-text-web>
+                   <myscript-math-web id="mathInput"
+                                      host="webdemoapi.myscript.com"
+                                      applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
+                                      hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+                                      hidden
+                   ></myscript-math-web>
+                   <myscript-common-element id="graphicsInput"
+                                            host="webdemoapi.myscript.com"
+                                            protocol="REST"
+                                            applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
+                                            hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+                                            type="SHAPE"
+                                            typeset="true"
+                                            hidden
+                   ></myscript-common-element>
+                   <myscript-common-element id="musicInput"
+                                            host="webdemoapi.myscript.com"
+                                            protocol="REST"
+                                            applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
+                                            hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+                                            type="MUSIC"
+                                            hidden
+                   ></myscript-common-element>
+               </div>    
                <pre id="MUSICXML" class="prettyprint lang-xml" hidden></pre>
            </div>
            </body>
@@ -246,8 +251,9 @@ To generate your own keys, see the [Registration]() section.
                     });
                     musicButton.addEventListener('tap', function () {
                         setButtonsStates(false, false, false, true);
-                        musicInput.clear();
                         initMusic(musicInput, musicXML);
+                        musicInput.clear();
+                        musicInput.notifyResize();
                     });
                 });
             
