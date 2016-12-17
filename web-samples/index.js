@@ -70,23 +70,29 @@
 
         // Initialize the default demo
         textButton.active = true;
+        var activeInput = textInput;
+        function clearActiveInput(newInputToSet){
+            activeInput.clear();
+            activeInput = newInputToSet;
+        }
+
 
         textButton.addEventListener('tap', function () {
             setButtonsStates(true, false, false, false);
-            textInput.clear();
+            clearActiveInput(textInput);
         });
         mathButton.addEventListener('tap', function () {
             setButtonsStates(false, true, false, false);
-            mathInput.clear();
+            clearActiveInput(mathInput);
         });
         graphicsButton.addEventListener('tap', function () {
             setButtonsStates(false, false, true, false);
-            graphicsInput.clear();
+            clearActiveInput(graphicsInput);
         });
         musicButton.addEventListener('tap', function () {
             setButtonsStates(false, false, false, true);
             initMusic(musicInput, musicXML);
-            musicInput.clear();
+            clearActiveInput(musicInput);
             musicInput.notifyResize();
         });
     });
