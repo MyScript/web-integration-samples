@@ -32,17 +32,20 @@
             musicXML.setAttribute('hidden', 'true');
 
             textButton.active = isTextButton;
-            if(isTextButton)textInput.removeAttribute('hidden');
+            if(isTextButton)textInput.removeAttribute('hidden');textInput.clear();
 
             mathButton.active = isMathButton;
-            if(isMathButton) mathInput.removeAttribute('hidden');
+            if(isMathButton) mathInput.removeAttribute('hidden');mathInput.clear();
 
             graphicsButton.active = isGraphicsButton;
-            if(isGraphicsButton) graphicsInput.removeAttribute('hidden');
+            if(isGraphicsButton) graphicsInput.removeAttribute('hidden');graphicsInput.clear();
 
             musicButton.active = isMusicButton;
             if(isMusicButton){
                 musicInput.removeAttribute('hidden');
+                initMusic(musicInput, musicXML);
+                musicInput.clear();
+                musicInput.notifyResize();
                 musicXML.removeAttribute('hidden');
             }
             $('.write-here').removeAttribute('hidden');
@@ -70,30 +73,18 @@
 
         // Initialize the default demo
         textButton.active = true;
-        var activeInput = textInput;
-        function clearActiveInput(newInputToSet){
-            activeInput.clear();
-            activeInput = newInputToSet;
-        }
-
 
         textButton.addEventListener('tap', function () {
             setButtonsStates(true, false, false, false);
-            clearActiveInput(textInput);
         });
         mathButton.addEventListener('tap', function () {
             setButtonsStates(false, true, false, false);
-            clearActiveInput(mathInput);
         });
         graphicsButton.addEventListener('tap', function () {
             setButtonsStates(false, false, true, false);
-            clearActiveInput(graphicsInput);
         });
         musicButton.addEventListener('tap', function () {
             setButtonsStates(false, false, false, true);
-            initMusic(musicInput, musicXML);
-            clearActiveInput(musicInput);
-            musicInput.notifyResize();
         });
     });
 
