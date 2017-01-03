@@ -54,62 +54,63 @@ This is a step-by-step tutorial to integrate MyScript Web Components as dependen
 
 4) In `<head>`, add the polyfills to make sure all browsers are supported, then add the web component:
    
-       <script src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-       <script type="text/javascript" src="index.js"></script>
+           <script type="text/javascript" src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+           <script type="text/javascript" src="index.js"></script>
        
-       <link rel="import" href="./bower_components/myscript-common-element/myscript-common-element.html">
-       <link rel="import" href="./bower_components/myscript-text-web/myscript-text-web.html">
-       <link rel="import" href="./bower_components/myscript-math-web/myscript-math-web.html">
+           <link rel="import" href="./bower_components/paper-button/paper-button.html">
+           <link rel="import" href="./bower_components/myscript-common-element/myscript-common-element.html">
+           <link rel="import" href="./bower_components/myscript-text-web/myscript-text-web.html">
+           <link rel="import" href="./bower_components/myscript-math-web/myscript-math-web.html">
 
 5) In `<head>`, add the following style to optimize the height of web component integration:
    
           <style is="custom-style">
-                  body {
-                      margin: 0;
-                      padding: 0;
-                      border: 0;
-                      height: 100%;
-                      max-height: 100%;
-                      overflow-x : hidden;
-                  }
-                  header {
-                      height: 49px;
-                      border-bottom: 1px solid #dddddd;
-                      display: -webkit-flex;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                  }
-                  .write-here-wrapper{
-                      position: relative;
-                  }
-                  .write-here{
-                      position: absolute;
-                      width : 100vw;
-                      text-align : center;
-                      padding:  0;
-                      margin: -33px auto 0;
-                      top: 50%;
-                      font-family: 'Waiting for the Sunrise', cursive;
-                      font-size: 40px;
-                      z-index: 1;
-                  }
-                  #textInput, #mathInput, #graphicsInput{
-                      height : calc(100vh - 50px);
-                  }
-                  paper-button[toggles][active] {
-                      background: rgba(0, 0, 0, 0.2);
-                  }
-                  #musicInput{
-                      height : 300px;
-                  }
-                  #MUSICXML {
-                      border: none;
-                      margin: 0;
-                      overflow: auto;
-                      height: calc(100vh - 350px);
-                  }
-              </style>
+                 body {
+                     margin: 0;
+                     padding: 0;
+                     border: 0;
+                     height: 100%;
+                     max-height: 100%;
+                     overflow-x : hidden;
+                 }
+                 header {
+                     height: 49px;
+                     border-bottom: 1px solid #dddddd;
+                     display: -webkit-flex;
+                     display: flex;
+                     align-items: center;
+                     justify-content: center;
+                 }
+                 .write-here-wrapper{
+                     position: relative;
+                 }
+                 .write-here{
+                     position: absolute;
+                     width : 100vw;
+                     text-align : center;
+                     padding:  0;
+                     margin: -33px auto 0;
+                     top: 50%;
+                     font-family: 'Waiting for the Sunrise', cursive;
+                     font-size: 40px;
+                     z-index: 1;
+                 }
+                 #textInput, #mathInput, #graphicsInput{
+                     height : calc(100vh - 50px);
+                 }
+                 paper-button[toggles][active] {
+                     background: rgba(0, 0, 0, 0.2);
+                 }
+                 #musicInput{
+                     height : 300px;
+                 }
+                 #MUSICXML {
+                     border: none;
+                     margin: 0;
+                     overflow: auto;
+                     height: calc(100vh - 350px);
+                 }
+             </style>
 
 6) In `<body>`, add this content with the web component integration. All properties are already set for a quick integration but you can also add your own values:
 
@@ -151,7 +152,7 @@ This is a step-by-step tutorial to integrate MyScript Web Components as dependen
                                             type="MUSIC"
                                             hidden
                    ></myscript-common-element>
-               </div>    
+               </div>
                <pre id="MUSICXML" class="prettyprint lang-xml" hidden></pre>
            </div>
            </body>
@@ -198,17 +199,20 @@ To generate your own keys, see the [Registration]() section.
                         musicXML.setAttribute('hidden', 'true');
             
                         textButton.active = isTextButton;
-                        if(isTextButton)textInput.removeAttribute('hidden');
+                        if(isTextButton)textInput.removeAttribute('hidden');textInput.clear();
             
                         mathButton.active = isMathButton;
-                        if(isMathButton) mathInput.removeAttribute('hidden');
+                        if(isMathButton) mathInput.removeAttribute('hidden');mathInput.clear();
             
                         graphicsButton.active = isGraphicsButton;
-                        if(isGraphicsButton) graphicsInput.removeAttribute('hidden');
+                        if(isGraphicsButton) graphicsInput.removeAttribute('hidden');graphicsInput.clear();
             
                         musicButton.active = isMusicButton;
                         if(isMusicButton){
                             musicInput.removeAttribute('hidden');
+                            initMusic(musicInput, musicXML);
+                            musicInput.clear();
+                            musicInput.notifyResize();
                             musicXML.removeAttribute('hidden');
                         }
                         $('.write-here').removeAttribute('hidden');
@@ -239,26 +243,19 @@ To generate your own keys, see the [Registration]() section.
             
                     textButton.addEventListener('tap', function () {
                         setButtonsStates(true, false, false, false);
-                        textInput.delete();
                     });
                     mathButton.addEventListener('tap', function () {
                         setButtonsStates(false, true, false, false);
-                        mathInput.delete();
                     });
                     graphicsButton.addEventListener('tap', function () {
                         setButtonsStates(false, false, true, false);
-                        graphicsInput.clear();
                     });
                     musicButton.addEventListener('tap', function () {
                         setButtonsStates(false, false, false, true);
-                        initMusic(musicInput, musicXML);
-                        musicInput.clear();
-                        musicInput.notifyResize();
                     });
                 });
             
             })(document);
-
 
 9) Type the following command to launch the server: 
 
