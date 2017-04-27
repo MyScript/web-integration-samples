@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
 
     <link rel="icon" type="image/png" sizes="96×96" href="./favicon.ico">
@@ -24,8 +25,9 @@
             border: 0;
             height: 100%;
             max-height: 100%;
-            overflow-x : hidden;
+            overflow-x: hidden;
         }
+        
         header {
             height: 49px;
             border-bottom: 1px solid #dddddd;
@@ -34,29 +36,37 @@
             align-items: center;
             justify-content: center;
         }
-        .write-here-wrapper{
+        
+        .write-here-wrapper {
             position: relative;
         }
-        .write-here{
+        
+        .write-here {
             position: absolute;
-            width : 100vw;
-            text-align : center;
-            padding:  0;
+            width: 100vw;
+            text-align: center;
+            padding: 0;
             margin: -33px auto 0;
             top: 50%;
             font-family: 'Waiting for the Sunrise', cursive;
             font-size: 40px;
             z-index: 1;
         }
-        #textInput, #mathInput, #graphicsInput{
-            height : calc(100vh - 50px);
+        
+        #textInput,
+        #mathInput,
+        #graphicsInput {
+            height: calc(100vh - 50px);
         }
+        
         paper-button[toggles][active] {
             background: rgba(0, 0, 0, 0.2);
         }
-        #musicInput{
-            height : 300px;
+        
+        #musicInput {
+            height: 300px;
         }
+        
         #MUSICXML {
             border: none;
             margin: 0;
@@ -65,46 +75,32 @@
         }
     </style>
 </head>
+
 <body touch-action="none">
-<header>
-    <paper-button id="textButton" toggles><iron-icon src="./assets/img/demo/myscript-text.svg"></iron-icon></paper-button>
-    <paper-button id="mathButton" toggles><iron-icon src="./assets/img/demo/myscript-math.svg"></iron-icon></paper-button>
-    <paper-button id="graphicsButton" toggles><iron-icon src="./assets/img/demo/myscript-shape.svg"></iron-icon></paper-button>
-    <paper-button id="musicButton" toggles><iron-icon src="./assets/img/demo/myscript-music.svg"></iron-icon></paper-button>
-</header>
-<div id="content">
-    <div class="write-here-wrapper">
-        <div class="write-here">Write here</div>
-        <myscript-text-web id="textInput"
-                           host="webdemoapi.myscript.com"
-                           applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                           hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
-        ></myscript-text-web>
-        <myscript-math-web id="mathInput"
-                           host="webdemoapi.myscript.com"
-                           applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                           hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
-                           hidden
-        ></myscript-math-web>
-        <myscript-common-element id="graphicsInput"
-                                 host="webdemoapi.myscript.com"
-                                 protocol="REST"
-                                 applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                                 hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
-                                 type="SHAPE"
-                                 typeset="true"
-                                 hidden
-        ></myscript-common-element>
-        <myscript-common-element id="musicInput"
-                                 host="webdemoapi.myscript.com"
-                                 protocol="REST"
-                                 applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                                 hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
-                                 type="MUSIC"
-                                 hidden
-        ></myscript-common-element>
+    <header>
+        <paper-button id="textButton" toggles>
+            <iron-icon src="./assets/img/demo/myscript-text.svg"></iron-icon>
+        </paper-button>
+        <paper-button id="mathButton" toggles>
+            <iron-icon src="./assets/img/demo/myscript-math.svg"></iron-icon>
+        </paper-button>
+        <paper-button id="graphicsButton" toggles>
+            <iron-icon src="./assets/img/demo/myscript-shape.svg"></iron-icon>
+        </paper-button>
+        <paper-button id="musicButton" toggles>
+            <iron-icon src="./assets/img/demo/myscript-music.svg"></iron-icon>
+        </paper-button>
+    </header>
+    <div id="content">
+        <div class="write-here-wrapper">
+            <div class="write-here">Write here</div>
+            <myscript-text-web id="textInput" host="webdemoapi.myscript.com" applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33" hmackey="8fdcb786-db27-4381-af0e-b379ef7753be"></myscript-text-web>
+            <myscript-math-web id="mathInput" host="webdemoapi.myscript.com" applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33" hmackey="8fdcb786-db27-4381-af0e-b379ef7753be" hidden></myscript-math-web>
+            <myscript-common-element id="graphicsInput" host="webdemoapi.myscript.com" protocol="REST" applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33" hmackey="8fdcb786-db27-4381-af0e-b379ef7753be" type="SHAPE" typeset="true" hidden></myscript-common-element>
+            <myscript-common-element id="musicInput" host="webdemoapi.myscript.com" protocol="REST" applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33" hmackey="8fdcb786-db27-4381-af0e-b379ef7753be" type="MUSIC" hidden></myscript-common-element>
+        </div>
+        <pre id="MUSICXML" class="prettyprint lang-xml" hidden></pre>
     </div>
-    <pre id="MUSICXML" class="prettyprint lang-xml" hidden></pre>
-</div>
 </body>
+
 </html>
