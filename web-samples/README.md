@@ -126,20 +126,20 @@ This is a step-by-step tutorial to integrate MyScript Web Components as dependen
                    <div class="write-here">Write here</div>
                    <myscript-text-web id="textInput"
                                       host="webdemoapi.myscript.com"
-                                      applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                                      hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+                                      applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33"
+                                      hmackey="8fdcb786-db27-4381-af0e-b379ef7753be"
                    ></myscript-text-web>
                    <myscript-math-web id="mathInput"
                                       host="webdemoapi.myscript.com"
-                                      applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                                      hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+                                      applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33"
+                                      hmackey="8fdcb786-db27-4381-af0e-b379ef7753be"
                                       hidden
                    ></myscript-math-web>
                    <myscript-common-element id="graphicsInput"
                                             host="webdemoapi.myscript.com"
                                             protocol="REST"
-                                            applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                                            hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+                                            applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33"
+                                            hmackey="8fdcb786-db27-4381-af0e-b379ef7753be"
                                             type="SHAPE"
                                             typeset="true"
                                             hidden
@@ -147,8 +147,8 @@ This is a step-by-step tutorial to integrate MyScript Web Components as dependen
                    <myscript-common-element id="musicInput"
                                             host="webdemoapi.myscript.com"
                                             protocol="REST"
-                                            applicationkey="9faa1259-48ba-44c4-9857-b3c86d986f94"
-                                            hmackey="fb166b5d-3ffd-93bd-7b5b-bca0fe2216a0"
+                                            applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33"
+                                            hmackey="8fdcb786-db27-4381-af0e-b379ef7753be"
                                             type="MUSIC"
                                             hidden
                    ></myscript-common-element>
