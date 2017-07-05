@@ -26,11 +26,13 @@ Thumbs.db
 ######################
 # Directories
 ######################
+/dist
 /**/*/bower_components
 /**/*/node_modules
 /**/*/obj
-/**/MyScript Math Sample/bin/
-/**/*/SharePointTaskPaneAddInWebFormItem/
-/**/*/dist/
+/**/MyScript Math Sample/bin
+/**/*/SharePointTaskPaneAddInWebFormItem
+/**/*/dist
+/**/*/delivery
 /**/*/pkg
 /**/*/pkgobj
