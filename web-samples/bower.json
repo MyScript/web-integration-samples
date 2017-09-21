@@ -6,7 +6,7 @@
     "webservices@myscript.com"
   ],
   "license": "MIT",
-  "homepage": "devevloper.myscript.com",
+  "homepage": "developer.myscript.com",
   "ignore": [
     "**/.*",
     "node_modules",
