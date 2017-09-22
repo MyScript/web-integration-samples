@@ -23,11 +23,11 @@ The following must be installed:
 
 1) Unzip the package `MyScript-Web-Samples-v1.2.0.zip`.
 
-2) Type the following command in a command terminal:
+2) Move to the web-samples directory:
 
          cd web-samples
          
-3) Type the following command to initialize dependencies:
+3) Install the dependencies:
         
         npm install && bower install
 
@@ -41,7 +41,7 @@ You are now ready to go!
 
 ## Step by step
 
-This is a step-by-step tutorial to integrate MyScript Web Components as dependencies.
+This is a step-by-step tutorial to integrate MyScript web components as dependencies.
     
 1) Create a directory for your project.
 
@@ -257,10 +257,8 @@ To generate your own keys, see the [Registration]() section.
             
             })(document);
 
-9) Type the following command to launch the server: 
+9) Launch the server: 
 
             npm run-script run
             
 10) Open [http://localhost:8000](http://localhost:8000) in your browser.
-
-You are now ready to go!
