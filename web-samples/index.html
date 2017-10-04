@@ -10,11 +10,10 @@
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise">
 
     <!--A WebComponent polyfill is needed to use the web component, has it's not yet well implemented by all browsers-->
-    <script type="text/javascript" src="./bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script type="text/javascript" src="./bower_components/webcomponentsjs/webcomponents-loader.js"></script>
     <script type="text/javascript" src="index.js"></script>
 
     <link rel="import" href="./bower_components/paper-button/paper-button.html">
-    <link rel="import" href="./bower_components/myscript-common-element/myscript-common-element.html">
     <link rel="import" href="./bower_components/myscript-text-web/myscript-text-web.html">
     <link rel="import" href="./bower_components/myscript-math-web/myscript-math-web.html">
 
@@ -26,8 +25,13 @@
             height: 100%;
             max-height: 100%;
             overflow-x: hidden;
+            font-family: sans-serif;
+            font-family: "Source Sans Pro";
         }
-        
+        iron-icon {
+          padding-right: 6px;
+        }
+
         header {
             height: 49px;
             border-bottom: 1px solid #dddddd;
@@ -43,6 +47,7 @@
         
         .write-here {
             position: absolute;
+            color: #0065B8;
             width: 100vw;
             text-align: center;
             padding: 0;
@@ -54,52 +59,51 @@
         }
         
         #textInput,
-        #mathInput,
-        #graphicsInput {
+        #mathInput {
             height: calc(100vh - 50px);
         }
-        
-        paper-button[toggles][active] {
-            background: rgba(0, 0, 0, 0.2);
+
+        paper-button, .warningkeys {
+          background-color: #F5F5F5;
+          color: #0065B8;
+
         }
-        
-        #musicInput {
-            height: 300px;
+        paper-button[active] {
+          background-color: #A5ABAD;
         }
-        
-        #MUSICXML {
-            border: none;
-            margin: 0;
-            overflow: auto;
-            height: calc(100vh - 350px);
+
+        .hidden {
+          display: none;
         }
+      .warningkeys {
+        height: calc(100vh - 40px);
+        text-align: center;
+        padding: 20px;
+        font-size: 150%;
+      }
+
     </style>
 </head>
 
 <body touch-action="none">
+    <div class="hidden warningkeys">Please set applicationkey and hmackey as describe in README.md</div>
     <header>
         <paper-button id="textButton" toggles>
-            <iron-icon src="./assets/img/demo/myscript-text.svg"></iron-icon>
+            <iron-icon src="./assets/img/demo/myscript-text.svg"></iron-icon> Text
         </paper-button>
         <paper-button id="mathButton" toggles>
-            <iron-icon src="./assets/img/demo/myscript-math.svg"></iron-icon>
+            <iron-icon src="./assets/img/demo/myscript-math.svg"></iron-icon> Math
         </paper-button>
-        <paper-button id="graphicsButton" toggles>
-            <iron-icon src="./assets/img/demo/myscript-shape.svg"></iron-icon>
-        </paper-button>
-        <paper-button id="musicButton" toggles>
-            <iron-icon src="./assets/img/demo/myscript-music.svg"></iron-icon>
-        </paper-button>
+
     </header>
     <div id="content">
+
         <div class="write-here-wrapper">
-            <div class="write-here">Write here</div>
-            <myscript-text-web id="textInput" host="webdemoapi.myscript.com" applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33" hmackey="8fdcb786-db27-4381-af0e-b379ef7753be"></myscript-text-web>
-            <myscript-math-web id="mathInput" host="webdemoapi.myscript.com" applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33" hmackey="8fdcb786-db27-4381-af0e-b379ef7753be" hidden></myscript-math-web>
-            <myscript-common-element id="graphicsInput" host="webdemoapi.myscript.com" protocol="REST" applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33" hmackey="8fdcb786-db27-4381-af0e-b379ef7753be" type="SHAPE" typeset="true" hidden></myscript-common-element>
-            <myscript-common-element id="musicInput" host="webdemoapi.myscript.com" protocol="REST" applicationkey="27f8d860-011b-4119-a32b-c75c8833ed33" hmackey="8fdcb786-db27-4381-af0e-b379ef7753be" type="MUSIC" hidden></myscript-common-element>
+
+            <div class="write-here hidden">Write here</div>
+            <myscript-text-web id="textInput" class="hidden" host="webdemoapi.myscript.com" applicationkey="REPLACE_ME" hmackey="REPLACE_ME" unloaded></myscript-text-web>
+            <myscript-math-web id="mathInput" class="hidden" host="webdemoapi.myscript.com" applicationkey="REPLACE_ME" hmackey="REPLACE_ME" unloaded></myscript-math-web>
         </div>
-        <pre id="MUSICXML" class="prettyprint lang-xml" hidden></pre>
     </div>
 </body>
 
