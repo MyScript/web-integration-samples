@@ -9,7 +9,7 @@
 
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise">
 
-    <!--A WebComponent polyfill is needed to use the web component, has it's not yet well implemented by all browsers-->
+    <!--A WebComponent polyfill is needed to use the web component, as it's not yet well implemented by all browsers-->
     <script type="text/javascript" src="./bower_components/webcomponentsjs/webcomponents-loader.js"></script>
     <script type="text/javascript" src="index.js"></script>
 
@@ -28,10 +28,11 @@
             font-family: sans-serif;
             font-family: "Source Sans Pro";
         }
+        
         iron-icon {
-          padding-right: 6px;
+            padding-right: 6px;
         }
-
+        
         header {
             height: 49px;
             border-bottom: 1px solid #dddddd;
@@ -62,31 +63,32 @@
         #mathInput {
             height: calc(100vh - 50px);
         }
-
-        paper-button, .warningkeys {
-          background-color: #F5F5F5;
-          color: #0065B8;
-
+        
+        paper-button,
+        .warningkeys {
+            background-color: #F5F5F5;
+            color: #0065B8;
         }
+        
         paper-button[active] {
-          background-color: #A5ABAD;
+            background-color: #A5ABAD;
         }
-
+        
         .hidden {
-          display: none;
+            display: none;
         }
-      .warningkeys {
-        height: calc(100vh - 40px);
-        text-align: center;
-        padding: 20px;
-        font-size: 150%;
-      }
-
+        
+        .warningkeys {
+            height: calc(100vh - 40px);
+            text-align: center;
+            padding: 20px;
+            font-size: 150%;
+        }
     </style>
 </head>
 
 <body touch-action="none">
-    <div class="hidden warningkeys">Please set applicationkey and hmackey as describe in README.md</div>
+    <div class="hidden warningkeys">Please set applicationkey and hmackey as described in README.md</div>
     <header>
         <paper-button id="textButton" toggles>
             <iron-icon src="./assets/img/demo/myscript-text.svg"></iron-icon> Text
