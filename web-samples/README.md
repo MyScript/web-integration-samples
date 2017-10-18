@@ -20,23 +20,25 @@ The following must be installed:
 * [Node.js](https://nodejs.org/en/)
 * [Bower](http://bower.io/)
 
-## Play with the sample
+## Run the sample
 
-1) Unzip the package `MyScript-Web-Samples-v1.2.0.zip`.
+1) Clone this repository: 
 
-2) Type the following command in a command terminal:
+        git clone https://github.com/myscript/web-integration-samples.git
 
-         cd web-samples
+2) Move to the web-samples folder:
+
+        cd web-integration-samples/web-samples
          
 3) Install the dependencies:
         
-        npm install && bower install
+        npm install
+        bower install
 
-4) Launch the server:  
+4) Edit the index.html file and replace the applicationkey and hmackey attributes with the values you received by email.
 
-         npm run-script run
+5) Launch the server:  
+
+        npm run-script run
             
-5) Open [http://localhost:8000](http://localhost:8000) in your browser.
-
-You are now ready to go!
-
+6) Open [http://localhost:8000](http://localhost:8000) in your browser.
