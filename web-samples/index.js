@@ -11,6 +11,7 @@
         var mathInput = $('#mathInput');
         var textButton = $('#textButton');
         var mathButton = $('#mathButton');
+        var writeHere = $('.write-here');
 
         if (textInput.applicationkey === "REPLACE_ME" || mathInput.applicationkey === "REPLACE_ME" ||
             textInput.hmackey === "REPLACE_ME" || mathInput.hmackey === "REPLACE_ME") {
@@ -21,19 +22,22 @@
             var listOfInputs = [textInput, mathInput];
             listOfInputs.forEach(function(input) {
                 input.addEventListener('loaded', function() {
-                    $('.write-here').classList.remove('hidden');
+                    writeHere.classList.remove('hidden');
                 });
                 input.addEventListener('pointerdown', function() {
-                    $('.write-here').classList.add('hidden');
+                    writeHere.classList.add('hidden');
                 });
                 input.addEventListener('pointerup', function() {
-                    $('.write-here').classList.add('hidden');
+                    writeHere.classList.add('hidden');
                 });
+            });
+            writeHere.addEventListener('pointermove', function() {
+                writeHere.classList.add('hidden');
             });
 
             // Manage the tap on the various buttons
             var setButtonsStates = function(isTextButton, isMathButton) {
-                $('.write-here').classList.add('hidden');
+                writeHere.classList.add('hidden');
                 listOfInputs.forEach(function(input) { input.classList.add('hidden'); });
 
                 textButton.active = isTextButton;
