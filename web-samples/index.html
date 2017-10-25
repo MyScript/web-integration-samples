@@ -18,96 +18,109 @@
     <link rel="import" href="./bower_components/myscript-text-web/myscript-text-web.html">
     <link rel="import" href="./bower_components/myscript-math-web/myscript-math-web.html">
 
-    <style is="custom-style">
-        body {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            height: 100%;
-            max-height: 100%;
-            overflow-x: hidden;
-            font-family: sans-serif;
-            font-family: "Source Sans Pro";
-        }
-        
-        iron-icon {
-            padding-right: 6px;
-        }
-        
-        header {
-            height: 49px;
-            border-bottom: 1px solid #dddddd;
-            display: -webkit-flex;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .write-here-wrapper {
-            position: relative;
-        }
-        
-        .write-here {
-            position: absolute;
-            color: #0065B8;
-            width: 100vw;
-            text-align: center;
-            padding: 0;
-            margin: -33px auto 0;
-            top: 50%;
-            font-family: 'Waiting for the Sunrise', cursive;
-            font-size: 40px;
-            z-index: 1;
-        }
-        
-        #textInput,
-        #mathInput {
-            height: calc(100vh - 50px);
-        }
-        
-        paper-button,
-        .warningkeys {
-            background-color: #F5F5F5;
-            color: #0065B8;
-        }
-        
-        paper-button[active] {
-            background-color: #A5ABAD;
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .warningkeys {
-            height: calc(100vh - 40px);
-            text-align: center;
-            padding: 20px;
-            font-size: 150%;
-        }
-    </style>
+    <custom-style>
+        <style>
+
+            html {
+                --paper-fab-background: #1A9FFF;
+                --paper-fab-keyboard-focus-background: #1A9FFF;
+                --paper-fab-disabled-background: #D7DADC;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                height: 100%;
+                max-height: 100%;
+                overflow-x: hidden;
+                font-family: sans-serif;
+                font-family: "Source Sans Pro";
+            }
+
+            .top-btn {
+                padding-right: 6px;
+            }
+
+            header {
+                height: 49px;
+                border-bottom: 1px solid #dddddd;
+                display: -webkit-flex;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .write-here-wrapper {
+                position: relative;
+            }
+
+            .write-here {
+                position: absolute;
+                color: #0065B8;
+                width: 100vw;
+                text-align: center;
+                padding: 0;
+                margin: -33px auto 0;
+                top: 50%;
+                font-family: 'Waiting for the Sunrise', cursive;
+                font-size: 40px;
+                z-index: 1;
+            }
+
+            #textInput,
+            #mathInput {
+                height: calc(100vh - 50px);
+            }
+
+            paper-button,
+            .warningkeys {
+                background-color: #F5F5F5;
+                color: #0065B8;
+            }
+
+            paper-button[active] {
+                background-color: #A5ABAD;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .warningkeys {
+                height: calc(100vh - 40px);
+                text-align: center;
+                padding: 20px;
+                font-size: 150%;
+            }
+
+        </style>
+    </custom-style>
 </head>
 
 <body touch-action="none">
-    <div class="hidden warningkeys">Please set applicationkey and hmackey as described in README.md</div>
-    <header>
-        <paper-button id="textButton" toggles>
-            <iron-icon src="./assets/img/demo/myscript-text.svg"></iron-icon> Text
-        </paper-button>
-        <paper-button id="mathButton" toggles>
-            <iron-icon src="./assets/img/demo/myscript-math.svg"></iron-icon> Math
-        </paper-button>
-
-    </header>
-    <div id="content">
-
-        <div class="write-here-wrapper">
-
-            <div class="write-here hidden">Write here</div>
-            <myscript-text-web id="textInput" class="hidden" host="webdemoapi.myscript.com" applicationkey="REPLACE_ME" hmackey="REPLACE_ME" unloaded></myscript-text-web>
-            <myscript-math-web id="mathInput" class="hidden" host="webdemoapi.myscript.com" applicationkey="REPLACE_ME" hmackey="REPLACE_ME" unloaded></myscript-math-web>
-        </div>
+<div class="hidden warningkeys">Please set applicationkey and hmackey as described in README.md</div>
+<header>
+    <paper-button id="textButton" toggles>
+        <iron-icon class="top-btn" src="./assets/img/demo/myscript-text.svg"></iron-icon>
+        Text
+    </paper-button>
+    <paper-button id="mathButton" toggles>
+        <iron-icon class="top-btn" src="./assets/img/demo/myscript-math.svg"></iron-icon>
+        Math
+    </paper-button>
+</header>
+<div id="content">
+    <div class="write-here-wrapper">
+        <div class="write-here hidden">Write here</div>
+        <myscript-text-web id="textInput" class="hidden" host="webdemoapi.myscript.com"
+                           applicationkey="515131ab-35fa-411c-bb4d-3917e00faf60"
+                           hmackey="54b2ca8a-6752-469d-87dd-553bb450e9ad" unloaded></myscript-text-web>
+        <myscript-math-web id="mathInput" class="hidden" host="webdemoapi.myscript.com"
+                           applicationkey="515131ab-35fa-411c-bb4d-3917e00faf60"
+                           hmackey="54b2ca8a-6752-469d-87dd-553bb450e9ad" unloaded></myscript-math-web>
     </div>
+</div>
 </body>
 
 </html>
