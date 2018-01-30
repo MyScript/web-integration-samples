@@ -17,7 +17,7 @@
     "dependencies": {
         "pepjs": "^0.4.3",
         "paper-button": "PolymerElements/paper-button#^2.0.x",
-        "myscript-text-web": "4.0.x",
-        "myscript-math-web": "4.0.x"
+        "myscript-text-web": "4.1.x",
+        "myscript-math-web": "4.1.x"
     }
 }
