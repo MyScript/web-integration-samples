@@ -1,0 +1,5 @@
+@import url('myscript/dist/myscript.min.css');
+#editor {
+  min-width: 300px;
+  min-height: 600px;
+}
