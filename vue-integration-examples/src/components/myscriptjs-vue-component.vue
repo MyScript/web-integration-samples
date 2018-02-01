@@ -31,8 +31,8 @@ export default {
         server: {
           scheme: 'https',
           host: 'webdemoapi.myscript.com',
-          applicationKey: 'xxxx-xxxx-xxxx-xxxx',
-          hmacKey: 'xxxx-xxxx-xxxx-xxxx',
+          applicationKey: 'xxxx',
+          hmacKey: 'xxxxx',
         },
       },
     });
