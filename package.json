@@ -1,0 +1,29 @@
+{
+  "name": "wolfram-alpha-api",
+  "version": "1.0.0-rc.1",
+  "description": "Wolfram|Alpha API Libraries",
+  "homepage": "https://products.wolframalpha.com/api/",
+  "main": "lib/WolframAlphaAPI.js",
+  "author": "Cody Woodard <codyw@wolfram.com>",
+  "license": "CC-BY-NC-4.0",
+  "engines": {
+    "node": ">=6"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "dotenv": "^4.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.8.0",
+    "jsdoc": "^3.5.5",
+    "minami": "^1.2.3",
+    "mocha": "^3.5.3"
+  },
+  "scripts": {
+    "lint": "eslint .; exit 0",
+    "test": "mocha --timeout 10000",
+    "create-docs": "jsdoc lib/WolframAlphaAPI.js --readme README.md --template node_modules/minami/"
+  }
+}
