@@ -38,7 +38,7 @@
             // Manage the tap on the various buttons
             var setButtonsStates = function(isTextButton, isMathButton) {
                 writeHere.classList.add('hidden');
-                listOfInputs.forEach(function(input) { input.classList.add('YOYOYO'); });
+                listOfInputs.forEach(function(input) { input.classList.add('hidden'); });
 
                 textButton.active = isTextButton;
                 if (isTextButton) {
