@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 Type.registerNamespace("Strings");
 Strings.OfficeOM = function()
 {

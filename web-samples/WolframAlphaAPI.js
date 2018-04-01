@@ -52,7 +52,7 @@ const createApiParamsRejectMsg = 'method only receives string or object';
  * createApiParams('https://api.wolframalpha.com/v1/result?appid=DEMO')
  */
 const WolframAlphaAPI = require('wolfram-alpha-api');
-const waApi = WolframAlphaAPI('743EW8-GKH6HX3RAA');
+const waApi = WolframAlphaAPI('');
 
 function createApiParams(baseUrl, input, output = 'string') {
   return new Promise((resolve, reject) => {
@@ -68,7 +68,6 @@ function createApiParams(baseUrl, input, output = 'string') {
     }
   });
 }
-
 
 /**
  * Return a Promise that downloads params.url, and resolves the results (for formatResults).

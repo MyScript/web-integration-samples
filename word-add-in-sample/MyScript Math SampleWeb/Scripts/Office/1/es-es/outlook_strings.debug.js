@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 Type.registerNamespace("_u");
 _u.ExtensibilityStrings = function()
 {

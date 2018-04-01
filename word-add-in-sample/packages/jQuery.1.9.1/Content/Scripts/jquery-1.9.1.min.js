@@ -1,4 +1,4 @@
-﻿/* NUGET: BEGIN LICENSE TEXT
+﻿﻿/* NUGET: BEGIN LICENSE TEXT
 jQuery v1.9.1
 Microsoft grants you the right to use these script files for the sole purpose of either: (i) interacting through your browser with the Microsoft website, subject to the website's terms of use; or (ii) using the files as included with a Microsoft product subject to that product's license terms. Microsoft reserves all other rights to the files not expressly granted by Microsoft, whether by implication, estoppel or otherwise. The notices and licenses below are for informational purposes only.
 ***************************************************
