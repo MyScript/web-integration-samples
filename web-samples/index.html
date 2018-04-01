@@ -118,7 +118,7 @@
         <div class="write-here hidden">Write here</div>
         <myscript-text-web id="textInput" class="hidden" host="webdemoapi.myscript.com"
                            applicationkey="1167f1ba-4455-44e1-9953-9db65e97f627"
-                           hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3" unloaded></myscript-text-web>
+                           hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3" unloaded></myscript-text-web>*/
         <myscript-math-web id="mathInput" class="hidden" host="webdemoapi.myscript.com"
                            applicationkey="1167f1ba-4455-44e1-9953-9db65e97f627"
                            hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3" unloaded></myscript-math-web>
@@ -129,7 +129,7 @@
             const checkElement = document.querySelector('.check.classic-btn');
 
             myscriptMathWebElement.addEventListener('exported', (evt) => {
-                if(evt.detail.exports) {
+                if (evt.detail.exports) {
                     var latexExport = evt.detail.exports['application/x-latex'] || '';
                     console.log('We got: ', latexExport);
                     if ("E=mc^{2}" === latexExport) {
@@ -139,18 +139,63 @@
                     }
                 }
             });
-
-            checkElement.addEventListener('click', () => {
-                myscriptMathWebElement.convert();
-                const functionOutput = myscriptMathWebElement.export_();
-
-                span = document.getElementById("myspan");
-                txt = document.createTextNode("your cool text");
-                span.appendChild(txt);
-
-                console.log('Output :' + functionOutput);
-            });
         });
+        const WolframAlphaAPI = require('wolfram-alpha-api');
+        const waApi = WolframAlphaAPI('743EW8-GKH6HX3RAA');
+
+        var ev = document.getElementById('window');
+        if (ev) {
+            checkElement.addEventListener('click', () => {
+
+                    myscriptMathWebElement.convert();
+                    const functionOutput = myscriptMathWebElement.export_();
+
+                    span = document.getElementById("myspan");
+                    txt = document.createTextNode("your cool text");
+                    span.appendChild(txt);
+
+                    console.log('Output :' + functionOutput);
+                    waApi.getFull('sin x').then(console.log).catch(console.error);
+                    // { success: true, error: false, numpods: 13, datatypes: '', ...
+
+                    waApi.getFull('F9TVlu5AmVzL').then(console.log).catch(console.error);
+                    // { success: false, error: false, numpods: 0, datatypes: '', ...
+
+                    waApi.getFull('sin(x)').then((queryresult) => {
+                        const pods = queryresult.pods;
+                        const output = pods.map((pod) => {
+                            const subpodContent = pod.subpods.map(subpod =>
+                                `  <img src="${subpod.img.src}" alt="${subpod.img.alt}">`
+                            ).join('\n');
+                            return `<h2>${pod.title}</h2>\n${subpodContent}`;
+                        }).join('\n');
+                        console.log(output);
+
+
+                        waApi.getFull('sin x').then(console.log).catch(console.error);
+// { success: true, error: false, numpods: 13, datatypes: '', ...
+
+                        waApi.getFull('F9TVlu5AmVzL').then(console.log).catch(console.error);
+// { success: false, error: false, numpods: 0, datatypes: '', ...
+
+                        waApi.getFull('sin(x)').then((queryresult) => {
+                            const pods = queryresult.pods;
+                            const output = pods.map((pod) => {
+                                const subpodContent = pod.subpods.map(subpod =>
+                                    `  <img src="${subpod.img.src}" alt="${subpod.img.alt}">`
+                                ).join('\n');
+                                return `<h2>${pod.title}</h2>\n${subpodContent}`;
+                            }).join('\n');
+                            console.log(output);
+                        }).catch(console.error);
+
+
+                    }).catch(console.error);
+
+                }
+            )
+        };
+
     </script>
 </div>
 </body>

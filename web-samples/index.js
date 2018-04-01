@@ -13,11 +13,10 @@
         var mathButton = $('#mathButton');
         var writeHere = $('.write-here');
 
-        if (textInput.applicationkey === "REPLACE_ME" || mathInput.applicationkey === "REPLACE_ME" ||
-            textInput.hmackey === "REPLACE_ME" || mathInput.hmackey === "REPLACE_ME") {
+
             $('header').remove();
             $('.warningkeys').classList.remove('hidden');
-        } else {
+
 
             var listOfInputs = [textInput, mathInput];
             listOfInputs.forEach(function(input) {
@@ -68,7 +67,6 @@
             });
             // Initialize the default demo
             setButtonsStates(true, false);
-        }
     });
 
 })(document);
