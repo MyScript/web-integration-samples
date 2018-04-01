@@ -1,0 +1,23 @@
+{
+    "name": "web-samples",
+    "description": "MyScript Web samples",
+    "main": "index.html",
+    "authors": [
+        "webservices@myscript.com"
+    ],
+    "license": "MIT",
+    "homepage": "developer.myscript.com",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "pepjs": "^0.4.3",
+        "paper-button": "PolymerElements/paper-button#^2.0.x",
+        "myscript-text-web": "4.1.x",
+        "myscript-math-web": "4.1.x"
+    }
+}
