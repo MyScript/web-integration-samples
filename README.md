@@ -1,8 +1,13 @@
-## MyScript Demo
-> What it's suppose to do, results may vary.
-<p align="center">
-  <img src="preview.gif">
+<p align="center"> 
+<img src="logo.jpg" style="max-height: 10px; max-width: 10px;">
 </p>
+
+## MyScript Demo
+
+> What it's suppose to do, results may vary.
+<p align="center"> 
+  <img src="preview.gif">
+
 
 ## Requirements
 
