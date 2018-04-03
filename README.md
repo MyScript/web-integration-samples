@@ -1,5 +1,5 @@
 <p align="center"> 
-<img src="logo.jpg" style="max-height: 10px; max-width: 10px;">
+<img src="logo.jpg" width="200" height="100" ">
 </p>
 
 ## MyScript Demo
