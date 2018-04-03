@@ -1,9 +1,8 @@
 <!doctype html>
-<html>
 
 <head>
-
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="custom.css">
     <link rel="icon" type="image/png" sizes="96×96" href="./favicon.ico">
 
     <title>MyScript Unified Sample</title>
@@ -15,8 +14,9 @@
     <script type="text/javascript" src="./bower_components/webcomponentsjs/webcomponents-loader.js"></script>
     <script type="text/javascript" src="./bower_components/pepjs/dist/pep.min.js"></script>
     <script type="text/javascript" src="index.js"></script>
-
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <link rel="import" href="./bower_components/paper-button/paper-button.html">
     <link rel="import" href="./bower_components/myscript-text-web/myscript-text-web.html">
@@ -102,134 +102,203 @@
     </custom-style>
 </head>
 
-<body touch-action="none">
 
 <div class="hidden warningkeys">Please set applicationkey and hmackey as described in README.md</div>
+<div class = 'row'>
 <header>
-    <paper-button id="textButton" toggles>
-        <iron-icon class="top-btn" src="./assets/img/demo/myscript-text.svg"></iron-icon>
-        Text
-    </paper-button>
-    <paper-button id="mathButton" toggles>
-        <iron-icon class="top-btn" src="./assets/img/demo/myscript-math.svg"></iron-icon>
-        Math
-    </paper-button>
+
     <script>
         var textButton = $('#textButton');
         var mathButton = $('#mathButton');
-        textButton.on('tap', function() {
-            $.notify("Switching to text!", "success")
+        textButton.on('tap', function () {
+            $.notify("Switching to text!", "success");
         });
-        mathButton.on('tap', function() {
-            $.notify("Switching to math!", "success")
+        mathButton.on('tap', function () {
+            $.notify("Switching to math!", "success");
         });
     </script>
 </header>
-<div id="content">
-    Question:
-    <input type = "text" id = "question">
+</div>
 
-    </input>
-    <paper-button id="submit-answer" class = "top-btn">
-        Submit Answer
-    </paper-button>
-    <div class="write-here-wrapper">
-        <div class="write-here hidden">Write here</div>
-        <myscript-text-web id="textInput" class="hidden" host="webdemoapi.myscript.com"
-                           applicationkey="1167f1ba-4455-44e1-9953-9db65e97f627"
-                           hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3" unloaded></myscript-text-web>
-        <myscript-math-web id="mathInput" class="hidden" host="webdemoapi.myscript.com"
-                           applicationkey="1167f1ba-4455-44e1-9953-9db65e97f627"
-                           hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3" unloaded></myscript-math-web>
+<div id="main" class="container-fluid">
+    <div class="row display-flex">
+
+        <div class="col-lg-1 well  pull-left" id="button-column">
+            <img src='logo.jpg' class="img-thumbnail img-responsive align-top">
+            <div class="btn-group-vertical btn-group-sm align-middle">
+            <button type="button" class="btn btn-outline-primary" id="textButton">
+                <iron-icon class="top-btn" src="./assets/img/demo/myscript-text.svg"></iron-icon>
+                Text
+            </button>
+            <button type="button" class="btn btn-outline-primary" id="mathButton">
+                <iron-icon class="top-btn" src="./assets/img/demo/myscript-math.svg"></iron-icon>
+                Math
+            </button>
+            <p>Matrix</p>
+            <button type="button" class = " btn btn-primary" onclick="clickRR()" id="Rowreductionbtn">Row-Reduction</button>
+            <button type="button" class = " btn btn-primary" onclick="clickEigenVal()" id="Eigenvaluebtn">Eigen Values</button>
+            <button type="button" class = " btn btn-primary" onclick="clickEigenVec()" id="Eigenvectorbtn">Eigen Vectors</button>
+            <button type="button" class = " btn btn-primary" onclick="clickDiagonal()" id="Diagonalizationbtn">Diagonalization</button>
+            <button type="button" class = " btn btn-primary" onclick="clickDet()" id="Determinantbtn">Determinant</button>
+                <br>
+            <p>Functions</p>
+            <button type="button" class = " btn btn-primary" onclick="Roots()" id="Rootbtn">Roots</button>
+            <button type="button" class = " btn btn-primary" onclick="Integration()" id="Integrationbtn">Integration</button>
+            <button type="button" class = " btn btn-primary" onclick="Diferentiation()" id="Diferentiationbtn">Diferentiation</button>
+            </div>
+        </div>
+
+        <div class="col-lg-11 pull-right">
+            <div class = "row-lg-12">
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="You can input equations or text based questions here!" aria-label="" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Button</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="write-here-wrapper">
+                <div class="write-here hidden">Write here</div>
+                <myscript-text-web id="textInput" class="hidden" host="webdemoapi.myscript.com"
+                                   applicationkey="1167f1ba-4455-44e1-9953-9db65e97f627"
+                                   hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3" unloaded></myscript-text-web>
+                <myscript-math-web id="mathInput" class="hidden" host="webdemoapi.myscript.com"
+                                   applicationkey="1167f1ba-4455-44e1-9953-9db65e97f627"
+                                   hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3"
+
+                ></myscript-math-web>
+            </div>
+        </div>
+
+        <!--- application/vnd.myscript.jiix   application/x-latex   application/mathml+xml --->
     </div>
-    <script>
-
-
-        //const regex = /\<img src\=\"(.*)\"/;
-        /*
-          while ((m = regex.exec(str)) !== null) { // This is necessary to avoid infinite loops with zero-width matches
-              if (m.index === regex.lastIndex) {
-                  regex.lastIndex++;
-              } // The result can be accessed through the `m`-variable.
-              m.forEach((match, groupIndex) => {console.log(`Found match, group ${groupIndex}: ${match}`);
-          })
-              ;
-          }
-          */
-
-        // var found = str.match(regex);
-        //var found = regex.exec(str);
-        //console.log(found);
-
-
-        const regex = /src/;
-        var word = "";
-        var newword = word.replace(regex, "Tim");
-        console.log("Look at what I found! : " + newword);
-
-        var latexExport = "";
-
-
-        window.addEventListener('load', function () {
-
-            const submitanswerElement = document.getElementById("submit-answer");
-            const myscriptMathWebElement = document.querySelector('myscript-math-web');
-            var textExport ;
-            var latexExport ;
-            var question;
-            var url = "http://api.wolframalpha.com/v2/simple?appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA&input=";
-
-            submitanswerElement.addEventListener('click', function () {
-                //const url = "http://api.wolframalpha.com/v2/simple?input=How+far+is+losangelous&appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA";
-                question = document.getElementById("question").value;
-                if (question != "") {
-                    window.open(url + question);
-                }
-                else if (textExport != ""){
-                    window.open(url + textExport);
-                }
-                else{$.notify("Nothing to submit!");
-                }
-
-
-            });
-
-
-            const checkElement = document.querySelector('.check.classic-btn');
-            const myscriptTextWebElement = document.querySelector('myscript-text-web');
-
-            myscriptTextWebElement.addEventListener('exported', function (evt) {
-                if (evt.detail.exports) {
-                    textExport = event.detail.exports["text/plain"];
-                    console.log(textExport);
-
-                }
-            });
-
-            myscriptMathWebElement.addEventListener('exported', function (evt) {
-                if (evt.detail.exports) {
-                    latexExport = evt.detail.exports['application/x-latex'] || '';
-                    console.log('We got: ', latexExport);
-                    console.log("Our window element:" + myscriptMathWebElement);
-
-
-                    if ("E=mc^{2}" === latexExport) {
-                        myscriptMathWebElement.themecolor = '#008000';
-                    } else {
-                        myscriptMathWebElement.themecolor = '#FF0000';
-                    }
-
-
-                }
-
-            })
-            ;
-        })
-        ;
-
-
-    </script>
 </div>
 </body>
+<script>
+    const regex = /src/;
+    var word = "";
+    var newword = word.replace(regex, "Tim");
+    console.log("Look at what I found! : " + newword);
+
+    var latexExport = "";
+    var url = "http://api.wolframalpha.com/v2/simple?appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA&input=";
+
+
+    window.addEventListener('load', function () {
+
+        const submitanswerElement = document.getElementById("submit-answer");
+        const myscriptMathWebElement = document.querySelector('myscript-math-web');
+        var textExport;
+        var latexExport;
+        var question;
+
+        submitanswerElement.addEventListener('click', function () {
+            question = document.getElementById("question").value;
+            if (question != "") {
+                window.open(url + question);
+            }
+            else if (textExport != "") {
+                window.open(url + textExport);
+            }
+            else {
+                $.notify("Nothing to submit!");
+            }
+
+
+        });
+
+
+        ////http://api.wolframalpha.com/v2/simple?appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA&input=row_reduction{{3,5},{4,2}}
+
+        const checkElement = document.querySelector('.check.classic-btn');
+        const myscriptTextWebElement = document.querySelector('myscript-text-web');
+        myscriptTextWebElement.addEventListener('exported', function (evt) {
+            if (evt.detail.exports) {
+                textExport = event.detail.exports["text/plain"];
+                console.log(textExport);
+
+            }
+        });
+        myscriptMathWebElement.addEventListener('exported', function (evt) {
+            if (evt.detail.exports) {
+                latexExport = evt.detail.exports['application/x-latex'] || '';
+                /*
+                if (mathmlExport && mathmlExport != "") {
+                    $.notify(mathmlExport, "success");
+                }
+                else{
+                    $.notify("Nothing to export!");
+                }
+                */
+                if (latexExport.includes("{bmatrix}")) {
+                    var res1 = latexExport.replace(/\\begin{bmatrix}/g, "{{");
+                    var res2 = res1.replace(/&/g, ",");
+                    var res3 = res2.replace(/\\\\/g, "},{");
+                    var res4 = res3.replace(/\\end{bmatrix}/g, "}}");
+                    latexExport = res4.replace(/(\r\n\t|\n|\r|\r\t| )/gm, "");
+                }
+                console.log('We got: ', latexExport);
+
+
+                if ("E=mc^{2}" === latexExport) {
+                    myscriptMathWebElement.themecolor = '#008000';
+                } else {
+                    myscriptMathWebElement.themecolor = '#FF0000';
+                }
+
+
+            }
+
+        })
+        ;
+    })
+    ;
+
+    function clickRR() {
+        url = url + "row%20reduction%20MATRIX%20" + latexExport;
+        $.notify("Row reducing!");
+        window.open(url);
+    }
+
+    function clickEigenVal() {
+        var url = url + "eigenvalues%20" + latexExport;
+        console.log(url);
+    }
+
+    function clickEigenVec() {
+        var url = url + "eigenvectors%20" + latexExport;
+        console.log(url);
+    }
+
+    function clickDiagonal() {
+        var url = url + "Diagonalization%20" + latexExport;
+        console.log(url);
+
+
+    }
+
+    function clickDet() {
+        var url = url + "Determinant%20" + latexExport;
+        console.log(url);
+    }
+
+    function Roots() {
+        var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=Roots%20" + latexExport;
+        console.log(url);
+    }
+
+    function Integration() {
+        var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=Integrate%20" + latexExport;
+        console.log(url);
+    }
+
+    function Diferentiation() {
+        var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=Derive%20" + latexExport;
+        console.log(url);
+    }
+</script>
 
 </html>
