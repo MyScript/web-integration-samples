@@ -1,7 +1,7 @@
 ## MyScript Demo
 > What it's suppose to do, results may vary.
 <p align="center">
-  <img src="preview.gif">
+  <img src="preview.gif"><img src="logo.jpg">
 </p>
 
 ## Requirements
