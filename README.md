@@ -4,6 +4,7 @@
   <img src="preview.gif">
 </p>
 # Requirements
+
 [Install bower](https://bower.io/#install-bower).
 
 [Then you're gonna want node JS](https://nodejs.org/en/).
