@@ -7,7 +7,9 @@
 
 # Requirements
 [Install bower](https://bower.io/#install-bower).
+
 [Then you're gonna want node JS] (https://nodejs.org/en/).
+
 Then clone the repo anywhere.
 
 # Important things to do in the place where you cloned it!
