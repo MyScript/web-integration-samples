@@ -1,0 +1,276 @@
+<!doctype html>
+<html>
+
+<head>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <title>Smart Math</title>
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise">
+
+    <!--A WebComponent polyfill is needed to use the web component, as it's not yet well implemented by all browsers-->
+    <script type="text/javascript" src="./bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <script type="text/javascript" src="./bower_components/pepjs/dist/pep.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="WolframAlphaAPI.js"></script>
+
+    <link rel="import" href="./bower_components/paper-button/paper-button.html">
+    <link rel="import" href="./bower_components/myscript-text-web/myscript-text-web.html">
+    <link rel="import" href="./bower_components/myscript-math-web/myscript-math-web.html">
+
+    <custom-style>
+        <style>
+
+            html {
+                --paper-fab-background: #1A9FFF;
+                --paper-fab-keyboard-focus-background: #1A9FFF;
+                --paper-fab-disabled-background: #D7DADC;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                height: 100%;
+                max-height: 100%;
+                overflow-x: hidden;
+                font-family: sans-serif;
+                font-family: "Source Sans Pro";
+            }
+
+            .top-btn {
+                padding-right: 6px;
+            }
+
+            header {
+                height: 49px;
+                border-bottom: 1px solid #dddddd;
+                display: -webkit-flex;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .write-here-wrapper {
+                position: relative;
+            }
+
+            .write-here {
+                position: absolute;
+                color: #0065B8;
+                width: 100vw;
+                text-align: center;
+                padding: 0;
+                margin: -33px auto 0;
+                top: 50%;
+                font-family: 'Waiting for the Sunrise', cursive;
+                font-size: 40px;
+                z-index: 1;
+            }
+
+            #textInput,
+            #mathInput {
+                height: calc(100vh - 50px);
+            }
+
+            paper-button,
+            .warningkeys {
+                background-color: #F5F5F5;
+                color: #0065B8;
+            }
+
+            paper-button[active] {
+                background-color: #A5ABAD;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .warningkeys {
+                height: calc(100vh - 40px);
+                text-align: center;
+                padding: 20px;
+                font-size: 150%;
+            }
+
+			.container{
+				width: 70%;
+				transform: translateX(40%);
+			}
+
+			.container2{
+				width: 25%;
+				float: left;
+				transform: translateY(-180%);
+
+			}
+
+        </style>
+    </custom-style>
+</head>
+
+<body touch-action="none">
+
+<h1>Quick_Math</h1>
+
+<div id="content" class="container" align="right">
+	<header>
+	    <paper-button id="textButton" toggles>
+	        <iron-icon class="top-btn" src="./assets/img/demo/myscript-text.svg"></iron-icon>
+	        Matrix
+	    </paper-button>
+	    <paper-button id="mathButton" toggles>
+	        <iron-icon class="top-btn" src="./assets/img/demo/myscript-math.svg"></iron-icon>
+	        Math
+	    </paper-button>
+	</header>
+
+    <div class="write-here-wrapper">
+        <div class="write-here hidden">Write here</div>
+        <myscript-text-web id="textInput" class="hidden" host="webdemoapi.myscript.com"
+                           applicationkey="1167f1ba-4455-44e1-9953-9db65e97f627"
+                           hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3" unloaded></myscript-text-web>
+        <myscript-math-web id="mathInput" class="hidden" host="webdemoapi.myscript.com"
+                           applicationkey="1167f1ba-4455-44e1-9953-9db65e97f627"
+                           hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3" unloaded></myscript-math-web>
+    </div>
+    <script>
+
+
+    function xmlToString(xmlData) {
+
+        var xmlString;
+        //IE
+        if (window.ActiveXObject){
+            xmlString = xmlData.xml;
+        }
+        // code for Mozilla, Firefox, Opera, etc.
+        else{
+            xmlString = (new XMLSerializer()).serializeToString(xmlData);
+        }
+        return xmlString;
+    }
+
+
+
+
+const regex = /\<img src\=\"(.*)\"/
+var str = 'queryresult success="true" error="false" numpods="3" datatypes="" timedout="" timedoutpods="" timing="0.537" parsetiming="0.226" parsetimedout="false" recalculate="" id="MSPa4481f42he7id547bf5e000054db28i42i033604" host="http://www4f.wolframalpha.com" server="39" related="http://www4f.wolframalpha.com/api/v2/relatedQueries.jsp?id=MSPa4491f42he7id547bf5e000067b5h8b8428407e25469078360193170248" version="2.6"><pod title="Input" scanner="Identity" id="Input" position="100" error="false" numsubpods="1"><subpod title=""><img src="http://www4f.wolframalpha.com/Calculate/MSP/MSP4501f42he7id547bf5e00000h93584025gb663a?MSPStoreType=image/gif&s=39" alt="eigenvectors | {{}}" title="eigenvectors | {{}}" width="155" height="32"/><plaintext>eigenvectors | {{}}</plaintext></subpod></pod><pod title="Result" scanner="Eigen" id="Result" position="200" error="false" numsubpods="1" primary="true"><subpod title=""><img src="http://www4f.wolframalpha.com/Calculate/MSP/MSP4511f42he7id547bf5e000020g3357293h6353c?MSPStoreType=image/gif&s=39" alt="(not a square matrix: no eigenvalues defined)" title="(not a square matrix: no eigenvalues defined)" width="296" height="18"/><plaintext>(not a square matrix: no eigenvalues defined)</plaintext></subpod></pod><pod title="Dimensions" scanner="Eigen" id="Dimensions" position="300" error="false" numsubpods="1"><subpod title=""><img src="http://www4f.wolframalpha.com/Calculate/MSP/MSP4521f42he7id547bf5e00001c873c69cdd9cacb?MSPStoreType=image/gif&s=39" alt="1 (rows) × 0 (columns)" title="1 (rows) × 0 (columns)" width="144" height="18"/><plaintext>1 (rows) × 0 (columns)</plaintext></subpod></pod><warnings count="1"><delimiters text="An attempt was made to fix mismatched parentheses, brackets, or braces."/></warnings></queryresult>";'
+var found = str.match(regex);
+console.log(found);
+console.log(regex.math);
+
+
+
+
+	var latexExport = "";
+
+        window.addEventListener('load', () => {
+            const myscriptMathWebElement = document.querySelector('myscript-math-web');
+            const checkElement = document.querySelector('.check.classic-btn');
+
+
+            myscriptMathWebElement.addEventListener('exported', (evt) => {
+
+
+                if(evt.detail.exports) {
+                    latexExport = evt.detail.exports['application/x-latex'] || '';/////------------------------------------------latexexport is the string
+
+					if (latexExport.includes("{bmatrix}")){
+    					var res1 = latexExport.replace(/\\begin{bmatrix}/g, "{{");
+    					var res2 = res1.replace(/&/g, ",");
+						var res3 = res2.replace(/\\\\/g, "},{");
+						var res4 = res3.replace(/\\end{bmatrix}/g, "}}");
+						latexExport = res4.replace(/(\r\n\t|\n|\r|\r\t| )/gm,"");
+					}
+
+					console.log('We got: ', latexExport);
+                }
+            });
+
+            checkElement.addEventListener('click', () => {
+                myscriptMathWebElement.convert();
+                const functionOutput = myscriptMathWebElement.export_();
+
+                span = document.getElementById("myspan");
+                txt = document.createTextNode("your cool text");
+                span.appendChild(txt);
+
+                console.log('Output :' + functionOutput);
+
+            });
+
+        });
+
+		function clickRR(){
+		    var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=row%20reduction%20MATRIX%20" + latexExport + "&podstate=Result__Step-by-step+solution&format=image";
+			console.log(url);
+		}
+		function clickEigenVal(){
+		    var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=eigenvalues%20" + latexExport + "&podstate=Result__Step-by-step+solution&format=image";
+			console.log(url);
+		}
+		function clickEigenVec(){
+			var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=eigenvectors%20" + latexExport + "&podstate=Result__Step-by-step+solution&format=image";
+			console.log(url);
+		}
+		function clickDiagonal(){
+		    var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=Diagonalization%20" + latexExport + "&podstate=Result__Step-by-step%20solution&format=image";
+		    console.log(url);
+
+
+		}
+		function clickDet(){
+		    var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=Determinant%20" + latexExport + "&podstate=Result__Step-by-step%20solution&format=image";
+		    console.log(url);
+		}
+
+		function Roots(){
+		    var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=Roots%20" + latexExport + "&podstate=Result__Step-by-step%20solution&format=image";
+		    console.log(url);
+		}
+
+		function Integration(){
+		    var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=Integrate%20" + latexExport + "&podstate=Result__Step-by-step%20solution&format=image";
+		    console.log(url);
+		}
+
+		function Diferentiation(){
+		    var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=Derive%20" + latexExport + "&podstate=Result__Step-by-step%20solution&format=image";
+		    console.log(url);
+		}
+
+
+
+    </script>
+</div>
+
+<div id="content" class="container2" align="left">
+	<p>Matrix</p>
+	<button type="button" onclick="clickRR()" id="RRbtn">Row-Reduction</button>
+	<hr>
+	<button type="button" onclick="clickEigenVal()" id="EigenValbtn">Eigen Values</button>
+	<hr>
+	<button type="button" onclick="clickEigenVec()" id="EigenVecbtn">Eigen Vectors</button>
+	<hr>
+	<button type="button" onclick="clickDiagonal()" id="Diagonalbtn">Diagonalization</button>
+	<hr>
+	<button type="button" onclick="clickDet()" id="Detbtn">Determinant</button>
+	<hr>
+
+	<p>Functions</p>
+	<button type="button" onclick="Roots()" id="RRbtn">Roots</button>
+	<hr>
+	<button type="button" onclick="Integration()" id="inte">Integration</button>
+	<hr>
+	<button type="button" onclick="Diferentiation()" id="intelmao">Diferentiation</button>
+	<hr>
+</div>
+
+<hr>
+<div id="content">
+	<p>Images go here</p>
+</div>
+</body>
+
+</html>

@@ -1,3 +1,4 @@
+
 (function(document) {
     'use strict';
 
@@ -67,7 +68,7 @@
                 setButtonsStates(false, true);
             });
             // Initialize the default demo
-            setButtonsStates(true, false);
+            setButtonsStates(false, true);
         }
     });
 
