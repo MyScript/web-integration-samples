@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="true"/>
+
+    <title>Changing the language dynamically</title>
+
+    <link rel="stylesheet" href="../../dist/myscript.min.css"/>
+    <link rel="stylesheet" href="../examples.css">
+
+    <!-- Live reload with webpack -->
+    <script type="text/javascript" src="http://localhost:8080/webpack-dev-server.js"></script>
+    <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+    <script type="text/javascript" src="../../dist/myscript.min.js"></script>
+  </head>
+
+  <body touch-action="none">
+  <nav>
+    <select id="language"></select>
+  </nav>
+    <div id="editor"></div>
+    <script>
+      var languageElement = document.getElementById('language');
+      var editorElement = document.getElementById('editor');
+
+      languageElement.addEventListener('change', function (e) {
+        var configuration = editorElement.editor.configuration;
+        //The path to the language depend of the version of API you are using.
+        configuration.recognitionParams.v4.lang = e.target.value;
+        editorElement.editor.configuration = configuration;
+      });
+
+      var configuration = {
+        recognitionParams: {
+          type: 'TEXT',
+          protocol: 'WEBSOCKET',
+          apiVersion: 'V4',
+          server: {
+            scheme: 'https',
+            host: 'webdemoapi.myscript.com',
+            applicationKey: '515131ab-35fa-411c-bb4d-3917e00faf60',
+            hmacKey: '54b2ca8a-6752-469d-87dd-553bb450e9ad'
+          },
+          v4: {
+            text: {
+              mimeTypes: ['text/plain']
+            },
+          }
+        }
+      };
+
+      /**
+       * Retrieve the list of available recognition languages using local json file
+       * @param {Object} The editor recognition parameters
+       */
+      var currentLanguage = 'en_US';
+      var res = MyScript.getAvailableLanguageList();
+
+      if (languageElement.options.length === 0) {
+        Object.keys(res.result).forEach(function (key) {
+          var selected = currentLanguage === key;
+          languageElement.options[languageElement.options.length] = new Option(res.result[key], key, selected, selected);
+        });
+      }
+
+      MyScript.register(editorElement, configuration);
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="HandheldFriendly" content="true"/>
+
+  <title>Multiple inputs</title>
+
+  <link rel="stylesheet" href="../../dist/myscript.min.css"/>
+  <link rel="stylesheet" href="../examples.css">
+
+  <style>
+    #editor {
+      border-radius: 6px;
+    }
+
+    nav {
+      position: fixed;
+      width: 100%;
+      background-color: white;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      padding: 96px 24px 24px;
+    }
+
+    .input {
+      z-index: 20;
+      font-size: 36px;
+      margin-bottom: 24px;
+      width: 80%;
+      height: 300px;
+      border: 1px #bfbfbf solid;
+      border-radius: 6px;
+    }
+
+    .input > svg {
+      position: absolute;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+  <script type="text/javascript" src="../../dist/myscript.min.js"></script>
+</head>
+
+<body>
+<div>
+  <nav>
+    <div class="button-div">
+      <button id="undo" class="nav-btn btn-fab-mini btn-lightBlue" disabled>
+        <img src="../assets/img/undo.svg">
+      </button>
+      <button id="redo" class="nav-btn btn-fab-mini btn-lightBlue" disabled>
+        <img src="../assets/img/redo.svg">
+      </button>
+      <div class="spacer"></div>
+    </div>
+    <button class="classic-btn" id="convert" disabled>Convert</button>
+  </nav>
+  <main id="mainContent">
+  </main>
+  <div id="editor" touch-action="none"></div>
+  <div id="editor2" touch-action="none"></div>
+</div>
+<script src="multiple_inputs.js"></script>
+</body>
+</html>

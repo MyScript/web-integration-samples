@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="true"/>
+
+    <title>Debug</title>
+
+    <link rel="stylesheet" href="../../dist/myscript.min.css"/>
+    <link rel="stylesheet" href="../examples.css">
+    <style>
+      #result {
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: xx-large;
+      }
+
+      #editor {
+        width: 100vw;
+        height: calc(100vh - 160px);
+      }
+    </style>
+
+    <!-- Live reload with webpack -->
+    <script type="text/javascript" src="http://localhost:8080/webpack-dev-server.js"></script>
+    <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+    <script type="text/javascript" src="../../dist/myscript.min.js"></script>
+  </head>
+
+  <body touch-action="none">
+    <div>
+      <nav>
+        <div class="button-div">
+          <button id="undo" class="nav-btn btn-fab-mini btn-lightBlue" disabled>
+            <img src="../assets/img/undo.svg">
+          </button>
+          <button id="redo" class="nav-btn btn-fab-mini btn-lightBlue" disabled>
+            <img src="../assets/img/redo.svg">
+          </button>
+        </div>
+        <div class="spacer"></div>
+        <div id="parameters">
+          <select id="level" disabled></select>
+        </div>
+      </nav>
+      <div id="editor"></div>
+    </div>
+    <script>
+      var editorElement = document.getElementById('editor');
+      var undoElement = document.getElementById('undo');
+      var redoElement = document.getElementById('redo');
+      var levelElement = document.getElementById('level');
+
+      editorElement.addEventListener('changed', function (event) {
+        undoElement.disabled = !event.detail.canUndo;
+        redoElement.disabled = !event.detail.canRedo;
+      });
+
+      undoElement.addEventListener('click', function () {
+        editorElement.editor.undo();
+      });
+      redoElement.addEventListener('click', function () {
+        editorElement.editor.redo();
+      });
+
+      levelElement.addEventListener('change', function (e) {
+        Object.keys(MyScript.Constants.Logger).forEach(function (key) {
+          var name = MyScript.Constants.Logger[key];
+          var logger = MyScript.LoggerConfig.getLogger(name);
+          logger.setLevel(e.target.value, false);
+        });
+      });
+
+      var defaultLevel = 'DEBUG';
+      Object.keys(MyScript.Constants.Logger).forEach(function (key) {
+        var name = MyScript.Constants.Logger[key];
+        var logger = MyScript.LoggerConfig.getLogger(name);
+        logger.setLevel(defaultLevel, false);
+      });
+
+      /**
+       * Initialize the list of available log levels
+       */
+      Object.keys(MyScript.Constants.LogLevel).forEach(function (key) {
+        var selected = defaultLevel === key;
+        levelElement.options[levelElement.options.length] = new Option(MyScript.Constants.LogLevel[key], key, selected, selected);
+      });
+      levelElement.disabled = false;
+
+      /**
+       * Attach an editor to the document
+       * @param {Element} The DOM element to attach the ink paper
+       * @param {Object} The recognition parameters
+       */
+      MyScript.register(editorElement, {
+        recognitionParams: {
+          server: {
+            scheme: 'https',
+            host: 'webdemoapi.myscript.com',
+            applicationKey: '515131ab-35fa-411c-bb4d-3917e00faf60',
+            hmacKey: '54b2ca8a-6752-469d-87dd-553bb450e9ad'
+          }
+        }
+      });
+
+      window.addEventListener('resize', function () {
+        editorElement.editor.resize();
+      });
+    </script>
+  </body>
+
+</html>
