@@ -1,3 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
 .align-vertically {
     display: flex;
     align-items: center;
@@ -16,5 +26,10 @@
 
 #button-column{
     padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+#main{
+    padding: 0 0 0 1%;
+
     margin: 0 0 0 0;
 }
