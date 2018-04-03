@@ -1,7 +1,7 @@
 ## MyScript Demo
 > What it's suppose to do, results may vary.
 <p align="center">
-  <img src="logo.jpg" style="max-height: 50px; max-width: 50px;">
+  <img src="logo.jpg" style="max-height: 10px; max-width: 10px;">
   <img src="preview.gif">
 </p>
 
