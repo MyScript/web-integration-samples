@@ -1,29 +1,29 @@
 {
-  "name": "wolfram-alpha-api",
-  "version": "1.0.0-rc.1",
-  "description": "Wolfram|Alpha API Libraries",
-  "homepage": "https://products.wolframalpha.com/api/",
-  "main": "lib/WolframAlphaAPI.js",
-  "author": "Cody Woodard <codyw@wolfram.com>",
-  "license": "CC-BY-NC-4.0",
-  "engines": {
-    "node": ">=6"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
-    "dotenv": "^4.0.0",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^11.3.2",
-    "eslint-plugin-import": "^2.8.0",
-    "jsdoc": "^3.5.5",
-    "minami": "^1.2.3",
-    "mocha": "^3.5.3"
-  },
+  "name": "web-samples",
+  "version": "1.0.0",
+  "description": "MyScript Web samples",
+  "main": "index.html",
   "scripts": {
-    "lint": "eslint .; exit 0",
-    "test": "mocha --timeout 10000",
-    "create-docs": "jsdoc lib/WolframAlphaAPI.js --readme README.md --template node_modules/minami/"
+    "run": "echo \"Run local server\" && http-server -p 8000 -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yohann.streibel@myscript.com",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=6.3.0"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "http-server": "^0.9.0",
+    "install": "^0.11.0",
+    "myscript": "^4.1.1"
+  },
+  "devDependencies": {
+    "bower": "^1.4.2",
+    "browser-sync": "2.11.0",
+    "connect-history-api-fallback": "1.1.0",
+    "gulp": "3.9.1",
+    "gulp-param": "0.6.4"
   }
 }
