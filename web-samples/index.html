@@ -14,7 +14,8 @@
     <script type="text/javascript" src="./bower_components/webcomponentsjs/webcomponents-loader.js"></script>
     <script type="text/javascript" src="./bower_components/pepjs/dist/pep.min.js"></script>
     <script type="text/javascript" src="index.js"></script>
-    <script type="text/javascript" src="WolframAlphaAPI.js"></script>
+    <script src="notify.js"></script>
+
 
     <link rel="import" href="./bower_components/paper-button/paper-button.html">
     <link rel="import" href="./bower_components/myscript-text-web/myscript-text-web.html">
@@ -114,87 +115,107 @@
     </paper-button>
 </header>
 <div id="content">
+    Question:
+    <input type = "text" id = "question">
+
+    </input>
+    <paper-button id="submit-answer" class = "top-btn">
+        Submit Answer
+    </paper-button>
     <div class="write-here-wrapper">
         <div class="write-here hidden">Write here</div>
         <myscript-text-web id="textInput" class="hidden" host="webdemoapi.myscript.com"
                            applicationkey="1167f1ba-4455-44e1-9953-9db65e97f627"
-                           hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3" unloaded></myscript-text-web>*/
+                           hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3"></myscript-text-web>
         <myscript-math-web id="mathInput" class="hidden" host="webdemoapi.myscript.com"
                            applicationkey="1167f1ba-4455-44e1-9953-9db65e97f627"
                            hmackey="2311e16b-ecfd-4403-9297-5d3b02004fe3" unloaded></myscript-math-web>
     </div>
     <script>
-        window.addEventListener('load', () => {
-            const myscriptMathWebElement = document.querySelector('myscript-math-web');
-            const checkElement = document.querySelector('.check.classic-btn');
 
-            myscriptMathWebElement.addEventListener('exported', (evt) => {
+
+        //const regex = /\<img src\=\"(.*)\"/;
+        /*
+          while ((m = regex.exec(str)) !== null) { // This is necessary to avoid infinite loops with zero-width matches
+              if (m.index === regex.lastIndex) {
+                  regex.lastIndex++;
+              } // The result can be accessed through the `m`-variable.
+              m.forEach((match, groupIndex) => {console.log(`Found match, group ${groupIndex}: ${match}`);
+          })
+              ;
+          }
+          */
+
+        // var found = str.match(regex);
+        //var found = regex.exec(str);
+        //console.log(found);
+
+
+        const regex = /src/;
+        var word = "";
+        var newword = word.replace(regex, "Tim");
+        console.log("Look at what I found! : " + newword);
+
+        var latexExport = "";
+
+
+        window.addEventListener('load', function () {
+
+            const submitanswerElement = document.getElementById("submit-answer");
+            const myscriptMathWebElement = document.querySelector('myscript-math-web');
+            var textExport ;
+            var latexExport ;
+            var question;
+            var url = "http://api.wolframalpha.com/v2/simple?appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA&input=";
+
+            submitanswerElement.addEventListener('click', function () {
+                //const url = "http://api.wolframalpha.com/v2/simple?input=How+far+is+losangelous&appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA";
+                question = document.getElementById("question").value;
+                if (question != "") {
+                    window.open(url + question);
+                }
+                else if (textExport != ""){
+                    window.open(url + textExport);
+                }
+                else{$.notify("Nothing to submit!");
+                }
+
+
+            });
+
+
+            const checkElement = document.querySelector('.check.classic-btn');
+            const myscriptTextWebElement = document.querySelector('myscript-text-web');
+
+            myscriptTextWebElement.addEventListener('exported', function (evt) {
                 if (evt.detail.exports) {
-                    var latexExport = evt.detail.exports['application/x-latex'] || '';
+                    textExport = event.detail.exports["text/plain"];
+                    console.log(textExport);
+
+                }
+            });
+
+            myscriptMathWebElement.addEventListener('exported', function (evt) {
+                if (evt.detail.exports) {
+                    latexExport = evt.detail.exports['application/x-latex'] || '';
                     console.log('We got: ', latexExport);
+                    console.log("Our window element:" + myscriptMathWebElement);
+
+
                     if ("E=mc^{2}" === latexExport) {
                         myscriptMathWebElement.themecolor = '#008000';
                     } else {
                         myscriptMathWebElement.themecolor = '#FF0000';
                     }
-                }
-            });
-        });
-        const WolframAlphaAPI = require('wolfram-alpha-api');
-        const waApi = WolframAlphaAPI('743EW8-GKH6HX3RAA');
 
-        var ev = document.getElementById('window');
-        if (ev) {
-            checkElement.addEventListener('click', () => {
-
-                    myscriptMathWebElement.convert();
-                    const functionOutput = myscriptMathWebElement.export_();
-
-                    span = document.getElementById("myspan");
-                    txt = document.createTextNode("your cool text");
-                    span.appendChild(txt);
-
-                    console.log('Output :' + functionOutput);
-                    waApi.getFull('sin x').then(console.log).catch(console.error);
-                    // { success: true, error: false, numpods: 13, datatypes: '', ...
-
-                    waApi.getFull('F9TVlu5AmVzL').then(console.log).catch(console.error);
-                    // { success: false, error: false, numpods: 0, datatypes: '', ...
-
-                    waApi.getFull('sin(x)').then((queryresult) => {
-                        const pods = queryresult.pods;
-                        const output = pods.map((pod) => {
-                            const subpodContent = pod.subpods.map(subpod =>
-                                `  <img src="${subpod.img.src}" alt="${subpod.img.alt}">`
-                            ).join('\n');
-                            return `<h2>${pod.title}</h2>\n${subpodContent}`;
-                        }).join('\n');
-                        console.log(output);
-
-
-                        waApi.getFull('sin x').then(console.log).catch(console.error);
-// { success: true, error: false, numpods: 13, datatypes: '', ...
-
-                        waApi.getFull('F9TVlu5AmVzL').then(console.log).catch(console.error);
-// { success: false, error: false, numpods: 0, datatypes: '', ...
-
-                        waApi.getFull('sin(x)').then((queryresult) => {
-                            const pods = queryresult.pods;
-                            const output = pods.map((pod) => {
-                                const subpodContent = pod.subpods.map(subpod =>
-                                    `  <img src="${subpod.img.src}" alt="${subpod.img.alt}">`
-                                ).join('\n');
-                                return `<h2>${pod.title}</h2>\n${subpodContent}`;
-                            }).join('\n');
-                            console.log(output);
-                        }).catch(console.error);
-
-
-                    }).catch(console.error);
 
                 }
-            )
-        };
+
+            })
+            ;
+        })
+        ;
+
 
     </script>
 </div>

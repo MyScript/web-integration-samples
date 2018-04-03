@@ -290,7 +290,7 @@ class WolframAlphaAPI {
    * // TypeError: method only receives string or object
    * waApi.getFull().then(console.log, console.error);
    */
-    getFull(input){
+    getFull(input) {
         const baseUrl = `${baseApiUrl}v2/query?appid=${this.appid}`;
         // This promise works just like createApiParams, except with a bit more processing
         return new Promise((resolve, reject) => {
@@ -337,3 +337,4 @@ function initializeClass("743EW8-GKH6HX3RAA") {
     return new WolframAlphaAPI(appid);
 }
 module.exports = initializeClass;
+export default {WolframAlphaAPI};
