@@ -1,10 +1,8 @@
 # MyScript Demo
 > What it's suppose to do, results may vary.
-
 <p align="center">
   <img src="preview.gif">
 </p>
-
 # Requirements
 [Install bower](https://bower.io/#install-bower).
 
