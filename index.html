@@ -144,7 +144,7 @@
             <p>Functions</p>
             <button type="button" class = " btn btn-primary" onclick="Roots()" id="Rootbtn">Roots</button>
             <button type="button" class = " btn btn-primary" onclick="Integration()" id="Integrationbtn">Integration</button>
-            <button type="button" class = " btn btn-primary" onclick="Diferentiation()" id="Diferentiationbtn">Diferentiation</button>
+            <button type="button" class = " btn btn-primary" onclick="Differentiation()" id="Diferentiationbtn">Diferentiation</button>
             </div>
         </div>
 
@@ -154,7 +154,7 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="You can input equations or text based questions here!" aria-label="" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">Button</button>
+                        <button class="btn btn-outline-primary" type="button">Submit Question!</button>
                     </div>
                 </div>
 
@@ -264,40 +264,47 @@
     }
 
     function clickEigenVal() {
-        var url = url + "eigenvalues%20" + latexExport;
-        console.log(url);
+        url = url + "eigenvalues%20" + latexExport;
+        $.notify("Row reducing!");
+        window.open(url);
     }
 
     function clickEigenVec() {
-        var url = url + "eigenvectors%20" + latexExport;
-        console.log(url);
+        url = url + "eigenvectors%20" + latexExport;
+        $.notify("Eigenvectoring!");
+        window.open(url);
     }
 
     function clickDiagonal() {
-        var url = url + "Diagonalization%20" + latexExport;
-        console.log(url);
+        url = url + "Diagonalization%20" + latexExport;
+        $.notify("Diagonalizationing!");
+        window.open(url);
 
 
     }
 
     function clickDet() {
-        var url = url + "Determinant%20" + latexExport;
-        console.log(url);
+        url = url + "Determinant%20" + latexExport;
+        $.notify("Determinanting!");
+        window.open(url);
     }
 
     function Roots() {
-        var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=Roots%20" + latexExport;
-        console.log(url);
+        url = url + "Roots%20" + latexExport;
+        $.notify("Rooting!");
+        window.open(url);
     }
 
     function Integration() {
-        var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=Integrate%20" + latexExport;
-        console.log(url);
+        url = url + "Integrate%20" + latexExport;
+        $.notify("Integrating!");
+        window.open(url);
     }
 
-    function Diferentiation() {
-        var url = "http://api.wolframalpha.com/v2/query?appid=J63LUT-WQJ6GW7ULJ&input=Derive%20" + latexExport;
-        console.log(url);
+    function Differentiation() {
+        url = url + "input=Derive%20" + latexExport;
+        $.notify("Deriving!");
+        window.open(url);
     }
 </script>
 
