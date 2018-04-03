@@ -1,11 +1,10 @@
 ## Requirements
-[Install bower.](https://bower.io/#install-bower)
-[Then you're gonna want node JS.] (https://nodejs.org/en/)
-
-# Then clone the repo anywhere
+[Install bower](https://bower.io/#install-bower).
+[Then you're gonna want node JS] (https://nodejs.org/en/).
+Then clone the repo anywhere.
 
 # Important things to do in the where you cloned it!
-Run the following commands in command prompt or terminal.
+Run the following commands in command prompt or terminal at the folder's location.
 ```shell
 bower install myscript
 ```
