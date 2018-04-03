@@ -1,7 +1,8 @@
 ## MyScript Demo
 > What it's suppose to do, results may vary.
 <p align="center">
-  <img src="preview.gif"><img src="logo.jpg">
+  <img src="logo.jpg" style="max-height: 100px; max-width: 100px;">
+  <img src="preview.gif">
 </p>
 
 ## Requirements
