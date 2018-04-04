@@ -1,130 +1,43 @@
 <!doctype html>
 
 <head>
+    <!---CSS--->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="custom.css">
-    <link rel="icon" type="image/png" sizes="96×96" href="./favicon.ico">
-
-    <title>MyScript Unified Sample</title>
-
+    <link rel="icon" type="image/png" sizes="96×96" href="logomini.png">
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise">
+    <!---Jquery--->
     <script src="jquery-3.3.1.min.js"></script>
-    <!--A WebComponent polyfill is needed to use the web component, as it's not yet well implemented by all browsers-->
     <script src="notify.js"></script>
+    <!---MyScript--->
     <script type="text/javascript" src="./bower_components/webcomponentsjs/webcomponents-loader.js"></script>
     <script type="text/javascript" src="./bower_components/pepjs/dist/pep.min.js"></script>
+    <link rel="import" href="./bower_components/paper-button/paper-button.html">
+    <link rel="import" href="./bower_components/myscript-text-web/myscript-text-web.html">
+    <link rel="import" href="./bower_components/myscript-math-web/myscript-math-web.html">
+    <!---BootStrap--->
     <script type="text/javascript" src="index.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-
-    <link rel="import" href="./bower_components/paper-button/paper-button.html">
-    <link rel="import" href="./bower_components/myscript-text-web/myscript-text-web.html">
-    <link rel="import" href="./bower_components/myscript-math-web/myscript-math-web.html">
-
-    <custom-style>
-        <style>
-
-            html {
-                --paper-fab-background: #1A9FFF;
-                --paper-fab-keyboard-focus-background: #1A9FFF;
-                --paper-fab-disabled-background: #D7DADC;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                border: 0;
-                height: 100%;
-                max-height: 100%;
-                overflow-x: hidden;
-                font-family: sans-serif;
-                font-family: "Source Sans Pro";
-            }
-
-            .top-btn {
-                padding-right: 6px;
-            }
-
-            header {
-                height: 49px;
-                border-bottom: 1px solid #dddddd;
-                display: -webkit-flex;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .write-here-wrapper {
-                position: relative;
-            }
-
-            .write-here {
-                position: absolute;
-                color: #0065B8;
-                width: 100vw;
-                text-align: center;
-                padding: 0;
-                margin: -33px auto 0;
-                top: 50%;
-                font-family: 'Waiting for the Sunrise', cursive;
-                font-size: 40px;
-                z-index: 1;
-            }
-
-            #textInput,
-            #mathInput {
-                height: calc(100vh - 50px);
-            }
-
-            paper-button,
-            .warningkeys {
-                background-color: #F5F5F5;
-                color: #0065B8;
-            }
-
-            paper-button[active] {
-                background-color: #A5ABAD;
-            }
-
-            .hidden {
-                display: none;
-            }
-
-            .warningkeys {
-                height: calc(100vh - 40px);
-                text-align: center;
-                padding: 20px;
-                font-size: 150%;
-            }
-
-        </style>
-    </custom-style>
 </head>
-
-<div class="hidden warningkeys">Please set applicationkey and hmackey as described in README.md</div>
 
 <div id="main" class="container-fluid">
     <div class="row display-flex">
-
-        <div class="col-lg-1 well  pull-left" id="button-column">
+        <div class="col-lg-1 well pull-left" id="button-column">
             <div>
-            <img src='logo.jpg' class="img-thumbnail img-responsive align-top">
+                <img src='logo.jpg' class="img-thumbnail img-responsive align-top">
             </div>
             <div class="btn-group-vertical btn-group-sm align-bottom">
-                <button type="button" class="btn btn-outline-primary" id="textButton">
-                    <iron-icon class="top-btn" src="./assets/img/demo/myscript-text.svg"></iron-icon>
+                <button type="button" class="btn btn-outline-primary math-mode-button" id="textButton">
                     Text
                 </button>
-                <button type="button" class="btn btn-outline-primary" id="mathButton">
-                    <iron-icon class="top-btn" src="./assets/img/demo/myscript-math.svg"></iron-icon>
+                <button type="button" class="btn btn-outline-primary math-mode-button" aria-pressed="true"
+                        id="mathButton">
                     Math
                 </button>
                 <p>Matrix</p>
@@ -183,18 +96,12 @@
     </div>
 </div>
 </body>
-<script>
-    const regex = /src/;
-    var word = "";
-    var newword = word.replace(regex, "Tim");
-    console.log("Look at what I found! : " + newword);
 
+<script>
     var latexExport = "";
     var url = "http://api.wolframalpha.com/v2/simple?appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA&input=";
 
-
     window.addEventListener('load', function () {
-
         const submitanswerElement = document.getElementById("submit-answer");
         const myscriptMathWebElement = document.querySelector('myscript-math-web');
         var textExport;
@@ -212,12 +119,7 @@
             else {
                 $.notify("Nothing to submit!");
             }
-
-
         });
-
-
-        ////http://api.wolframalpha.com/v2/simple?appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA&input=row_reduction{{3,5},{4,2}}
 
         const checkElement = document.querySelector('.check.classic-btn');
         const myscriptTextWebElement = document.querySelector('myscript-text-web');
@@ -225,20 +127,11 @@
             if (evt.detail.exports) {
                 textExport = event.detail.exports["text/plain"];
                 console.log(textExport);
-
             }
         });
         myscriptMathWebElement.addEventListener('exported', function (evt) {
             if (evt.detail.exports) {
                 latexExport = evt.detail.exports['application/x-latex'] || '';
-                /*
-                if (mathmlExport && mathmlExport != "") {
-                    $.notify(mathmlExport, "success");
-                }
-                else{
-                    $.notify("Nothing to export!");
-                }
-                */
                 if (latexExport.includes("{bmatrix}")) {
                     var res1 = latexExport.replace(/\\begin{bmatrix}/g, "{{");
                     var res2 = res1.replace(/&/g, ",");
@@ -247,8 +140,6 @@
                     latexExport = res4.replace(/(\r\n\t|\n|\r|\r\t| )/gm, "");
                 }
                 console.log('We got: ', latexExport);
-
-
                 if ("E=mc^{2}" === latexExport) {
                     myscriptMathWebElement.themecolor = '#008000';
                 } else {
@@ -262,13 +153,20 @@
         ;
     })
     ;
-
     var textButton = $('#textButton');
     var mathButton = $('#mathButton');
-    textButton.on('tap', function () {
+
+    var toggleswitch = function () {
+        // textButton.button('toggle')
+    }
+
+    textButton.on('click', function () {
         $.notify("Switching to text!", "success");
+        toggleswitch();
     });
+
     mathButton.on('tap', function () {
+        toggleswitch();
         $.notify("Switching to math!", "success");
     });
 
@@ -294,8 +192,6 @@
         url = url + "Diagonalization%20" + latexExport;
         $.notify("Diagonalizationing!");
         window.open(url);
-
-
     }
 
     function clickDet() {
@@ -321,7 +217,5 @@
         $.notify("Deriving!");
         window.open(url);
     }
-
 </script>
-
 </html>

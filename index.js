@@ -43,6 +43,8 @@
 
                 textButton.active = isTextButton;
                 if (isTextButton) {
+                    console.log("I'm running");
+
                     textInput.classList.remove('hidden');
                     textInput.removeAttribute('unloaded');
                     mathInput.setAttribute('unloaded', true);
@@ -52,6 +54,7 @@
 
                 mathButton.active = isMathButton;
                 if (isMathButton) {
+
                     mathInput.classList.remove('hidden');
                     mathInput.removeAttribute('unloaded');
                     textInput.setAttribute('unloaded', true);
@@ -60,6 +63,7 @@
                 }
 
             };
+
 
             textButton.addEventListener('tap', function() {
                 setButtonsStates(true, false);

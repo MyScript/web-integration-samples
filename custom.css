@@ -1,3 +1,4 @@
+/*Custom CSS*/
 * {
     margin: 0;
     padding: 0;
@@ -6,6 +7,43 @@
     font-size: 100%;
     vertical-align: baseline;
     background: transparent;
+}
+
+.math-mode-button{
+
+}
+.math-mode-button:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #80b5ea), color-stop(1, #bddbfa));
+    background:-moz-linear-gradient(top, #80b5ea 5%, #bddbfa 100%);
+    background:-webkit-linear-gradient(top, #80b5ea 5%, #bddbfa 100%);
+    background:-o-linear-gradient(top, #80b5ea 5%, #bddbfa 100%);
+    background:-ms-linear-gradient(top, #80b5ea 5%, #bddbfa 100%);
+    background:linear-gradient(to bottom, #80b5ea 5%, #bddbfa 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#80b5ea', endColorstr='#bddbfa',GradientType=0);
+    background-color:#80b5ea;
+}
+.math-mode-button:active {
+    -moz-box-shadow: 0px 1px 0px 0px #dcecfb;
+    -webkit-box-shadow: 0px 1px 0px 0px #dcecfb;
+    box-shadow: 0px 1px 0px 0px #dcecfb;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bddbfa), color-stop(1, #80b5ea));
+    background:-moz-linear-gradient(top, #bddbfa 5%, #80b5ea 100%);
+    background:-webkit-linear-gradient(top, #bddbfa 5%, #80b5ea 100%);
+    background:-o-linear-gradient(top, #bddbfa 5%, #80b5ea 100%);
+    background:-ms-linear-gradient(top, #bddbfa 5%, #80b5ea 100%);
+    background:linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bddbfa', endColorstr='#80b5ea',GradientType=0);
+    background-color:#bddbfa;
+    border:1px solid #84bbf3;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px 2px 0px #528ecc;
 }
 
 .align-vertically {
@@ -31,5 +69,84 @@
 #main{
     padding: 0 0 0 1%;
 
+    margin: 0 0 0 0;
+}
+
+/* CSS for my MyScript elements*/
+html {
+    --paper-fab-background: #1A9FFF;
+    --paper-fab-keyboard-focus-background: #1A9FFF;
+    --paper-fab-disabled-background: #D7DADC;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 100%;
+    max-height: 100%;
+    overflow-x: hidden;
+    font-family: sans-serif;
+    font-family: "Source Sans Pro";
+}
+
+.top-btn {
+    padding-right: 6px;
+}
+
+header {
+    height: 49px;
+    border-bottom: 1px solid #dddddd;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.write-here-wrapper {
+    position: relative;
+}
+
+.write-here {
+    position: absolute;
+    color: #0065B8;
+    width: 100vw;
+    text-align: center;
+    padding: 0;
+    margin: -33px auto 0;
+    top: 50%;
+    font-family: 'Waiting for the Sunrise', cursive;
+    font-size: 40px;
+    z-index: 1;
+}
+
+#textInput,
+#mathInput {
+    height: calc(100vh - 50px);
+}
+
+paper-button,
+.warningkeys {
+    background-color: #F5F5F5;
+    color: #0065B8;
+}
+
+paper-button[active] {
+    background-color: #A5ABAD;
+}
+
+.hidden {
+    display: none;
+}
+
+.warningkeys {
+    height: calc(100vh - 40px);
+    text-align: center;
+    padding: 20px;
+    font-size: 150%;
+}
+
+.math-button-div{
+    padding: 0 0 0 0;
     margin: 0 0 0 0;
 }
