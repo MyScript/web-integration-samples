@@ -62,12 +62,14 @@
 #button-column{
     padding: 0 0 0 0;
     margin: 0 0 0 0;
+
 }
 .img-responsive{
     border : 0;
     padding : 0;
     border-color: rgba(85,0,255,0);
 }
+
 #sidebar-nav{
     padding: 0 0 0 1%;
     margin: 0 0 0 0;
@@ -76,6 +78,9 @@
     padding : 0 1% 0 0;
 }
 
+.btn-primary{
+    font-size: 1vw;
+}
 /* CSS for my MyScript elements*/
 html {
     --paper-fab-background: #1A9FFF;
