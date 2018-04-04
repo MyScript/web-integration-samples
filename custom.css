@@ -1,7 +1,7 @@
 /*Custom CSS*/
 * {
-    margin: 0;
-    padding: 0;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
     border: 0;
     outline: 0;
     font-size: 100%;
@@ -58,18 +58,22 @@
     display: flex;
     flex-direction: column;
 }
-.top-btn{
-
-}
 
 #button-column{
     padding: 0 0 0 0;
     margin: 0 0 0 0;
 }
-#main{
+.img-responsive{
+    border : 0;
+    padding : 0;
+    border-color: rgba(85,0,255,0);
+}
+#sidebar-nav{
     padding: 0 0 0 1%;
-
     margin: 0 0 0 0;
+}
+#main-content{
+    padding : 0 1% 0 0;
 }
 
 /* CSS for my MyScript elements*/
@@ -90,6 +94,15 @@ body {
     font-family: "Source Sans Pro";
 }
 
+nav{
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+div {
+    display: block;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
 .top-btn {
     padding-right: 6px;
 }
@@ -125,7 +138,6 @@ header {
     height: calc(100vh - 50px);
 }
 
-paper-button,
 .warningkeys {
     background-color: #F5F5F5;
     color: #0065B8;
@@ -145,8 +157,62 @@ paper-button[active] {
     padding: 20px;
     font-size: 150%;
 }
+.btn-group-vertical{
+    display: flex;
+}
 
 .math-button-div{
     padding: 0 0 0 0;
     margin: 0 0 0 0;
+}
+
+/*Sidebar*/
+/* Shrinking the sidebar from 250px to 80px and center aligining its content*/
+#sidebar.active {
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center;
+}
+
+/* Toggling the sidebar header content, hide the big heading [h3] and showing the small heading [strong] and vice versa*/
+#sidebar .sidebar-header strong {
+    display: none;
+}
+#sidebar.active .sidebar-header h3 {
+    display: none;
+}
+#sidebar.active .sidebar-header strong {
+    display: block;
+}
+
+#sidebar ul li a {
+    text-align: left;
+}
+
+#sidebar.active ul li a {
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 0.85em;
+}
+
+#sidebar.active ul li a i {
+    margin-right:  0;
+    display: block;
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+
+/* Same dropdown links padding*/
+#sidebar.active ul ul a {
+    padding: 10px !important;
+}
+
+/* Changing the arrow position to bottom center position,
+   translateX(50%) works with right: 50%
+   to accurately  center the arrow */
+#sidebar.active a[aria-expanded="false"]::before, #sidebar.active a[aria-expanded="true"]::before {
+    top: auto;
+    bottom: 5px;
+    right: 50%;
+    transform: translateX(50%);
 }

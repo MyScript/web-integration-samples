@@ -8,6 +8,8 @@
 
     window.addEventListener('WebComponentsReady', function() {
 
+
+
         var textInput = $('#textInput');
         var mathInput = $('#mathInput');
         var textButton = $('#textButton');

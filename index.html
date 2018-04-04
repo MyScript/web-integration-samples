@@ -26,54 +26,62 @@
             crossorigin="anonymous"></script>
 </head>
 
-<div id="main" class="container-fluid">
-    <div class="row display-flex">
+<div id="sidebar-nav" class="container-fluid">
+    <div class="row">
         <div class="col-lg-1 well pull-left" id="button-column">
-            <div>
+            <nav id="sidebar">
                 <img src='logo.jpg' class="img-thumbnail img-responsive align-top">
-            </div>
-            <div class="btn-group-vertical btn-group-sm align-bottom">
-                <button type="button" class="btn btn-outline-primary math-mode-button" id="textButton">
-                    Text
+                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn hidden">
+                    Sidebar
                 </button>
-                <button type="button" class="btn btn-outline-primary math-mode-button" aria-pressed="true"
-                        id="mathButton">
-                    Math
-                </button>
-                <p>Matrix</p>
-                <button type="button" class=" btn btn-primary" onclick="clickRR()" id="Rowreductionbtn">Row-Reduction
-                </button>
-                <button type="button" class=" btn btn-primary" onclick="clickEigenVal()" id="Eigenvaluebtn">Eigen
-                    Values
-                </button>
-                <button type="button" class=" btn btn-primary" onclick="clickEigenVec()" id="Eigenvectorbtn">Eigen
-                    Vectors
-                </button>
-                <button type="button" class=" btn btn-primary" onclick="clickDiagonal()" id="Diagonalizationbtn">
-                    Diagonalization
-                </button>
-                <button type="button" class=" btn btn-primary" onclick="clickDet()" id="Determinantbtn">Determinant
-                </button>
-                <br>
-                <p>Functions</p>
-                <button type="button" class=" btn btn-primary" onclick="Roots()" id="Rootbtn">Roots</button>
-                <button type="button" class=" btn btn-primary" onclick="Integration()" id="Integrationbtn">Integration
-                </button>
-                <button type="button" class=" btn btn-primary" onclick="Differentiation()" id="Diferentiationbtn">
-                    Diferentiation
-                </button>
-            </div>
+                <div class="btn-group-vertical btn-group-xl align-bottom">
+                    <button type="button" class="btn btn-outline-primary math-mode-button" id="textButton">
+                        Text
+                    </button>
+                    <button type="button" class="btn btn-outline-primary math-mode-button" aria-pressed="true"
+                            id="mathButton">
+                        Math
+                    </button>
+                    <br>
+                    <h2>Matrix</h2>
+                    <button type="button" class=" btn btn-primary" onclick="clickRR()" id="Rowreductionbtn">
+                        Row-Reduction
+                    </button>
+                    <button type="button" class=" btn btn-primary" onclick="clickEigenVal()" id="Eigenvaluebtn">
+                        Eigen Values
+                    </button>
+                    <button type="button" class=" btn btn-primary" onclick="clickEigenVec()" id="Eigenvectorbtn">
+                        Eigen Vectors
+                    </button>
+                    <button type="button" class=" btn btn-primary" onclick="clickDiagonal()"
+                            id="Diagonalizationbtn">
+                        Diagonalization
+                    </button>
+                    <button type="button" class=" btn btn-primary" onclick="clickDet()" id="Determinantbtn">
+                        Determinant
+                    </button>
+                    <br>
+                    <h2>Functions</h2>
+                    <button type="button" class=" btn btn-primary" onclick="Roots()" id="Rootbtn">Roots</button>
+                    <button type="button" class=" btn btn-primary" onclick="Integration()" id="Integrationbtn">
+                        Integration
+                    </button>
+                    <button type="button" class=" btn btn-primary" onclick="Differentiation()"
+                            id="Diferentiationbtn">
+                        Diferentiation
+                    </button>
+                </div>
+            </nav>
         </div>
-
-        <div class="col-lg-11 pull-right">
+        <div class="col-lg-11 pull-right" id="main-content">
             <div class="row-lg-12">
-
                 <div class="input-group mb-3">
-                    <input type="text" id = "question" class="form-control"
+                    <input type="text" id="question" class="form-control"
                            placeholder="You can input equations or text based questions here!" aria-label=""
                            aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-primary" id ="submit-answer" type="button">Submit Question!</button>
+                        <button class="btn btn-outline-primary" id="submit-answer" type="button">Submit Question!
+                        </button>
                     </div>
                 </div>
 
@@ -91,9 +99,8 @@
                 ></myscript-math-web>
             </div>
         </div>
-
-        <!--- application/vnd.myscript.jiix   application/x-latex   application/mathml+xml --->
     </div>
+    <!--- application/vnd.myscript.jiix   application/x-latex   application/mathml+xml --->
 </div>
 </body>
 
@@ -155,6 +162,10 @@
     ;
     var textButton = $('#textButton');
     var mathButton = $('#mathButton');
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
 
     var toggleswitch = function () {
         // textButton.button('toggle')
