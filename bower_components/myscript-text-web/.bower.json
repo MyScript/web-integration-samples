@@ -50,7 +50,6 @@
     "commit": "a84ed17c52a08bb93a4036dae6c045c3d0b3eb78"
   },
   "_source": "https://github.com/MyScript/myscript-text-web.git",
-  "_target": "^4.1.1",
-  "_originalSource": "myscript-text-web",
-  "_direct": true
+  "_target": "4.1.x",
+  "_originalSource": "myscript-text-web"
 }

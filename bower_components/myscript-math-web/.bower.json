@@ -52,7 +52,6 @@
     "commit": "41bf61b6818d59d61f4e4ada97ff5d7a6edfde54"
   },
   "_source": "https://github.com/MyScript/myscript-math-web.git",
-  "_target": "^4.1.1",
-  "_originalSource": "myscript-math-web",
-  "_direct": true
+  "_target": "4.1.x",
+  "_originalSource": "myscript-math-web"
 }

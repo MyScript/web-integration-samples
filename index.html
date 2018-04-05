@@ -107,14 +107,12 @@
 <script>
     var latexExport = "";
     var url = "http://api.wolframalpha.com/v2/simple?appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA&input=";
+    var textExport;
+    var question;
 
     window.addEventListener('load', function () {
         const submitanswerElement = document.getElementById("submit-answer");
         const myscriptMathWebElement = document.querySelector('myscript-math-web');
-        var textExport;
-        var latexExport;
-        var question;
-
         submitanswerElement.addEventListener('click', function () {
             question = document.getElementById("question").value;
             if (question != "") {
@@ -162,6 +160,7 @@
     ;
     var textButton = $('#textButton');
     var mathButton = $('#mathButton');
+    var newurl = "";
 
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
@@ -181,52 +180,57 @@
         $.notify("Switching to math!", "success");
     });
 
+    //http://api.wolframalpha.com/v2/simple?appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA&input=
+
+    //row%20reduction%20
+    //{{3,2},{4,1}}
+    //
     function clickRR() {
-        url = url + "row%20reduction%20" + latexExport;
+        newurl = url + "row%20reduction%20" + latexExport;
         $.notify("Row reducing!");
-        window.open(url);
+        window.open(newurl);
     }
 
     function clickEigenVal() {
-        url = url + "eigenvalues%20" + latexExport;
+        newurl = url + "eigenvalues%20" + latexExport;
         $.notify("Eigenvaluing!");
-        window.open(url);
+        window.open(newurl);
     }
 
     function clickEigenVec() {
-        url = url + "eigenvectors%20" + latexExport;
+        newurl = url + "eigenvectors%20" + latexExport;
         $.notify("Eigenvectoring!");
-        window.open(url);
+        window.open(newurl);
     }
 
     function clickDiagonal() {
         url = url + "Diagonalization%20" + latexExport;
         $.notify("Diagonalizationing!");
-        window.open(url);
+        window.open(newurl);
     }
 
     function clickDet() {
-        url = url + "Determinant%20" + latexExport;
+        newurl = url + "Determinant%20" + latexExport;
         $.notify("Determinanting!");
-        window.open(url);
+        window.open(newurl);
     }
 
     function Roots() {
-        url = url + "Roots%20" + latexExport;
+        newurl = url + "Roots%20" + latexExport;
         $.notify("Rooting!");
-        window.open(url);
+        window.open(newurl);
     }
 
     function Integration() {
-        url = url + "Integrate%20" + latexExport;
+        newurl = url + "Integrate%20" + latexExport;
         $.notify("Integrating!");
-        window.open(url);
+        window.open(newurl);
     }
 
     function Differentiation() {
-        url = url + "input=Derive%20" + latexExport;
+        newurl = url + "input=Derive%20" + latexExport;
         $.notify("Deriving!");
-        window.open(url);
+        window.open(newurl);
     }
 </script>
 </html>
