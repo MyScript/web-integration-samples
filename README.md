@@ -33,6 +33,11 @@ Then in that same folder run the following command.
 ```shell
 python -m http.server to run server
 ```
+Or if you're on mac!
+```shell
+python -m SimpleHTTPServer
+```
+
 Note if this command doesn't work search [running local testing server!](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/set_up_a_local_testing_server)
 
 ## Testing if node Js works
