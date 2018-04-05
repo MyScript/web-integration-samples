@@ -7,3 +7,4 @@ Everything is important except xml files b/c screw those files
 
 *.xml
 *.xml
+/bower_components
