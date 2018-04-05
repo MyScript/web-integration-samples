@@ -306,7 +306,7 @@
       <workItem from="1522800182499" duration="4317000" />
       <workItem from="1522806787811" duration="4980000" />
       <workItem from="1522812723647" duration="1625000" />
-      <workItem from="1522968424185" duration="467000" />
+      <workItem from="1522968424185" duration="500000" />
     </task>
     <task id="LOCAL-00001" summary="Figured out dependencies">
       <created>1522730309269</created>
@@ -357,14 +357,22 @@
       <option name="project" value="LOCAL" />
       <updated>1522811172823</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Actually fixed the matrix, made variables global">
+      <created>1522968915435</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1522968915435</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42370000" />
+    <option name="totallyTimeSpent" value="42403000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -439,7 +447,8 @@
     <MESSAGE value="Cleaned some html" />
     <MESSAGE value="Fixed the question button" />
     <MESSAGE value="Cleaned up code and improved spacing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up code and improved spacing" />
+    <MESSAGE value="Actually fixed the matrix, made variables global" />
+    <option name="LAST_COMMIT_MESSAGE" value="Actually fixed the matrix, made variables global" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
