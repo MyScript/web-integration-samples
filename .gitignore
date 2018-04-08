@@ -9,3 +9,4 @@ Everything is important except xml files b/c screw those files
 *.xml
 /bower_components
 *.xml
+/.idea
