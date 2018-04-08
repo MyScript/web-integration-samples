@@ -1,12 +1,12 @@
 <p align="center"> 
-<img src="logo.jpg" width="200" height="100" ">
+<img src="images/logo.jpg" width="200" height="100" ">
 </p>
 
 ## MyScript Demo
 
 > What it's suppose to do, results may vary.
 <p align="center"> 
-  <img src="preview.gif">
+  <img src="images/preview.gif">
 
 
 ## Requirements
@@ -31,7 +31,7 @@ bower install myscript-math-web
 
 Then in that same folder run the following command.
 ```shell
-python -m http.server to run server
+python -m http.server
 ```
 Or if you're on mac!
 ```shell

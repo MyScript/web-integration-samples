@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="custom.css">
-    <link rel="icon" type="image/png" sizes="96×96" href="logomini.png">
+    <link rel="icon" type="image/png" sizes="96×96" href="images/logomini.png">
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise">
     <!---Jquery--->
     <script src="jquery-3.3.1.min.js"></script>
@@ -30,7 +30,7 @@
     <div class="row">
         <div class="col-lg-1 well pull-left" id="button-column">
             <nav id="sidebar">
-                <img src='logo.jpg' class="img-thumbnail img-responsive align-top">
+                <img src='./images/logo.jpg' class="img-thumbnail img-responsive align-top">
                 <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn hidden">
                     Sidebar
                 </button>
@@ -50,7 +50,8 @@
                     <button type="button" class=" btn btn-primary" onclick="clickEigenVal()" id="Eigenvaluebtn">
                         Eigen Values
                     </button>
-                    <button type="button" class=" btn btn-primary" onclick="clickEigenVec()" id="Eigenvectorbtn">
+                    <button type="button" class=" btn btn-primary" onclick="clickEigenVec()"
+                            id="Eigenvectorbtn">
                         Eigen Vectors
                     </button>
                     <button type="button" class=" btn btn-primary" onclick="clickDiagonal()"
@@ -77,10 +78,11 @@
             <div class="row-lg-12">
                 <div class="input-group mb-3">
                     <input type="text" id="question" class="form-control"
-                           placeholder="You can input equations or text based questions here!" aria-label=""
+                           placeholder="You can input equations or text based questions here! V.1" aria-label=""
                            aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-primary" id="submit-answer" type="button">Submit Question!
+                        <button class="btn btn-outline-primary" id="submit-answer" type="button">Submit
+                            Question!
                         </button>
                     </div>
                 </div>
@@ -107,8 +109,8 @@
 <script>
     var latexExport = "";
     var url = "http://api.wolframalpha.com/v2/simple?appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA&input=";
-    var textExport;
-    var question;
+    var textExport = "";
+    var question = "";
 
     window.addEventListener('load', function () {
         const submitanswerElement = document.getElementById("submit-answer");
@@ -116,10 +118,15 @@
         submitanswerElement.addEventListener('click', function () {
             question = document.getElementById("question").value;
             if (question != "") {
+                console.log("normal")
                 window.open(url + question);
             }
             else if (textExport != "") {
                 window.open(url + textExport);
+            }
+            else if (latexExport != "") {
+                console.log("Latexing")
+                window.open(url + latexExport)
             }
             else {
                 $.notify("Nothing to submit!");
@@ -204,7 +211,7 @@
     }
 
     function clickDiagonal() {
-        url = url + "Diagonalization%20" + latexExport;
+        newurl = url + "Diagonalization%20" + latexExport;
         $.notify("Diagonalizationing!");
         window.open(newurl);
     }
