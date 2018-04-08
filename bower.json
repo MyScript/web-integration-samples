@@ -3,10 +3,11 @@
   "description": "MyScript Web samples",
   "main": "index.html",
   "authors": [
-    "webservices@myscript.com"
+    "yohann.streibel@myscript.com"
   ],
   "license": "MIT",
-  "homepage": "developer.myscript.com",
+  "homepage": "https://github.com/AnarchySheep/web-integration-samples",
+  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,9 +16,18 @@
     "tests"
   ],
   "dependencies": {
-    "pepjs": "^0.4.3",
-    "paper-button": "PolymerElements/paper-button#^2.0.x",
-    "myscript-text-web": "4.1.x",
-    "myscript-math-web": "4.1.x"
+    "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#1 - 2",
+    "font-roboto": "PolymerElements/font-roboto#^1.0.1",
+    "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#1 - 2",
+    "iron-a11y-announcer": "PolymerElements/iron-a11y-announcer#1 - 2",
+    "iron-fit-behavior": "PolymerElements/iron-fit-behavior#1 - 2",
+    "iron-behaviors": "PolymerElements/iron-behaviors#1 - 2",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#1 - 2",
+    "iron-icon": "PolymerElements/iron-icon#1 - 2",
+    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#1 - 2",
+    "katex": "^0.8.3",
+    "myscript-common-element": "^4.1.1",
+    "myscript-math-web": "4.1.x",
+    "myscript-text-web": "4.1.x"
   }
 }
