@@ -23,7 +23,13 @@
     "myscript-math-web": "4.1.x",
     "myscript-text-web": "4.1.x",
     "pepjs": "^0.4.3",
-    "paper-button": "2.1.0"
+    "paper-button": "2.1.0",
+      "polymer": "^2.0.1",
+      "webcomponentsjs": "^1.0.1",
+      "iron-component-page": "^3.0.0",
+      "paper-swatch-picker": "^2.0.1",
+      "paper-toggle-button": "^2.0.0",
+      "paper-slider": "^2.0.2"
 
   },
   "ignore": [
