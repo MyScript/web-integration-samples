@@ -22,9 +22,7 @@
     "katex": "^0.8.3",
     "myscript-math-web": "4.1.x",
     "myscript-text-web": "4.1.x",
-    "pepjs" : "^0",
-    "webcomponentsjs" : "^0",
-    "paper-button" : "^0"
+
 
   },
   "ignore": [
