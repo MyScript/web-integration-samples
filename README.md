@@ -6,7 +6,7 @@
 
 > What it's suppose to do, results may vary.
 <p align="center"> 
-  <img src="preview.gif">
+  <img src="image/preview.gif">
 
 
 ## Requirements
