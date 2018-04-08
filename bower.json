@@ -29,7 +29,10 @@
       "iron-component-page": "^3.0.0",
       "paper-swatch-picker": "^2.0.1",
       "paper-toggle-button": "^2.0.0",
-      "paper-slider": "^2.0.2"
+      "paper-slider": "^2.0.2",
+    "web-component-tester": "^v6.0.0",
+    "webcomponsnetjs" : "1.2.0"
+
 
   },
   "ignore": [
@@ -39,4 +42,5 @@
     "test",
     "tests"
   ]
+
 }
