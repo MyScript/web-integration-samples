@@ -31,7 +31,7 @@ bower install myscript-math-web
 
 Then in that same folder run the following command.
 ```shell
-python -m http.server to run server
+python -m http.server
 ```
 Or if you're on mac!
 ```shell
