@@ -1,0 +1,36 @@
+{
+  "name": "myscript",
+  "main": "myscript.html",
+  "description": "MyScriptJS is the fastest way to integrate handwriting panel and recognition in your webapp",
+  "keywords": [
+    "myscript",
+    "javascript",
+    "developer",
+    "handwriting",
+    "recognition",
+    "cloud"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://myscript.github.io/MyScriptJS/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MyScript/MyScriptJS.git"
+  },
+  "ignore": [
+    "*",
+    "!LICENSE",
+    "!package.json",
+    "!bower.json",
+    "!dist/**/*"
+  ],
+  "version": "4.1.2",
+  "_release": "4.1.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v4.1.2",
+    "commit": "fdc8daed71330cce06ee3b5418aca38c538b0437"
+  },
+  "_source": "https://github.com/MyScript/MyScriptJS.git",
+  "_target": "^4.1.1",
+  "_originalSource": "myscript"
+}
