@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="custom.css">
-    <link rel="icon" type="image/png" sizes="96×96" href="src/logomini.png">
+    <link rel="icon" type="image/png" sizes="96×96" href="images/logomini.png">
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise">
     <!---Jquery--->
     <script src="jquery-3.3.1.min.js"></script>
@@ -17,7 +17,7 @@
     <link rel="import" href="./bower_components/myscript-text-web/myscript-text-web.html">
     <link rel="import" href="./bower_components/myscript-math-web/myscript-math-web.html">
     <!---BootStrap--->
-    <script type="text/javascript" src="index.js"><script>
+    <script type="text/javascript" src="index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
@@ -50,7 +50,8 @@
                     <button type="button" class=" btn btn-primary" onclick="clickEigenVal()" id="Eigenvaluebtn">
                         Eigen Values
                     </button>
-                    <button type="button" class=" btn btn-primary" onclick="clickEigenVec()" id="Eigenvectorbtn">
+                    <button type="button" class=" btn btn-primary" onclick="clickEigenVec()"
+                            id="Eigenvectorbtn">
                         Eigen Vectors
                     </button>
                     <button type="button" class=" btn btn-primary" onclick="clickDiagonal()"
@@ -80,7 +81,8 @@
                            placeholder="You can input equations or text based questions here!" aria-label=""
                            aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-primary" id="submit-answer" type="button">Submit Question!
+                        <button class="btn btn-outline-primary" id="submit-answer" type="button">Submit
+                            Question!
                         </button>
                     </div>
                 </div>
@@ -107,8 +109,8 @@
 <script>
     var latexExport = "";
     var url = "http://api.wolframalpha.com/v2/simple?appid=743EW8-GKH6HX3RAA&layout=labelbar&background=DAE8FA&input=";
-    var textExport;
-    var question;
+    var textExport = "";
+    var question = "";
 
     window.addEventListener('load', function () {
         const submitanswerElement = document.getElementById("submit-answer");
@@ -116,13 +118,15 @@
         submitanswerElement.addEventListener('click', function () {
             question = document.getElementById("question").value;
             if (question != "") {
+                console.log("normal")
                 window.open(url + question);
             }
             else if (textExport != "") {
                 window.open(url + textExport);
             }
-            else if(latexExport != ""){
-                window.open(url + textExport);
+            else if (latexExport != "") {
+                console.log("Latexing")
+                window.open(url + latexExport)
             }
             else {
                 $.notify("Nothing to submit!");
