@@ -3,7 +3,6 @@
 ######################
 # Files
 ######################
-Everything is important except xml files b/c screw those files
 
 /bower_components
 **.xml
