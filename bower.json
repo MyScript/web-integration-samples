@@ -22,5 +22,12 @@
     "katex": "^0.8.3",
     "myscript-math-web": "4.1.x",
     "myscript-text-web": "4.1.x"
-  }
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
