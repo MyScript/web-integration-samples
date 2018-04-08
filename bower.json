@@ -20,7 +20,7 @@
     "iron-icon": "PolymerElements/iron-icon#1 - 2",
     "myscript-common-element": "^4.1.1",
     "katex": "^0.8.3",
-    "myscript-math-web": "4.1.x",
+
     "myscript-text-web": "4.1.x",
     "pepjs": "^0.4.3",
     "paper-button": "2.1.0",
@@ -31,7 +31,8 @@
       "paper-toggle-button": "^2.0.0",
       "paper-slider": "^2.0.2",
     "web-component-tester": "^v6.0.0",
-    "webcomponsnetjs" : "1.2.0"
+    "webcomponsnetjs" : "1.2.0",
+    "myscript-math-web": "4.1.x"
 
 
   },
