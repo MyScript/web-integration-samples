@@ -44,12 +44,12 @@
     "paper-toggle-button": "^2.0.0",
     "paper-slider": "^2.0.2"
   },
-  "version": "4.1.2",
-  "_release": "4.1.2",
+  "version": "4.1.1",
+  "_release": "4.1.1",
   "_resolution": {
     "type": "version",
-    "tag": "v4.1.2",
-    "commit": "2faa779c581232068b06ea0a0089082a561b6418"
+    "tag": "v4.1.1",
+    "commit": "41bf61b6818d59d61f4e4ada97ff5d7a6edfde54"
   },
   "_source": "https://github.com/MyScript/myscript-math-web.git",
   "_target": "4.1.x",

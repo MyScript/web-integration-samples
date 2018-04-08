@@ -3,8 +3,9 @@
 ######################
 # Files
 ######################
+Everything is important except xml files b/c screw those files
 
-**.xml
-/.idea
-/node_modules
-**.iml
+*.xml
+*.xml
+/bower_components
+*.xml
