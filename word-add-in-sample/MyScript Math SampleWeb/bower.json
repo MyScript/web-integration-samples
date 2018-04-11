@@ -15,6 +15,6 @@
     "tests"
   ],
   "dependencies": {
-    "myscript-math-web": "^1.2.2"
+    "myscript-math-web": "1.2.2"
   }
 }
