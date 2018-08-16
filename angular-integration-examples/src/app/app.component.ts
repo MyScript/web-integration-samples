@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild,  ElementRef, ViewEncapsulation} from '@angular/core';
-import * as MyScriptJS from 'myscript/src/myscript';
+import * as MyScriptJS from 'myscript';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -22,8 +22,8 @@ export class AppComponent  implements AfterViewInit {
         server: {
           scheme: 'https',
           host: 'webdemoapi.myscript.com',
-          applicationKey: 'xxxxx',
-          hmacKey: 'xxxxx',
+          applicationKey: 'xxxx',
+          hmacKey: 'xxxx',
         },
       },
     });
