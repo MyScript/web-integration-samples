@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
-    <div class="writing-container" ref="editor"></div>
+    <div class="writing-container" touch-action="none" ref="editor"></div>
   </div>
 </template>
 
@@ -31,8 +31,8 @@ export default {
         server: {
           scheme: 'https',
           host: 'webdemoapi.myscript.com',
-          applicationKey: 'xxxx',
-          hmacKey: 'xxxxx',
+          applicationKey: 'f1355ec8-c74a-4da9-8d63-691ab05952eb',
+          hmacKey: '752acf37-5a45-481b-9361-fcb32cd7f6a1',
         },
       },
     });
