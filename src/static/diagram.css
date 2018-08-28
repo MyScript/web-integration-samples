@@ -1,0 +1,445 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+#editor {
+    height: calc(100vh - 152px);
+}
+
+nav {
+    background-color: white;
+    border-top: none;
+    flex-wrap: wrap-reverse;
+    display: none;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    z-index: 25;
+    border-bottom: 1px solid #D7DDE3;
+    padding: 3px 12px;
+    transition: opacity 0.5s;
+}
+
+.nav-group {
+    display: flex;
+    align-items: center;
+}
+
+div.nav-group:nth-child(3) {
+    width: 270px;
+    justify-content: end;
+}
+
+#progress {
+    transition: width 10s;
+    width: 0;
+    height: 2px;
+    background-color: #1A9FFF;
+    opacity: 0;
+}
+
+.classic-btn {
+    height: 36px;
+    line-height: 30px;
+    padding: 0 .75em 2px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+    background: #1a9fff;
+    box-shadow: 0 2px 8px -2px rgba(0,0,0,.2);
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    transition: all 125ms;
+}
+
+.classic-btn:active {
+    color: #fff;
+    text-decoration: none;
+    background: #0065b8;
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, .5);
+}
+
+.classic-btn:disabled {
+    pointer-events: none;
+    cursor: default;
+    background-color: #ececec;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.colors {
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+    display: flex;
+    overflow: auto;
+}
+
+.color {
+    height: 36px;
+    width: 36px;
+    border: #c0c0c0 1px solid;
+    border-radius: 50%;
+}
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+
+.check {
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 16px;
+    width: 8px;
+}
+
+.jscolor {
+    height: 36px;
+    width: 36px;
+    border: #c0c0c0 1px dashed;
+    border-radius: 50%;
+}
+
+.jscolor:focus {
+    outline: none;
+}
+
+.jscolor > img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.pensettings {
+    text-align: center;
+    user-select: none;
+    margin-right: 12px;
+}
+
+.flex-container-thickness {
+    margin-top: 12px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+.thickness-icon {
+    margin: 0 auto;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.thickness {
+    cursor: pointer;
+    position: relative;
+    height: 40px;
+    width: 30px;
+}
+
+.active-thickness::after {
+    position: absolute;
+    content: '';
+    width: 70%;
+    transform: translateX(-50%);
+    bottom: -15px;
+    left: 50%;
+    border-bottom: 2px solid rgb(26, 159, 255);
+}
+
+.thickness > span {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+
+.toggle {
+    vertical-align: middle;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 62px;
+    height: 32px;
+    display: inline-block;
+    position: relative;
+    border-radius: 50px;
+    overflow: hidden;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: #ececec;
+    transition: background-color ease 0.3s;
+}
+
+.toggle:before {
+    content: "on off";
+    display: block;
+    position: absolute;
+    z-index: 2;
+    width: 28px;
+    height: 28px;
+    background: #fff;
+    left: 2px;
+    top: 2px;
+    border-radius: 50%;
+    font: 10px/28px Helvetica;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-indent: -22px;
+    word-spacing: 37px;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transition: all cubic-bezier(0.3, 1.5, 0.7, 1) 0.3s;
+    color: #131F26;
+}
+
+.toggle:checked {
+    background-color: #1A9FFF;
+}
+
+.toggle:checked:before {
+    color: #fff;
+    left: 32px;
+}
+
+#export-pptx {
+    margin-left: 24px;
+}
+
+.notification {
+    box-shadow: 0 2px 10px rgba(6,6,7,.4);
+    top: -120px;
+    right: 12px;
+    position: absolute;
+    width: 300px;
+    z-index: 40;
+    background-color: white;
+    border-radius: 6px;
+    padding: 24px;
+    display: none;
+}
+
+.show {
+    animation: showNotification 0.4s;
+    top: 4px;
+}
+
+.hide {
+    animation: hideNotification 0.2s linear;
+    top: -120px;
+}
+
+.warning {
+    box-shadow: none;
+    display: initial;
+    padding: 18px 12px 0;
+    background-color: #feefb3;
+    color: #9F6000;
+}
+
+@keyframes showNotification {
+    from {
+        top: -120px;
+    }
+
+    to {
+        top: 4px;
+    }
+}
+
+@keyframes hideNotification {
+    from {
+        top: 4px;
+    }
+
+    to {
+        top: -120px;
+    }
+}
+
+
+#eraser, #pen {
+    border-radius: initial;
+    height: 50px;
+    background: none;
+    box-shadow: none;
+    transition: none;
+}
+
+#eraser > img {
+    width: 80%
+}
+
+#pen > img {
+    width: 65%
+}
+
+.classic-btn {
+    margin-left: 12px;
+    display: flex;
+    align-items: center;
+    height: 38px;
+}
+
+.classic-btn > img {
+    margin-right: 12px;
+    height: 24px;
+}
+
+.save-group {
+    margin-left: 12px;
+    display: flex;
+    align-items: center;
+    height: 38px;
+    background: #cb4a32;
+}
+
+.save-group:active {
+    background: #cb4a32;
+}
+
+.delete {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: rgba(10, 10, 10, 0.2);
+    border: none;
+    border-radius: 290486px;
+    cursor: pointer;
+    display: inline-block;
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    font-size: 0;
+    height: 20px;
+    max-height: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    min-width: 20px;
+    outline: none;
+    vertical-align: top;
+    width: 20px;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+}
+
+.delete:before, .delete:after {
+    background-color: white;
+    content: "";
+    display: block;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+}
+
+.delete:before {
+    height: 2px;
+    width: 50%;
+}
+
+.delete:after {
+    height: 50%;
+    width: 2px;
+}
+
+.delete:hover, .delete:focus {
+    background-color: rgba(10, 10, 10, 0.3);
+}
+
+.delete:active {
+    background-color: rgba(10, 10, 10, 0.4);
+}
+
+.introduction {
+    background-color: #f5f5f5;
+}
+
+.diagram-container {
+    display: flex;
+    align-content: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 64px;
+}
+
+@media only screen and (max-width : 580px) {
+    .diagram-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 24px;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    body {
+        background: none;
+    }
+
+    #editor {
+        visibility: visible!important;
+    }
+}
+
+.diagram-example {
+    width: 350px;
+    position: relative;
+    max-width: 350px;
+    padding-top: 24px;
+    margin: 24px 1%;
+    box-shadow: 0 6px 24px -12px rgba(6,6,7,.4);
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    flex: 1 0 auto;
+    height: 200px;
+    max-height: 200px;
+}
+
+.diagram-example > img {
+    max-width: 95%;
+    max-height: 95%;
+}
+
+.diagram-example > .create-diagram {
+    height: 127px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
