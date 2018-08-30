@@ -22,9 +22,24 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 0px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
 }
-.el-main{
-  max-height: 80vh;
+
+.col-right {
+  text-align: right;
+}
+
+.col-left {
+  text-align: left;
+}
+.el-container {
+    height: 100%;
+    width: 100%;
 }
 </style>

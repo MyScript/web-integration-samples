@@ -13,7 +13,8 @@
     "vue-color": "^2.6.0",
     "vue-router": "^3.0.1",
     "vue-simple-spinner": "^1.2.8",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "myscript": "MyScript/MyScriptJS#rest-flows-improvement"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.1",
