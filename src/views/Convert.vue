@@ -1,6 +1,11 @@
 <template>
   <el-container>
     <el-header>
+      <el-row type="flex">
+        <el-col :span="1" class="col-left">
+          <a id="index-header-link" @click="$router.push({ path: '/' })" class="ooo-link-back" style="cursor: pointer"></a>
+        </el-col>
+      </el-row>
     </el-header>
     <el-main>
       <el-row>
@@ -11,7 +16,7 @@
           </el-select>
         </el-col>
       </el-row>
-      <el-row >
+      <el-row>
         <el-col :span="24">
           <el-select v-if="partType !== '' && partType.langSelector === true" v-model="lang" filterable placeholder="Select language">
             <el-option v-for="(key, value) in langList.result" :key="key" :label="key" :value="value">
@@ -19,28 +24,25 @@
           </el-select>
         </el-col>
       </el-row>
-      <el-row >
+      <el-row>
         <el-col :span="24">
           <el-switch v-if="partType !== '' && partType.convertSelector === true" v-model="handwritingMode" active-text="Handwriting mode" inactive-text="Convert mode">
           </el-switch>
         </el-col>
       </el-row>
-      <el-row >
+      <el-row>
         <el-col :span="24">
-          <el-tooltip v-for="mimeType in partType.supportedMimeTypes" :key="mimeType.label" :content="formatLabel(mimeType)" placement="top" effect="light">
-            <el-checkbox v-model="requestedMimeTypes" :label="mimeType.label" border :disabled="!mimeType.available"></el-checkbox>
+          <el-tooltip v-for="mimeKey in partType.supportedMimeTypes" :key="mimeKey.key" :content="formatLabel(mimeKey)" placement="top" effect="light">
+            <el-checkbox v-model="requestedMimeTypes" :label="mimeFromMimeKey(mimeKey)" border :disabled="!mimeKey.available">{{mimeKey.key}}</el-checkbox>
           </el-tooltip>
         </el-col>
       </el-row>
-      
+
     </el-main>
     <el-footer>
       <el-row justify="center">
-        <el-col :span="12">
-          <el-button icon="el-icon-back" circle @click="$router.push({ path: '/' })"></el-button>
-        </el-col>
-        <el-col :span="12">
-          <el-button v-if="partType !== 'MATH' && lang !== ''" type="primary" @click="convert">Convert</el-button>
+        <el-col :span="24" class="col-right">
+          <el-button :disabled="requestedMimeTypes.length == 0" type="primary" @click="convert">Convert</el-button>
         </el-col>
       </el-row>
 
@@ -49,13 +51,15 @@
 </template>
 <script>
 import langList from '@/static/languages.js';
+import store from '@/store/index';
+import * as recognizer from '@/utils/recognizer';
 
 const mimeTypesLabels = {
-  jiix : "The JSON iink format.\n By far the most complete format.",
-  text : "The plain text format",
-  latex : "latex",
-  mathml : "mathml",
-  word : "word"
+  jiix : {label : "The JSON iink format.\n By far the most complete format.", mime : "application/vnd.myscript.jiix"},
+  text : {label : "The plain text format", mime : "text/plain"},
+  latex : {label : "latex", mime : "application/x-latex"},
+  mathml : {label : "mathml", mime : "application/mathml+xml"},
+  word : {label : "word", mime : ""}
 }
 const partTypeOptions = {
   text : {
@@ -64,9 +68,9 @@ const partTypeOptions = {
     langSelector : true,
     convertSelector : true,
     supportedMimeTypes: [
-      {label : "jiix", available : true},
-      {label : "text", available : true},
-      {label : "word", available : false},
+      {key : "jiix", available : true},
+      {key : "text", available : true},
+      {key : "word", available : false},
     ]
   },
   math : {
@@ -75,9 +79,9 @@ const partTypeOptions = {
     langSelector : false,
     convertSelector : true,
     supportedMimeTypes: [
-      {label : "jiix", available : true},
-      {label : "latex", available : true},
-      {label : "mathml", available : false},
+      {key : "jiix", available : true},
+      {key : "latex", available : true},
+      {key : "mathml", available : false},
     ]
   },
   "raw-content" : {
@@ -86,13 +90,18 @@ const partTypeOptions = {
     langSelector : true,
     convertSelector : false,
     supportedMimeTypes: [
-      {label : "jiix", available : true},
+      {key : "jiix", available : true},
     ]
 }};
 
 export default {
   name: 'parttypechooser',
-   data() {
+  beforeCreate(){
+    if(this.$store.state.strokeGroups &&  this.$store.state.strokeGroups.length == 0){
+      this.$router.push({ path: '/' })
+    }
+  },
+  data() {
       return {
         partTypeOptionKey : '',
         partTypeOptions,
@@ -119,12 +128,17 @@ export default {
         this.lang = '';
         return true;
       },
-      formatLabel(mimeType){
-        return mimeTypesLabels[mimeType.label];
+      formatLabel(mimeKey){
+        return mimeTypesLabels[mimeKey.key].label;
+      },
+      mimeFromMimeKey(mimeType){
+        return mimeTypesLabels[mimeType.key].mime;
       },
       convert(){
-        this.router.push({ path: 'exports' })
-        this.$emit("converting", {partType : this.partType, lang : this.lang})
+        store.commit('updateRequestedExportResultsTypes', this.requestedMimeTypes);
+        // eslint-disable-next-line
+        recognizer.launchExport(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, this.$store);
+        this.$router.push({ path: 'export' })
       }
     }
 }
@@ -137,10 +151,13 @@ export default {
   max-width: 200px;
   margin: auto;
 }
+</style>
+<style scoped>
 .el-row {
   padding-bottom: 20px;
 }
-.el-main{
-  min-height: 300px;
+
+.el-main {
+  max-height: 300px;
 }
 </style>

@@ -14,7 +14,7 @@ import EventBus from '@/event-bus';
 import { attach, detach } from '@/utils/custom_grabber';
 
 export default {
-  name: 'editor',
+  name: 'vue-editor',
   props: ['diagramData','noLogo'],
   data() {
     return {
@@ -86,6 +86,9 @@ export default {
           : '',
       };
     },
+    getStrokeGroups(){
+      return this.editor.model.strokeGroups;
+    }
   },
   mounted() {
     this.defaultConfiguration = {
