@@ -16,6 +16,7 @@ export function launchExport(strokeGroups, type, mimeTypes, store) {
       const recognizerContext = MyScript.RecognizerContext.createEmptyRecognizerContext({
         configuration: MyScript.DefaultConfiguration
       });
+      recognizerContext.editor.configuration.recognitionParams.type = type;
       recognizerContext.editor.configuration.recognitionParams.protocol = 'REST';
       recognizerContext.editor.configuration.recognitionParams.server = {
         scheme: 'https',

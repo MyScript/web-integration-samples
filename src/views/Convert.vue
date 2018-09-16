@@ -18,7 +18,7 @@
       </el-row>
       <el-row>
         <el-col :span="24">
-          <el-select v-if="partType !== '' && partType.langSelector === true" v-model="lang" filterable placeholder="Select language">
+          <el-select :disabled="!(partType !== '' && partType.langSelector === true)" v-model="lang" filterable placeholder="Select language">
             <el-option v-for="(key, value) in langList.result" :key="key" :label="key" :value="value">
             </el-option>
           </el-select>
@@ -26,7 +26,7 @@
       </el-row>
       <el-row>
         <el-col :span="24">
-          <el-switch v-if="partType !== '' && partType.convertSelector === true" v-model="handwritingMode" active-text="Handwriting mode" inactive-text="Convert mode">
+          <el-switch :disabled="partType === '' || partType.convertSelector !== true" v-model="handwritingMode" active-text="Handwriting mode" inactive-text="Convert mode">
           </el-switch>
         </el-col>
       </el-row>
@@ -37,14 +37,15 @@
           </el-tooltip>
         </el-col>
       </el-row>
-
-    </el-main>
-    <el-footer>
-      <el-row justify="center">
-        <el-col :span="24" class="col-right">
+       <el-row >
+        <el-col :span="24" >
           <el-button :disabled="requestedMimeTypes.length == 0" type="primary" @click="convert">Convert</el-button>
         </el-col>
       </el-row>
+
+    </el-main>
+    <el-footer>
+     
 
     </el-footer>
   </el-container>
@@ -59,10 +60,15 @@ const mimeTypesLabels = {
   text : {label : "The plain text format", mime : "text/plain"},
   latex : {label : "latex", mime : "application/x-latex"},
   mathml : {label : "mathml", mime : "application/mathml+xml"},
-  word : {label : "word", mime : ""}
+  word : {label : "word", mime : ""},
+  jpeg : {label : "jpeg", mime : "image/jpeg"},
+  png : {label : "png", mime : "image/png"},
+  pptx : {label : "pptx", mime : "application/vnd.openxmlformats-officedocument.presentationml.presentation"},
+  svg : {label : "svg", mime : "image/png"},
+  graphml : {label : "GraphML", mime : "application/graphml+xml"},
 }
 const partTypeOptions = {
-  text : {
+  TEXT : {
     label : "Text",
     interactive : true,
     langSelector : true,
@@ -71,9 +77,11 @@ const partTypeOptions = {
       {key : "jiix", available : true},
       {key : "text", available : true},
       {key : "word", available : false},
+      {key : "jpeg", available : true},
+      {key : "png", available : true},
     ]
   },
-  math : {
+  MATH : {
     label : "Math",
     interactive : true,
     langSelector : false,
@@ -82,17 +90,37 @@ const partTypeOptions = {
       {key : "jiix", available : true},
       {key : "latex", available : true},
       {key : "mathml", available : false},
+      {key : "jpeg", available : true},
+      {key : "png", available : true},
     ]
   },
-  "raw-content" : {
+  "Raw Content" : {
     label : "Raw-content",
     interactive : false,
     langSelector : true,
     convertSelector : false,
     supportedMimeTypes: [
       {key : "jiix", available : true},
+      {key : "jpeg", available : true},
+      {key : "png", available : true},
     ]
-}};
+  },
+  DIAGRAM : {
+    label : "Diagram",
+    interactive : false,
+    langSelector : true,
+    convertSelector : true,
+    supportedMimeTypes: [
+      {key : "jiix", available : true},
+      {key : "svg", available : true},
+      {key : "graphml", available : true},
+      {key : "pptx", available : true},
+      {key : "jpeg", available : true},
+      {key : "png", available : true},
+      
+    ]
+  },
+  };
 
 export default {
   name: 'parttypechooser',

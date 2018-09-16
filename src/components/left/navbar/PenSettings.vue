@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-group">
+  <div class="nav-group left-separation">
     <button @click="disableEraser" id="pen" class="nav-btn btn-fab-mini tools"
             :class="{ penDisabled: !eraserDisabled, penEnabled: eraserDisabled }">
       <img src="../../../static/img/pen.svg">
@@ -8,12 +8,12 @@
             :class="{ eraserEnabled: !eraserDisabled, eraserDisabled: eraserDisabled }">
       <img src="../../../static/img/eraser.svg">
     </button>
-    <div @click="showThicknessPanel" class="pensettings thickness" ref="thickness">
+    <div @click="showThicknessPanel" class="pensettings thickness left-separation" ref="thickness">
       <div class="thickness-icon" :style="activeThickness.itemStyle"></div>
       <span>{{activeThickness.value}}</span>
     </div>
     <thickness-panel id="thickness-panel" v-show="displayThicknessPanel" :style="{ left: thicknessPanelLeft }"/>
-    <div class="colors">
+    <div class="colors left-separation">
       <pen-color v-for="color in colors" :color="color" :checked="color === '#000000'" :key="color"/>
       <color-picker/>
     </div>
@@ -28,15 +28,22 @@ import ThicknessPanel from './ThicknessPanel';
 
 export default {
   name: 'pen-setting',
+  props: {
+    colors: {
+      type: Array,
+      default: function () {
+        return ['#000000', '#808080', '#D9D9D9', '#1A8CFF', '#FF1A40', '#2BD965', '#FFDD33'];
+      },
+    },
+  },
   data() {
     return {
-      colors: ['#000000', '#808080', '#D9D9D9', '#1A8CFF', '#FF1A40', '#2BD965', '#FFDD33'],
       eraserDisabled: true,
       displayThicknessPanel: false,
       thicknessPanelLeft: '',
       activeThickness: {
         value: 1,
-        itemStyle: 'width: 5px; height: 5px; margin-top: 6px',
+        itemStyle: 'width: 5px; height: 5px; margin-top: 11px; margin-left: 11px;',
       },
     };
   },
