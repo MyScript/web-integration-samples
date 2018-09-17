@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import langList from '../../static/languages.js';
+import langList from '@/static/languages.js';
 
 const partTypeList = [{
           label: 'Interactive parts',

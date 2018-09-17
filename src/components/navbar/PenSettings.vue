@@ -2,11 +2,11 @@
   <div class="nav-group left-separation">
     <button @click="disableEraser" id="pen" class="nav-btn btn-fab-mini tools"
             :class="{ penDisabled: !eraserDisabled, penEnabled: eraserDisabled }">
-      <img src="../../../static/img/pen.svg">
+      <img src="@/static/img/pen.svg">
     </button>
     <button @click="enableEraser" id="eraser" class="nav-btn btn-fab-mini tools"
             :class="{ eraserEnabled: !eraserDisabled, eraserDisabled: eraserDisabled }">
-      <img src="../../../static/img/eraser.svg">
+      <img src="@/static/img/eraser.svg">
     </button>
     <div @click="showThicknessPanel" class="pensettings thickness left-separation" ref="thickness">
       <div class="thickness-icon" :style="activeThickness.itemStyle"></div>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import EventBus from '../../../event-bus';
+import EventBus from '@/event-bus';
 import PenColor from './PenColor';
 import ColorPicker from './ColorPicker';
 import ThicknessPanel from './ThicknessPanel';

@@ -9,6 +9,12 @@ const store = new Vuex.Store({
     recognitionOptions : {},
     requestedExportResultsTypes : [],
     exportResults : {},
+    interpretationOptions : {
+      partTypeOptionKey : '',
+        lang: 'en_US',
+        handwritingMode : false,
+        requestedMimeTypes : [],
+    },
   },
   mutations: {
     updateStrokeGroups(state, strokeGroups){
@@ -23,8 +29,14 @@ const store = new Vuex.Store({
     updateRequestedExportResultsTypes(state, requestedExportResultsTypes){
       state.requestedExportResultsTypes = requestedExportResultsTypes;
     },
+    resetExportResult(state){
+      state.exportResults = {};
+    },
     persistExportResult(state, exportResult){
       Vue.set(state.exportResults, exportResult.type, exportResult.exportValue)
+    },
+    updateInterpretationOptions(state, interpretationOptions){
+      state.interpretationOptions = interpretationOptions;
     }
   }
 });

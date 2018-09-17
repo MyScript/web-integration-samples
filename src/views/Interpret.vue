@@ -10,7 +10,7 @@
     <el-main>
       <el-row>
         <el-col :span="24">
-          <el-select v-model="partTypeOptionKey" placeholder="Select part type">
+          <el-select v-model="partTypeOptionKey" placeholder="Select part type" @change="partTypeChanged">
             <el-option v-for="(value, key) in partTypeOptions" :key="key" :label="value.label" :value="key">
             </el-option>
           </el-select>
@@ -51,8 +51,9 @@
   </el-container>
 </template>
 <script>
+//TODO Activate configuration options depending of the type. (Digital Edit only if Jiix or Image are supported, style only with images ...)
 import langList from '@/static/languages.js';
-import store from '@/store/index';
+import store from '@/store/store';
 import * as recognizer from '@/utils/recognizer';
 
 const mimeTypesLabels = {
@@ -64,7 +65,7 @@ const mimeTypesLabels = {
   jpeg : {label : "jpeg", mime : "image/jpeg"},
   png : {label : "png", mime : "image/png"},
   pptx : {label : "pptx", mime : "application/vnd.openxmlformats-officedocument.presentationml.presentation"},
-  svg : {label : "svg", mime : "image/png"},
+  svg : {label : "svg", mime : "image/svg+xml"},
   graphml : {label : "GraphML", mime : "application/graphml+xml"},
 }
 const partTypeOptions = {
@@ -125,20 +126,28 @@ const partTypeOptions = {
 export default {
   name: 'parttypechooser',
   beforeCreate(){
+    this.interpretationOptions = this.$store.state.interpretationOptions;
     if(this.$store.state.strokeGroups &&  this.$store.state.strokeGroups.length == 0){
       this.$router.push({ path: '/' })
     }
+    
   },
   data() {
       return {
-        partTypeOptionKey : '',
         partTypeOptions,
         mimeTypesLabels,
         langList,
-        lang: '',
+        partTypeOptionKey : '',
+        lang: 'en_US',
         handwritingMode : false,
         requestedMimeTypes : [],
       }
+    },
+    created(){
+      this.partTypeOptionKey = this.interpretationOptions.partTypeOptionKey;
+        this.lang = this.interpretationOptions.lang;
+        this.handwritingMode = this.interpretationOptions.handwritingMode;
+        this.requestedMimeTypes = this.interpretationOptions.requestedMimeTypes;
     },
     computed : {
       partType(){
@@ -150,10 +159,14 @@ export default {
       }
     },
     methods : {
-      resetPartType(){
+      partTypeChanged(partType){
         this.requestedMimeTypes = [];
         this.handwritingMode = false;
-        this.lang = '';
+        if(partType === 'MATH'){
+          this.lang = '';
+        }else if (this.lang === ''){
+          this.lang = 'en_US';
+        }
         return true;
       },
       formatLabel(mimeKey){
@@ -163,10 +176,17 @@ export default {
         return mimeTypesLabels[mimeType.key].mime;
       },
       convert(){
-        store.commit('updateRequestedExportResultsTypes', this.requestedMimeTypes);
+        this.interpretationOptions = {
+          partTypeOptionKey : this.partTypeOptionKey,
+          lang: this.lang,
+          handwritingMode : this.handwritingMode,
+          requestedMimeTypes : this.requestedMimeTypes,
+        };
+        store.commit('resetExportResult');
+        store.commit('updateInterpretationOptions', this.interpretationOptions);
         // eslint-disable-next-line
-        recognizer.launchExport(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, this.$store);
-        this.$router.push({ path: 'export' })
+        recognizer.launchExport(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, this.interpretationOptions, this.$store);
+        this.$router.push({ path: 'control' })
       }
     }
 }

@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import { blackOrWhiteTick, hexToRgb } from '../../../utils/utils';
-import EventBus from '../../../event-bus';
+import { blackOrWhiteTick, hexToRgb } from '@/utils/utils';
+import EventBus from '@/event-bus';
 
 export default {
   name: 'pen-color',

@@ -2,7 +2,7 @@
   <div class="pensettings">
     <button @click="openPicker" class="color-picker" :style="style">
       <span v-if="colorChecked" class="check" :style="{ borderColor: tickColor }"></span>
-      <img v-else src="../../../static/img/add.svg">
+      <img v-else src="@/static/img/add.svg">
     </button>
     <sketch-picker id="color-picker" class="picker" v-model="colors" v-show="showPicker" @input="updateColor"/>
   </div>
@@ -10,8 +10,8 @@
 
 <script>
 import { Sketch } from 'vue-color';
-import { blackOrWhiteTick, hexToRgb } from '../../../utils/utils';
-import EventBus from '../../../event-bus';
+import { blackOrWhiteTick, hexToRgb } from '@/utils/utils';
+import EventBus from '@/event-bus';
 
 export default {
   name: 'color-picker',

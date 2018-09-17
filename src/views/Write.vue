@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import Navbar from '@/components/left/Navbar.vue';
+import Navbar from '@/components/Navbar.vue';
 import VueEditor from '@/components/VueEditor';
-import store from '@/store/index';
+import store from '@/store/store';
 import EventBus from '@/event-bus';
 
 export default {
@@ -41,7 +41,7 @@ export default {
     handleSelect(){},
     convert(){
       store.commit('updateStrokeGroups', this.$refs.vueEditor.getStrokeGroups());
-      this.$router.push({ path: 'convert' })
+      this.$router.push({ path: 'interpret' })
     },
     handleOpen(key, keyPath) {
       // eslint-disable-next-line
