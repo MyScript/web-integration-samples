@@ -123,8 +123,10 @@ const partTypeOptions = {
   },
   };
 
+//TODO Manage style
+//TODO Display in different colors the interpretation options
 export default {
-  name: 'parttypechooser',
+  name: 'interpret',
   beforeCreate(){
     this.interpretationOptions = this.$store.state.interpretationOptions;
     if(this.$store.state.strokeGroups &&  this.$store.state.strokeGroups.length == 0){
@@ -192,20 +194,8 @@ export default {
 }
 
 </script>
-<style>
-.parttypechooser {
-  display: flex;
-  flex-direction: column;
-  max-width: 200px;
-  margin: auto;
-}
-</style>
 <style scoped>
 .el-row {
   padding-bottom: 20px;
-}
-
-.el-main {
-  max-height: 300px;
 }
 </style>

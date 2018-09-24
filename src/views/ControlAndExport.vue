@@ -13,7 +13,8 @@
           <div class="controlView" v-if="exportResults[requestedMimeType]">
             <img v-if="requestedMimeType.startsWith('image/png') || requestedMimeType.startsWith('image/jpeg')"  class="interpretedContent" :src="exportResults[requestedMimeType]"/>
             <vue-json-pretty  v-else-if="requestedMimeType.startsWith('application/vnd.myscript.jiix')" :data="exportResults[requestedMimeType]" class="interpretedContent"></vue-json-pretty>
-            <div v-else-if="requestedMimeType.startsWith('image/svg')" v-html="exportResults[requestedMimeType]" class="interpretedContent">
+            <div v-else-if="requestedMimeType.startsWith('image/svg')"  class="interpretedContent">
+              <div v-html="exportResults[requestedMimeType]"></div>
             </div>
             <div v-else-if="requestedMimeType.startsWith('application/vnd')" class="explaination">
               Power Point files could not be previewed in a web browser easily please use the download button.
@@ -52,9 +53,13 @@ export default {
     'exportResults'
   ]),
   methods: {
-    download(){},
-    edit(){},
-    interactiveEdit(){},
+    download(){
+      this.$message({
+          showClose: true,
+          message: 'Not implemented yet.',
+          type: 'warning'
+        });
+    },
   }
 }
 </script>
@@ -74,12 +79,12 @@ export default {
 }
 
 .interpretedContent {
-  max-width: 100%;
-  max-height: 100%;
+    max-width: 80vmin;
+    max-height: 80vmin;
 }
-.interpretedContent > svg {
-  max-width: 100%;
-  max-height: 100%;
+.interpretedContent > div > svg {
+    max-width: 80vmin;
+    max-height: 80vmin;
 }
 
 .controlView {

@@ -1,6 +1,6 @@
 import Vue from 'vue'
-
 import App from './App.vue'
+import VueClipboard from 'vue-clipboard2'
 import router from './router'
 import store from './store/store'
 import './plugins/element.js'
@@ -11,4 +11,5 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+Vue.use(VueClipboard)
 

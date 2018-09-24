@@ -34,13 +34,8 @@ export default {
     pointerDown() {
       EventBus.$emit('pointerDown');
     },
-    loaded() {
-      if (this.diagramData) {
-        this.editor.reDraw(
-          this.diagramData.rawStrokes,
-          this.diagramData.strokeGroups,
-        );
-      }
+    loaded(evt) {
+      this.$emit('loaded', evt)
     },
     changed(event) {
       EventBus.$emit('changed', {

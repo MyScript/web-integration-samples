@@ -15,6 +15,9 @@ const store = new Vuex.Store({
         handwritingMode : false,
         requestedMimeTypes : [],
     },
+    localContent : [],
+    preloadedContent : [],
+    currentContent : {}
   },
   mutations: {
     updateStrokeGroups(state, strokeGroups){
@@ -37,6 +40,12 @@ const store = new Vuex.Store({
     },
     updateInterpretationOptions(state, interpretationOptions){
       state.interpretationOptions = interpretationOptions;
+    },
+    addLocalContent(state, newLocalContent){
+      state.localContent.push(newLocalContent);
+    },
+    updateCurrentContent(state, currentContent){
+      state.currentContent = currentContent;
     }
   }
 });
