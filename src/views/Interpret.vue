@@ -24,12 +24,7 @@
           </el-select>
         </el-col>
       </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-switch :disabled="partType === '' || partType.convertSelector !== true" v-model="handwritingMode" active-text="Handwriting mode" inactive-text="Convert mode">
-          </el-switch>
-        </el-col>
-      </el-row>
+      
       <el-row>
         <el-col :span="24">
           <el-tooltip v-for="mimeKey in partType.supportedMimeTypes" :key="mimeKey.key" :content="formatLabel(mimeKey)" placement="top" effect="light">
@@ -37,6 +32,63 @@
           </el-tooltip>
         </el-col>
       </el-row>
+      <el-row v-if="requestedMimeTypes.includes('application/vnd.myscript.jiix') || requestedMimeTypes.includes('images/png') || requestedMimeTypes.includes('images/jpeg')">
+        <el-col :span="24">
+          <el-switch :disabled="partType === '' || partType.convertSelector !== true" v-model="handwritingMode" active-text="Handwriting mode" inactive-text="Convert mode">
+          </el-switch>
+        </el-col>
+      </el-row>
+      <template v-if="requestedMimeTypes.includes('application/vnd.myscript.jiix')">
+        <el-row>
+          <el-col :span="24">
+            <el-switch  v-model="textRecoOn" active-text="Activate text recognition" >
+            </el-switch>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-switch  v-model="shapeRecoOn" active-text="Activate shape recognition" >
+            </el-switch>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-switch  v-model="jiixWithStrokes" active-text="With strokes" >
+            </el-switch>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-switch  v-model="jiixWithWords" active-text="With words">
+            </el-switch>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-switch  v-model="jiixWithChars" active-text="With chars" >
+            </el-switch>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-switch  v-model="jiixWithBoudingBox" active-text="With bouding boxes" >
+            </el-switch>
+          </el-col>
+        </el-row>
+      </template>
+      <template v-if="requestedMimeTypes.includes('image/jpeg') || requestedMimeTypes.includes('image/png')">
+      <el-row>
+        <el-col :span="24">
+          <el-switch  v-model="overideDefaultThemeStyle" active-text="Overide default theme" inactive-text="">
+          </el-switch>
+        </el-col>
+      </el-row>
+      <el-row v-if="overideDefaultThemeStyle">
+        <el-col :span="24">
+          <el-input type="textarea" v-model="styleshet" size="medium"></el-input>
+        </el-col>
+      </el-row>
+       </template>
        <el-row >
         <el-col :span="24" >
           <el-button :disabled="requestedMimeTypes.length == 0" type="primary" @click="convert">Convert</el-button>
@@ -55,6 +107,26 @@
 import langList from '@/static/languages.js';
 import store from '@/store/store';
 import * as recognizer from '@/utils/recognizer';
+
+const defaultTheme = {
+  ink: {
+    color: '#000000',
+    '-myscript-pen-width': 1,
+    '-myscript-pen-fill-style': 'none',
+    '-myscript-pen-fill-color': '#FFFFFF00'
+  },
+  '.math': {
+    'font-family': 'STIXGeneral'
+  },
+  '.math-solved': {
+    'font-family': 'STIXGeneral',
+    color: '#A8A8A8FF'
+  },
+  '.text': {
+    'font-family': 'Open Sans',
+    'font-size': 10
+  }
+};
 
 const mimeTypesLabels = {
   jiix : {label : "The JSON iink format.\n By far the most complete format.", mime : "application/vnd.myscript.jiix"},
@@ -143,6 +215,14 @@ export default {
         lang: 'en_US',
         handwritingMode : false,
         requestedMimeTypes : [],
+        textRecoOn : false,
+        shapeRecoOn : false,
+        jiixWithStrokes : false,
+        jiixWithWords : false,
+        jiixWithChars : false,
+        jiixWithBoudingBox : false,
+        overideDefaultThemeStyle : false,
+        styleshet : JSON.stringify(defaultTheme, ' ', 2),
       }
     },
     created(){
@@ -183,11 +263,22 @@ export default {
           lang: this.lang,
           handwritingMode : this.handwritingMode,
           requestedMimeTypes : this.requestedMimeTypes,
+          textRecoOn : this.textRecoOn,
+          shapeRecoOn : this.shapeRecoOn,
+          jiixWithStrokes : this.jiixWithStrokes,
+          jiixWithWords : this.jiixWithWords,
+          jiixWithChars : this.jiixWithChars,
+          jiixWithBoudingBox : this.jiixWithBoudingBox,
+          
         };
+        if(this.overideDefaultThemeStyle){
+          this.interpretationOptions.styleshet = JSON.parse(this.styleshet);
+        }
+        
         store.commit('resetExportResult');
         store.commit('updateInterpretationOptions', this.interpretationOptions);
         // eslint-disable-next-line
-        recognizer.launchExport(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, this.interpretationOptions, this.$store);
+        recognizer.launchExportAndUpdateStore(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, this.interpretationOptions, this.$store);
         this.$router.push({ path: 'control' })
       }
     }
@@ -197,5 +288,11 @@ export default {
 <style scoped>
 .el-row {
   padding-bottom: 20px;
+}
+
+</style>
+<style>
+.el-textarea__inner{
+  height: 200px;
 }
 </style>

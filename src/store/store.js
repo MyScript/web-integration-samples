@@ -3,6 +3,7 @@ import Vue from 'vue';
 
 Vue.use(Vuex);
 
+const localStorageLocalContent = JSON.parse(window.localStorage.getItem('localContent'));
 const store = new Vuex.Store({
   state: {
     strokeGroups : [],
@@ -15,7 +16,7 @@ const store = new Vuex.Store({
         handwritingMode : false,
         requestedMimeTypes : [],
     },
-    localContent : [],
+    localContent : localStorageLocalContent ? localStorageLocalContent : [],
     preloadedContent : [],
     currentContent : {}
   },
@@ -43,6 +44,9 @@ const store = new Vuex.Store({
     },
     addLocalContent(state, newLocalContent){
       state.localContent.push(newLocalContent);
+    },
+    removeLocalContentItem(state, idx){
+      state.localContent.splice(idx, 1);
     },
     updateCurrentContent(state, currentContent){
       state.currentContent = currentContent;

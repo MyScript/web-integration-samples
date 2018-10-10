@@ -5,15 +5,20 @@
             <el-submenu index="1">
               <template slot="title"></template>
               <el-menu-item index="ImportStrokes">Import strokes</el-menu-item>
-              <el-menu-item index="1-2" disabled>Browse local inks</el-menu-item>
-              <el-menu-item index="1-3" disabled></el-menu-item>
-              <el-menu-item index="StrokesDisplay">Display strokes</el-menu-item>
+              <el-menu-item index="1-3" disabled>Load a model</el-menu-item>
+              <el-menu-item index="BrowseLocalContent" >Browse local inks</el-menu-item>
+              <el-menu-item index="StrokesDisplay" :disabled="!firstStroke">Display strokes</el-menu-item>
             </el-submenu>
             
           </el-menu>
         
           <Navbar :colors="['#000000', '#FF1A40']"></Navbar>
-          <div class="button-container left-separation">
+          <div class="button-container">
+            <el-input placeholder="Search text (en_US)" v-model="searchTerm" class="input-with-select">
+              <el-button slot="append" icon="el-icon-search" @click="searchWithJiix"></el-button>
+            </el-input>
+          </div>
+          <div class="button-container">
             <el-button type="primary" @click="convert" :disabled="!firstStroke" class="convert-button left-separation">Convert <i class="el-icon-arrow-right el-icon-right"></i></el-button>
           </div>
 
@@ -22,6 +27,7 @@
       <el-main class="mainEditor"><vue-editor :no-logo="true" @loaded="loaded" ref="vueEditor"></vue-editor></el-main>
       <stroke-importer ref="strokeimporter"></stroke-importer>
       <pointer-events-display ref="pointerEventsDisplay"></pointer-events-display>
+      <browse-local-content ref="browseLocalContent"></browse-local-content>
       <el-button v-if="firstStroke" type="primary" icon="el-icon-star-off" circle @click="star" class="star-button"></el-button>
     </el-container>
 </template>
@@ -31,17 +37,20 @@ import Navbar from '@/components/Navbar';
 import VueEditor from '@/components/VueEditor';
 import StrokeImporter from '@/components/StrokeImporter';
 import PointerEventsDisplay from '@/components/PointerEventsDisplay';
+import BrowseLocalContent from '@/components/BrowseLocalContent';
 import store from '@/store/store';
 import EventBus from '@/event-bus';
+import search from '@/utils/search';
 
 export default {
   name: 'write',
-  components: {Navbar, VueEditor, StrokeImporter, PointerEventsDisplay},
+  components: {Navbar, VueEditor, StrokeImporter, PointerEventsDisplay, BrowseLocalContent},
   data(){
     return {
       activeIndex: "1",
       firstStroke : false,
       isCollapse: true,
+      searchTerm : "",
     }
   },
   methods:{
@@ -50,6 +59,8 @@ export default {
         this.$refs.strokeimporter.display();
       }else if (menuIndex === 'StrokesDisplay') {
         this.$refs.pointerEventsDisplay.display();
+      } else if (menuIndex === 'BrowseLocalContent') {
+        this.$refs.browseLocalContent.display();
       } else {
         this.$message({
           showClose: true,
@@ -85,8 +96,11 @@ export default {
           rawStrokes : this.$refs.vueEditor.editor.model.rawStrokes,
           strokeGroups : this.$refs.vueEditor.editor.model.strokeGroups,
           png : this.$refs.vueEditor.editor.png,
+          date : new Date(),
         };
         store.commit('addLocalContent',datas);
+        const myStorage = window.localStorage;
+        myStorage.setItem('localContent', JSON.stringify(this.$store.state.localContent));
         this.$message({
           showClose: true,
           message: 'Content stored in your current session',
@@ -94,6 +108,9 @@ export default {
         });
         
         //
+      },
+      searchWithJiix(){
+        search(this.searchTerm, this.$refs.vueEditor.editor)
       }
   },
   mounted() {
@@ -165,13 +182,16 @@ export default {
 }
 .button-container{
   display: flex;
-  background-color: white;
+  align-self: center;
 }
 .star-button {
   position: absolute;
   bottom: 15px;
   right: 15px;
   z-index: 20;
+}
+.input-with-select {
+  justify-self : center;
 }
 
 </style>

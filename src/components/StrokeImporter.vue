@@ -64,7 +64,7 @@
         this.reset();
         this.centerDialogVisible =  true;
       },
-       reset(){
+      reset(){
         this.format = '';
         this.strokes = '';
         this.strokesPlaceHolder= 'Chose a stroke format first';

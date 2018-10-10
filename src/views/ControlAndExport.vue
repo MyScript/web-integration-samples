@@ -90,6 +90,7 @@ export default {
 .controlView {
   text-align: left;
   margin: 5px;
+  overflow: auto;
 }
 .explaination{
   font-size: 0.8em;
