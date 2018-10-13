@@ -9,13 +9,13 @@
         v-on:keyup.esc="centerDialogVisible =  false"
         >
         <div class="wrapper">
-          <el-card v-for="(localInk, index) in localContent" :key="index"  class="box">
+          <el-card v-for="(localInk, index) in data" :key="index"  class="box">
              <img :src="localInk.png" class="image">
               <div>
                 <time class="time">{{ localInk.date }}</time>
                 <div class="bottom clearfix">
                   <el-button @click="select(index)" type="primary" size="small" class="button">Load</el-button>
-                  <el-button @click="remove(index)" size="small" icon="el-icon-delete" class="button button-right"></el-button>
+                  <el-button v-if="!useModels" @click="remove(index)" size="small" icon="el-icon-delete" class="button button-right"></el-button>
                 </div>
               </div>
             </el-card>
@@ -31,22 +31,34 @@
   
   export default {
     
-  name: 'browse-local-content',
-   data() {
+  name: 'browse-inks',
+  data() {
       return {
         centerDialogVisible: false,
       }
     },
-  computed: mapState([
-    'localContent',
-  ]),
-    
+  computed: {
+    data : function(){
+      if(this.useModels === true){
+        return this.models
+      }else{
+        return this.localContent
+      }
+    },
+    ...mapState([
+      'localContent','models'
+    ])
+  },
+  props: {
+    uselocal: Boolean,
+    useModels : Boolean,
+  },
     methods : {
       display(){
         this.centerDialogVisible =  true;
       },
       select(idx){
-        this.importStrokeGroups(this.$store.state.localContent[idx].strokeGroups);
+        this.importStrokeGroups(this.data[idx].strokeGroups);
         this.centerDialogVisible =  false;
         return true;
       },
@@ -109,12 +121,6 @@
     flex: 1;
     padding: 10px;
     flex-direction: column;
-  }
-  .strokearea {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    height: 200px;
   }
   .selector {
     padding: 20px;

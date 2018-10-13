@@ -1,15 +1,6 @@
 <template>
   <div>
-    <el-dialog
-        title="Strokes display"
-        :visible.sync="centerDialogVisible"
-        width="600px"
-        center
-        class="strokeimporter"
-        v-on:keyup.esc="centerDialogVisible =  false"
-        >
-        
-        <div class="modalcontainer">
+        <div class="strokedisplaymodalcontainer">
             <el-select v-model="format" placeholder="Format" class="selector" @change="change">
               <el-option
                 v-for="item in options"
@@ -18,12 +9,11 @@
                 :value="item.value">
               </el-option>
             </el-select>
-          <textarea class="strokearea" :disabled="format === ''" v-model="strokes" :placeholder="strokesPlaceHolder"></textarea>
+          <textarea class="strokedisplayarea" :disabled="format === ''" v-model="strokes" :placeholder="strokesPlaceHolder"></textarea>
         </div>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary"  :disabled="!format" @click="copy">Copy</el-button>
         </span>
-      </el-dialog>
     </div>
   </template>
   
@@ -38,7 +28,19 @@
   }
   
   function convertToPointerevents(rawStrokes){
-    return ""+JSON.stringify(rawStrokes)
+    const pointerEvents = {
+      events : rawStrokes.map(rawStroke => {
+        return {
+          "pointerType": "PEN",
+          "pointerId": rawStroke.pointerId,
+          "x": rawStroke.x,
+          "y": rawStroke.y,
+          "t": rawStroke.t,
+          "p": rawStroke.p
+        };
+      })
+    }
+    return ""+JSON.stringify(pointerEvents, ' ', 2)
   }
   
   export default {
@@ -80,7 +82,7 @@
         }else if (value === 'pointerevents'){
           this.strokes = convertToPointerevents(rawStrokes);
         } else if(value === 'jiix'){
-          this.strokes = "Perfom a recognition to access the JIXX transformation.";
+          this.strokes = "Perfom a recognition to access the JIXX exports.";
         }
       }
     }
@@ -88,20 +90,22 @@
   </script>
   
   <style>
-  .el-dialog {
-    max-width: 90vw;
-  }
-  .modalcontainer{
+ 
+  .strokedisplaymodalcontainer{
     display: flex;
     flex: 1;
     padding: 10px;
     flex-direction: column;
+    max-height: 95%;
+    height: 95%;
   }
-  .strokearea {
+  .strokedisplayarea {
     width: 100%;
     min-width: 100%;
     max-width: 100%;
-    height: 200px;
+    max-height: 80%;
+    height: 70%;
+    
   }
   .selector {
     padding: 20px;

@@ -7655,6 +7655,12 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-burger-menu@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/vue-burger-menu/-/vue-burger-menu-1.0.8.tgz#90c6d9ea4ea995733f465850ea5ee3dca88c1310"
+  dependencies:
+    vue "^2.5.17"
+
 vue-cli-plugin-element@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-element/-/vue-cli-plugin-element-1.0.0.tgz#2ee8cfecb9a49aabdc1d4cb58934113bddf3b4c0"

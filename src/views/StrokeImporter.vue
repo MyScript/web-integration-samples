@@ -1,14 +1,11 @@
 <template>
-  <div>
-    <el-dialog
-        title="Import strokes"
-        :visible.sync="centerDialogVisible"
-        width="600px"
-        center
-        class="strokeimporter"
-        >
+    <el-container class="write ">
+      <el-header class="headerLeft">
         
-        <div class="modalcontainer">
+          <a id="index-header-link" @click="back" class="ooo-link-back" style="cursor: pointer"></a>
+        
+      </el-header>
+      <el-main class="modalcontainer initialContainer">
             <div>Import is interactive features only. In batch mode a redraw of strokes into the canvas is done.</div>
             <el-select v-model="format" placeholder="Format" class="selector" @change="changePlaceHolder">
               <el-option
@@ -19,19 +16,18 @@
               </el-option>
             </el-select>
           <textarea class="strokearea" :disabled="format === ''" v-model="strokes" :placeholder="strokesPlaceHolder"></textarea>
-        </div>
+        </el-main>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="importInk">Import</el-button>
         </span>
-      </el-dialog>
-    </div>
+    </el-container>
   </template>
   
   <script>
 
   
-  import strokeGroupsPlaceHolder from './StrokeImporter/StrokeGroupsPlaceHolder';
-  import pointerEventPlaceHolder from './StrokeImporter/PointerEventPlaceHolder';
+  import strokeGroupsPlaceHolder from '@/utils/StrokeImporter/StrokeGroupsPlaceHolder';
+  import pointerEventPlaceHolder from '@/utils/StrokeImporter/PointerEventPlaceHolder';
   import strokeConvert from '@/utils/strokeConverter';
   
   
@@ -39,7 +35,6 @@
   name: 'stroke-importer',
    data() {
       return {
-        centerDialogVisible: false,
         format : '',
         strokes : '',
         strokesPlaceHolder: 'Chose a stroke format first',
@@ -60,9 +55,8 @@
       }
     },
     methods : {
-      display(){
-        this.reset();
-        this.centerDialogVisible =  true;
+      back(){
+        this.$router.push({ path: '/' })
       },
       reset(){
         this.format = '';
@@ -129,6 +123,10 @@
   </script>
   
   <style>
+  .headerLeft {
+    display: flex;
+  }
+  
   .el-dialog {
     max-width: 90vw;
   }
@@ -138,12 +136,7 @@
     padding: 10px;
     flex-direction: column;
   }
-  .strokearea {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    height: 200px;
-  }
+
   .selector {
     padding: 10px 20px 20px 20px;
   }

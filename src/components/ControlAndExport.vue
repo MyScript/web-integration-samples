@@ -3,7 +3,7 @@
     <el-header>
       <el-row type="flex">
         <el-col :span="1" class="col-left">
-          <a id="index-header-link" @click="$router.push({ path: 'interpret' })" class="ooo-link-back" style="cursor: pointer"></a>
+          <a id="index-header-link" @click="$store.commit('switchToWaitingConversion');" class="ooo-link-back" style="cursor: pointer"></a>
         </el-col>
       </el-row>
     </el-header>
@@ -42,7 +42,7 @@ import Spinner from 'vue-simple-spinner'
 import VueJsonPretty from 'vue-json-pretty'
 
 export default {
-  name: 'controlAndExport',
+  name: 'control-and-export',
   components: {
     Spinner,
     VueJsonPretty

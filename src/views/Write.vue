@@ -1,50 +1,64 @@
 <template>
+
     <el-container class="write">
       <el-header>
-          <el-menu :default-active="activeIndex" class="el-menu-custom right-separation" mode="horizontal" @select="handleSelect" menu-trigger="click">
-            <el-submenu index="1">
-              <template slot="title"></template>
-              <el-menu-item index="ImportStrokes">Import strokes</el-menu-item>
-              <el-menu-item index="1-3" disabled>Load a model</el-menu-item>
-              <el-menu-item index="BrowseLocalContent" >Browse local inks</el-menu-item>
-              <el-menu-item index="StrokesDisplay" :disabled="!firstStroke">Display strokes</el-menu-item>
-            </el-submenu>
-            
-          </el-menu>
+        
+          <a id="index-header-link" @click="back" class="ooo-link-back" style="cursor: pointer"></a>
         
           <Navbar :colors="['#000000', '#FF1A40']"></Navbar>
-          <div class="button-container">
-            <el-input placeholder="Search text (en_US)" v-model="searchTerm" class="input-with-select">
-              <el-button slot="append" icon="el-icon-search" @click="searchWithJiix"></el-button>
-            </el-input>
-          </div>
-          <div class="button-container">
+          <!--
+            FIXME Use this button in mobile view
+            div class="button-container">
             <el-button type="primary" @click="convert" :disabled="!firstStroke" class="convert-button left-separation">Convert <i class="el-icon-arrow-right el-icon-right"></i></el-button>
-          </div>
-
+          </div-->
+        <!-- Star ink and result button -->
+        <div class="button-container">
+          <el-button v-if="firstStroke" type="primary" icon="el-icon-star-off" circle @click="star" class="star-button"></el-button>
+        </div>
         
       </el-header>
-      <el-main class="mainEditor"><vue-editor :no-logo="true" @loaded="loaded" ref="vueEditor"></vue-editor></el-main>
-      <stroke-importer ref="strokeimporter"></stroke-importer>
-      <pointer-events-display ref="pointerEventsDisplay"></pointer-events-display>
-      <browse-local-content ref="browseLocalContent"></browse-local-content>
-      <el-button v-if="firstStroke" type="primary" icon="el-icon-star-off" circle @click="star" class="star-button"></el-button>
+      
+      <el-main class="mainEditor">
+        <vue-editor :no-logo="true" @loaded="loaded" ref="vueEditor"></vue-editor>
+        
+        <el-tabs tab-position="top"	:stretch="true">
+          
+          <el-tab-pane label="Interpretation">
+            <interpretation-options v-if="status !== 'CONVERTING'"></interpretation-options>
+            <control-and-export v-if="status === 'CONVERTING'"></control-and-export>
+          </el-tab-pane>
+          <el-tab-pane label="Strokes">
+            <pointer-events-display ></pointer-events-display>
+          </el-tab-pane>
+        </el-tabs>
+      </el-main>
+      
+      <!-- Menu views -->
+
+     
+
+      
+      
+      
+      
     </el-container>
+
 </template>
 
 <script>
+import InterpretationOptions from '@/components/InterpretationOptions';
+import ControlAndExport from '@/components/ControlAndExport';
 import Navbar from '@/components/Navbar';
 import VueEditor from '@/components/VueEditor';
-import StrokeImporter from '@/components/StrokeImporter';
 import PointerEventsDisplay from '@/components/PointerEventsDisplay';
-import BrowseLocalContent from '@/components/BrowseLocalContent';
 import store from '@/store/store';
 import EventBus from '@/event-bus';
 import search from '@/utils/search';
+import { mapState } from 'vuex';
 
 export default {
   name: 'write',
-  components: {Navbar, VueEditor, StrokeImporter, PointerEventsDisplay, BrowseLocalContent},
+  components: {Navbar, VueEditor, PointerEventsDisplay, InterpretationOptions, ControlAndExport},
   data(){
     return {
       activeIndex: "1",
@@ -53,22 +67,13 @@ export default {
       searchTerm : "",
     }
   },
+  computed: mapState([
+    'status',
+  ]),
   methods:{
-    handleSelect(menuIndex){
-      if(menuIndex === 'ImportStrokes'){
-        this.$refs.strokeimporter.display();
-      }else if (menuIndex === 'StrokesDisplay') {
-        this.$refs.pointerEventsDisplay.display();
-      } else if (menuIndex === 'BrowseLocalContent') {
-        this.$refs.browseLocalContent.display();
-      } else {
-        this.$message({
-          showClose: true,
-          message: 'Not implemented yet.',
-          type: 'warning'
-        });
-      }
-    },
+    back(){
+        this.$router.push({ path: '/' })
+      },
     convert(){
       const datas = {
           rawStrokes : this.$refs.vueEditor.editor.model.rawStrokes,
@@ -99,8 +104,7 @@ export default {
           date : new Date(),
         };
         store.commit('addLocalContent',datas);
-        const myStorage = window.localStorage;
-        myStorage.setItem('localContent', JSON.stringify(this.$store.state.localContent));
+        
         this.$message({
           showClose: true,
           message: 'Content stored in your current session',
@@ -157,9 +161,10 @@ export default {
 </style>
 <style scoped>
 .el-main {
-  display: flex;
-    flex-direction: column;
-    position: relative;
+  display: grid;
+  grid-template-columns: 65% 35%;
+  
+  position: relative;
   width: 100%;
   height: 100%;
   padding: 0px;
@@ -185,13 +190,11 @@ export default {
   align-self: center;
 }
 .star-button {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  z-index: 20;
+      margin: 10px;
 }
 .input-with-select {
   justify-self : center;
 }
+
 
 </style>

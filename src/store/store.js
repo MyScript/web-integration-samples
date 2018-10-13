@@ -1,11 +1,14 @@
 import Vuex from 'vuex'
 import Vue from 'vue';
+import models from './models'
 
 Vue.use(Vuex);
+const myStorage = window.localStorage;
+const localStorageLocalContent = JSON.parse(myStorage.getItem('localContent'));
 
-const localStorageLocalContent = JSON.parse(window.localStorage.getItem('localContent'));
 const store = new Vuex.Store({
   state: {
+    status : "WAITING_CONVERSION_OPTIONS",//"CONVERTING"
     strokeGroups : [],
     recognitionOptions : {},
     requestedExportResultsTypes : [],
@@ -17,6 +20,7 @@ const store = new Vuex.Store({
         requestedMimeTypes : [],
     },
     localContent : localStorageLocalContent ? localStorageLocalContent : [],
+    models,
     preloadedContent : [],
     currentContent : {}
   },
@@ -44,12 +48,20 @@ const store = new Vuex.Store({
     },
     addLocalContent(state, newLocalContent){
       state.localContent.push(newLocalContent);
+      myStorage.setItem('localContent', JSON.stringify(newLocalContent));
     },
     removeLocalContentItem(state, idx){
       state.localContent.splice(idx, 1);
+      myStorage.setItem('localContent', JSON.stringify(state.localContent));
     },
     updateCurrentContent(state, currentContent){
       state.currentContent = currentContent;
+    },
+    switchToConvertingStatus(state){
+      state.status = "CONVERTING";
+    },
+    switchToWaitingConversion(state){
+      state.status = "WAITING_CONVERSION_OPTIONS";
     }
   }
 });

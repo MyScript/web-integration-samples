@@ -1,12 +1,12 @@
 <template>
   <el-container>
-    <el-header>
+    <!--el-header>
       <el-row type="flex">
         <el-col :span="1" class="col-left">
           <a id="index-header-link" @click="$router.push({ path: '/' })" class="ooo-link-back" style="cursor: pointer"></a>
         </el-col>
       </el-row>
-    </el-header>
+    </el-header-->
     <el-main>
       <el-row>
         <el-col :span="24">
@@ -39,18 +39,20 @@
         </el-col>
       </el-row>
       <template v-if="requestedMimeTypes.includes('application/vnd.myscript.jiix')">
-        <el-row>
-          <el-col :span="24">
-            <el-switch  v-model="textRecoOn" active-text="Activate text recognition" >
-            </el-switch>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="24">
-            <el-switch  v-model="shapeRecoOn" active-text="Activate shape recognition" >
-            </el-switch>
-          </el-col>
-        </el-row>
+        <template v-if="partType.richJiiXOptions">
+          <el-row>
+            <el-col :span="24">
+              <el-switch  v-model="textRecoOn" active-text="Activate text recognition" >
+              </el-switch>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="24">
+              <el-switch  v-model="shapeRecoOn" active-text="Activate shape recognition" >
+              </el-switch>
+            </el-col>
+          </el-row>
+        </template>
         <el-row>
           <el-col :span="24">
             <el-switch  v-model="jiixWithStrokes" active-text="With strokes" >
@@ -107,6 +109,7 @@
 import langList from '@/static/languages.js';
 import store from '@/store/store';
 import * as recognizer from '@/utils/recognizer';
+import { mapState } from 'vuex'
 
 const defaultTheme = {
   ink: {
@@ -172,6 +175,7 @@ const partTypeOptions = {
     interactive : false,
     langSelector : true,
     convertSelector : false,
+    richJiiXOptions : true,
     supportedMimeTypes: [
       {key : "jiix", available : true},
       {key : "jpeg", available : true},
@@ -198,14 +202,14 @@ const partTypeOptions = {
 //TODO Manage style
 //TODO Display in different colors the interpretation options
 export default {
-  name: 'interpret',
-  beforeCreate(){
+  name: 'interpretation-options',
+  /*beforeCreate(){
     this.interpretationOptions = this.$store.state.interpretationOptions;
     if(this.$store.state.strokeGroups &&  this.$store.state.strokeGroups.length == 0){
       this.$router.push({ path: '/' })
     }
     
-  },
+  },*/
   data() {
       return {
         partTypeOptions,
@@ -238,7 +242,10 @@ export default {
         }else{
           return this.partTypeOptions[this.partTypeOptionKey];
         }
-      }
+      },
+      ...mapState([
+        'status','interpretationOptions'
+      ])
     },
     methods : {
       partTypeChanged(partType){
@@ -258,7 +265,15 @@ export default {
         return mimeTypesLabels[mimeType.key].mime;
       },
       convert(){
-        this.interpretationOptions = {
+        //FIXME Check at the end if this usage of $parent.$parent could not be avoided elegantly
+        const datas = {
+          rawStrokes : this.$parent.$parent.$parent.$refs.vueEditor.editor.model.rawStrokes,
+          strokeGroups : this.$parent.$parent.$parent.$refs.vueEditor.editor.model.strokeGroups,
+        };
+        store.commit('updateCurrentContent',datas);
+        store.commit('updateStrokeGroups', this.$parent.$parent.$parent.$refs.vueEditor.getStrokeGroups());
+        
+        const newInterpretationOptions = {
           partTypeOptionKey : this.partTypeOptionKey,
           lang: this.lang,
           handwritingMode : this.handwritingMode,
@@ -276,10 +291,10 @@ export default {
         }
         
         store.commit('resetExportResult');
-        store.commit('updateInterpretationOptions', this.interpretationOptions);
+        store.commit('updateInterpretationOptions', newInterpretationOptions);
         // eslint-disable-next-line
-        recognizer.launchExportAndUpdateStore(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, this.interpretationOptions, this.$store);
-        this.$router.push({ path: 'control' })
+        recognizer.launchExportAndUpdateStore(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, newInterpretationOptions, this.$store);
+        this.$store.commit('switchToConvertingStatus');
       }
     }
 }
