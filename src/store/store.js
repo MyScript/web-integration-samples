@@ -8,7 +8,7 @@ const localStorageLocalContent = JSON.parse(myStorage.getItem('localContent'));
 
 const store = new Vuex.Store({
   state: {
-    status : "WAITING_CONVERSION_OPTIONS",//"CONVERTING"
+    status : "WAITING_CONVERSION_OPTIONS",//"CONVERTING", "CONVERTED","CONTENT-MODIFIED"
     strokeGroups : [],
     recognitionOptions : {},
     requestedExportResultsTypes : [],
@@ -30,16 +30,17 @@ const store = new Vuex.Store({
     updateRecognitionOptions(state, recognitionOptions){
       state.recognitionOptions = recognitionOptions;
     },
-    resetExports(state){
-      state.exportResults = {};
-    },
     updateRequestedExportResultsTypes(state, requestedExportResultsTypes){
+      
       state.requestedExportResultsTypes = requestedExportResultsTypes;
     },
     resetExportResult(state){
       state.exportResults = {};
     },
     persistExportResult(state, exportResult){
+      if(exportResult !== undefined && state.status === 'CONVERTING'){
+        state.status = "CONVERTED";
+      }
       Vue.set(state.exportResults, exportResult.type, exportResult.exportValue)
     },
     updateInterpretationOptions(state, interpretationOptions){
@@ -58,7 +59,10 @@ const store = new Vuex.Store({
     },
     switchToWaitingConversion(state){
       state.status = "WAITING_CONVERSION_OPTIONS";
-    }
+    },
+    switchToContentModified(state){
+      state.status = "CONTENT-MODIFIED";
+    },
   }
 });
 

@@ -21,15 +21,16 @@
       <el-main class="mainEditor">
         <vue-editor :no-logo="true" @loaded="loaded" ref="vueEditor"></vue-editor>
         
-        <el-tabs tab-position="top"	:stretch="true">
-          <el-tab-pane label="Options">
+        <el-tabs tab-position="top"	:stretch="true" v-model="activeTab">
+          <el-tab-pane label="Strokes" name="strokes">
+            <pointer-events-display ></pointer-events-display>
+          </el-tab-pane>
+          <el-tab-pane label="Content type" name="content-type">
             <interpretation-options></interpretation-options>
           </el-tab-pane>
-          <el-tab-pane label="Interpretation">
-            <control-and-export v-if="status === 'CONVERTING'"></control-and-export>
-          </el-tab-pane>
-          <el-tab-pane label="Strokes">
-            <pointer-events-display ></pointer-events-display>
+          <el-tab-pane label="Interpretation" name="interpretation">
+            <div  v-if="status === 'WAITING_CONVERSION_OPTIONS'">Specify the content type first</div>
+            <control-and-export v-else></control-and-export>
           </el-tab-pane>
         </el-tabs>
       </el-main>
@@ -62,7 +63,7 @@ export default {
   components: {Navbar, VueEditor, PointerEventsDisplay, InterpretationOptions, ControlAndExport},
   data(){
     return {
-      activeIndex: "1",
+      activeTab : "strokes",
       firstStroke : false,
       isCollapse: true,
       searchTerm : "",
@@ -122,8 +123,16 @@ export default {
   mounted() {
     EventBus.$on('changed', (evt) => {
       this.firstStroke = evt.canClear;
-      store.commit('resetExports');
     });
+    
+    EventBus.$on('pointerDown', () => {
+      if(this.$store.state.status === "CONVERTED"){
+        this.$store.commit('switchToContentModified');
+      }
+    })
+    EventBus.$on('viewTabModificationRequested', (evt) => {
+      this.activeTab = evt;
+    })
   }
 }
 

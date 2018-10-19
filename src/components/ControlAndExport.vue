@@ -1,14 +1,11 @@
 <template>
   <el-container>
-
     <el-main>
-          <!--TODO -->
-          <el-row>
-            <el-col :span="24">
-          <el-button :disabled="true" type="primary" @click="convert">Re-Convert</el-button>
-            </el-col>
-          </el-row>
-      
+      <el-row v-if="status === 'CONTENT-MODIFIED'">
+        <el-col :span="24">
+          <div class="takecare">The content have been modified since. Please request a new interpretation.</div>
+        </el-col>
+      </el-row>
       <el-row>
         <el-col :span="24">
           <el-select v-model="requestedMimeType">
@@ -19,6 +16,10 @@
       </el-row>
        <el-row>
         <el-col :span="24">
+          <div v-if="status === 'CONVERTING'">
+            <spinner size="large" message="Interpreting..."/>
+            <div class="explaination">Your input is actually interpreated by MyScript Cloud</div>
+          </div>
           <div class="controlView" v-if="exportResults[requestedMimeType]">
             <img v-if="requestedMimeType.startsWith('image/png') || requestedMimeType.startsWith('image/jpeg')"  class="interpretedContent" :src="exportResults[requestedMimeType]"/>
             <vue-json-pretty  v-else-if="requestedMimeType.startsWith('application/vnd.myscript.jiix')" :data="exportResults[requestedMimeType]" class="interpretedContent"></vue-json-pretty>
@@ -32,10 +33,6 @@
               {{exportResults[requestedMimeType]}}
             </div>
           </div>
-          <div v-else>
-            <spinner size="large" message="Interpreting..."/>
-            <div class="explaination">Your input is actually interpreated by MyScript Cloud</div>
-          </div>
           <el-button v-if="exportResults[requestedMimeType]" type="primary" icon="el-icon-download" circle @click="download" class="dl-button"></el-button>
         </el-col>
        </el-row>
@@ -48,6 +45,7 @@
 import { mapState } from 'vuex'
 import Spinner from 'vue-simple-spinner'
 import VueJsonPretty from 'vue-json-pretty'
+import EventBus from '@/event-bus';
 
 export default {
   name: 'control-and-export',
@@ -63,7 +61,8 @@ export default {
   computed: mapState([
     // map this.count to store.state.count
     'interpretationOptions',
-    'exportResults'
+    'exportResults',
+    'status'
   ]),
   methods: {
     download(){
@@ -73,7 +72,22 @@ export default {
           type: 'warning'
         });
     },
+    reconvert(){
+      this.$message({
+                showClose: true,
+                message: 'Not implemented yet.',
+                type: 'warning'
+              });
+    }
+  },
+  mounted(){
+    this.requestedMimeType = this.interpretationOptions.requestedMimeTypes[0];
+    EventBus.$on('requestedMimeTypesChanged', () => {
+      this.requestedMimeType = this.interpretationOptions.requestedMimeTypes[0];
+    })
+    
   }
+  
 }
 </script>
 <style>
@@ -113,6 +127,13 @@ export default {
 <style scoped>
 .el-row {
   padding-bottom: 20px;
+}
+
+.takecare {
+    border: solid 1px lightgrey;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #E6A23C;
 }
 
 </style>

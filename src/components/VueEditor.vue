@@ -38,6 +38,7 @@ export default {
       this.$emit('loaded', evt)
     },
     changed(event) {
+      this.$store.commit('updateStrokeGroups', this.getStrokeGroups());
       EventBus.$emit('changed', {
         event,
         canClear: this.editor.model.rawStrokes.length > 0,

@@ -103,6 +103,7 @@ import langList from '@/static/languages.js';
 import store from '@/store/store';
 import * as recognizer from '@/utils/recognizer';
 import { mapState } from 'vuex'
+import EventBus from '@/event-bus';
 
 const defaultTheme = {
   ink: {
@@ -285,6 +286,9 @@ export default {
         // eslint-disable-next-line
         recognizer.launchExportAndUpdateStore(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, newInterpretationOptions, this.$store);
         this.$store.commit('switchToConvertingStatus');
+        
+        EventBus.$emit('viewTabModificationRequested', 'interpretation');
+        EventBus.$emit('requestedMimeTypesChanged',this.requestedMimeTypes);
       }
     }
 }

@@ -48,16 +48,18 @@
    data() {
       return {
         centerDialogVisible: false,
-        format : '',
+        format : 'pointerevents',
 //        strokes : '',
         strokesPlaceHolder: 'Chose a stroke format first',
-        options: [{
+        options: [
+          {
+            value: 'pointerevents',
+            label: 'PointerEvents'
+          },
+          {
           value: 'XY',
           label: 'Flat x&y '
-        }, {
-          value: 'pointerevents',
-          label: 'PointerEvents'
-        }, {
+        },  {
           value: 'jiix',
           label: 'JIIX'
         }]
@@ -81,7 +83,7 @@
     },
     methods : {
       reset(){
-        this.format = '';
+        this.format = 'pointerevents';
         this.strokes = '';
       },
       async copy() {
