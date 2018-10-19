@@ -22,9 +22,10 @@
         <vue-editor :no-logo="true" @loaded="loaded" ref="vueEditor"></vue-editor>
         
         <el-tabs tab-position="top"	:stretch="true">
-          
+          <el-tab-pane label="Options">
+            <interpretation-options></interpretation-options>
+          </el-tab-pane>
           <el-tab-pane label="Interpretation">
-            <interpretation-options v-if="status !== 'CONVERTING'"></interpretation-options>
             <control-and-export v-if="status === 'CONVERTING'"></control-and-export>
           </el-tab-pane>
           <el-tab-pane label="Strokes">

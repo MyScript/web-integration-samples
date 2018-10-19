@@ -1,12 +1,5 @@
 <template>
   <el-container>
-    <!--el-header>
-      <el-row type="flex">
-        <el-col :span="1" class="col-left">
-          <a id="index-header-link" @click="$router.push({ path: '/' })" class="ooo-link-back" style="cursor: pointer"></a>
-        </el-col>
-      </el-row>
-    </el-header-->
     <el-main>
       <el-row>
         <el-col :span="24">
@@ -26,8 +19,8 @@
       </el-row>
       
       <el-row>
-        <el-col :span="24">
-          <el-tooltip v-for="mimeKey in partType.supportedMimeTypes" :key="mimeKey.key" :content="formatLabel(mimeKey)" placement="top" effect="light">
+        <el-col :span="24" class="mimeTypes">
+          <el-tooltip v-for="mimeKey in partType.supportedMimeTypes" :key="mimeKey.key" :content="formatLabel(mimeKey)" placement="top" effect="light" class="el-checkbox">
             <el-checkbox v-model="requestedMimeTypes" :label="mimeFromMimeKey(mimeKey)" border :disabled="!mimeKey.available">{{mimeKey.key}}</el-checkbox>
           </el-tooltip>
         </el-col>
@@ -300,6 +293,14 @@ export default {
 <style scoped>
 .el-row {
   padding-bottom: 20px;
+}
+.el-checkbox {
+  margin-left: 10px;
+}
+.mimeTypes {
+  display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-gap: 5px;
 }
 
 </style>

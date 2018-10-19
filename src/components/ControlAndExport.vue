@@ -1,15 +1,24 @@
 <template>
   <el-container>
-    <el-header>
-      <el-row type="flex">
-        <el-col :span="1" class="col-left">
-          <a id="index-header-link" @click="$store.commit('switchToWaitingConversion');" class="ooo-link-back" style="cursor: pointer"></a>
+
+    <el-main>
+          <!--TODO -->
+          <el-row>
+            <el-col :span="24">
+          <el-button :disabled="true" type="primary" @click="convert">Re-Convert</el-button>
+            </el-col>
+          </el-row>
+      
+      <el-row>
+        <el-col :span="24">
+          <el-select v-model="requestedMimeType">
+            <el-option v-for="requestedMimeType in interpretationOptions.requestedMimeTypes" :key="requestedMimeType" :label="requestedMimeType" :value="requestedMimeType" >
+            </el-option>
+          </el-select>
         </el-col>
       </el-row>
-    </el-header>
-    <el-main>
-      <el-tabs tab-position="top"	>
-        <el-tab-pane v-for="requestedMimeType in interpretationOptions.requestedMimeTypes" :key="requestedMimeType" :label="requestedMimeType">
+       <el-row>
+        <el-col :span="24">
           <div class="controlView" v-if="exportResults[requestedMimeType]">
             <img v-if="requestedMimeType.startsWith('image/png') || requestedMimeType.startsWith('image/jpeg')"  class="interpretedContent" :src="exportResults[requestedMimeType]"/>
             <vue-json-pretty  v-else-if="requestedMimeType.startsWith('application/vnd.myscript.jiix')" :data="exportResults[requestedMimeType]" class="interpretedContent"></vue-json-pretty>
@@ -28,9 +37,8 @@
             <div class="explaination">Your input is actually interpreated by MyScript Cloud</div>
           </div>
           <el-button v-if="exportResults[requestedMimeType]" type="primary" icon="el-icon-download" circle @click="download" class="dl-button"></el-button>
-        </el-tab-pane>
-      </el-tabs>
-        
+        </el-col>
+       </el-row>
     </el-main>
   </el-container>
 </template>
@@ -46,6 +54,11 @@ export default {
   components: {
     Spinner,
     VueJsonPretty
+  },
+  data(){
+    return {
+      requestedMimeType : '',
+    }
   },
   computed: mapState([
     // map this.count to store.state.count
@@ -97,4 +110,9 @@ export default {
   color: #757B7F;
 }
 </style>
+<style scoped>
+.el-row {
+  padding-bottom: 20px;
+}
 
+</style>
