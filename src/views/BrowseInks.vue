@@ -14,57 +14,23 @@
           </div>
           
           <h3>Models</h3>
-          <div  class="wrapper">
-            <el-card v-for="(localInk, index) in models" :key="index"  class="box">
-              <img :src="localInk.png" class="image">
-                <div>
-                  <time class="time">{{ localInk.date }}</time>
-                  <div class="bottom clearfix">
-                    <el-button @click="select(index)" type="primary" size="small" class="button">Load</el-button>
-                    <el-button v-if="!useModels" @click="remove(index)" size="small" icon="el-icon-delete" class="button button-right"></el-button>
-                  </div>
-                </div>
-              </el-card>
-          </div>
+          <ink-list :useModels="true"></ink-list>
+          
           
           <h3>Previously stored inks</h3>
-          <div  class="wrapper">
-            <el-card v-for="(localInk, index) in localContent" :key="index"  class="box">
-              <img :src="localInk.png" class="image">
-                <div>
-                  <time class="time">{{ localInk.date }}</time>
-                  <div class="bottom clearfix">
-                    <el-button @click="select(index)" type="primary" size="small" class="button">Load</el-button>
-                    <el-button v-if="!useModels" @click="remove(index)" size="small" icon="el-icon-delete" class="button button-right"></el-button>
-                  </div>
-                </div>
-              </el-card>
-          </div>
+          <ink-list :useLocals="true"></ink-list>
 
         </div>
        
   </template>
   
   <script>
-  import { mapState } from 'vuex';
+  import InkList from '@/components/InkList.vue';
   
   export default {
     
   name: 'browse-inks',
-  data() {
-      return {
-        centerDialogVisible: false,
-      }
-    },
-  computed: {
-    ...mapState([
-      'localContent','models'
-    ])
-  },
-  props: {
-    uselocal: Boolean,
-    useModels : Boolean,
-  },
+  components: {InkList},
     methods : {
       createEmpty(){
         this.$router.push({ path: '/write' })
@@ -72,25 +38,6 @@
       importStrokes(){
         this.$router.push({ path: '/import-strokes' })
       },
-      display(){
-        this.centerDialogVisible =  true;
-      },
-      select(idx){
-        this.importStrokeGroups(this.data[idx].strokeGroups);
-        this.centerDialogVisible =  false;
-        return true;
-      },
-      remove(idx){
-        this.$store.commit('removeLocalContentItem',idx);
-      },
-      importStrokeGroups(strokeGroups){
-        //With interactive mode TODO manage interactive mode
-        //this.$parent.$parent.$refs.vueEditor.editor.pointerEvents(pointerEvents);
-        const editor = this.$parent.$parent.$refs.vueEditor.editor;
-        editor.clear();
-        editor.eastereggs.importStrokeGroups(editor, strokeGroups);
-        editor.forceChange();
-      }
     }
 }
   </script>
@@ -129,10 +76,6 @@
     .time {
       font-size: 1em;
       color: #999;
-    }
-    .image{
-      min-width: 100%;
-      max-width: 100%;
     }
     
     .bottom {

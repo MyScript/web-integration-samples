@@ -22,7 +22,6 @@ const store = new Vuex.Store({
     localContent : localStorageLocalContent ? localStorageLocalContent : [],
     models,
     preloadedContent : [],
-    currentContent : {}
   },
   mutations: {
     updateStrokeGroups(state, strokeGroups){
@@ -53,9 +52,6 @@ const store = new Vuex.Store({
     removeLocalContentItem(state, idx){
       state.localContent.splice(idx, 1);
       myStorage.setItem('localContent', JSON.stringify(state.localContent));
-    },
-    updateCurrentContent(state, currentContent){
-      state.currentContent = currentContent;
     },
     switchToConvertingStatus(state){
       state.status = "CONVERTING";

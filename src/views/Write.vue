@@ -75,17 +75,18 @@ export default {
         this.$router.push({ path: '/' })
       },
     convert(){
-      const datas = {
-          rawStrokes : this.$refs.vueEditor.editor.model.rawStrokes,
-          strokeGroups : this.$refs.vueEditor.editor.model.strokeGroups,
-        };
-      store.commit('updateCurrentContent',datas);
       store.commit('updateStrokeGroups', this.$refs.vueEditor.getStrokeGroups());
       this.$router.push({ path: 'interpret' })
     },
     loaded() {
-      if(this.$store.state.currentContent && this.$store.state.currentContent.rawStrokes){
-        this.$refs.vueEditor.editor.reDraw(store.state.currentContent.rawStrokes,store.state.currentContent.strokeGroups);
+      if(this.$store.state.strokeGroups && this.$store.state.strokeGroups.length > 0){
+        //this.$refs.vueEditor.editor.reDraw(store.state.currentContent.rawStrokes,store.state.currentContent.strokeGroups);
+
+        const editor = this.$refs.vueEditor.editor;
+        //editor.clear();
+        editor.eastereggs.importStrokeGroups(editor, this.$store.state.strokeGroups);
+        editor.forceChange();
+        
       }
     },
     handleOpen(key, keyPath) {

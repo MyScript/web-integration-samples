@@ -1,14 +1,5 @@
 <template>
-  <div>
-    <el-dialog
-        title="Strokes display"
-        :visible.sync="centerDialogVisible"
-        width="600px"
-        center
-        class="strokeimporter"
-        v-on:keyup.esc="centerDialogVisible =  false"
-        >
-        <div class="wrapper">
+  <div class="wrapper">
           <el-card v-for="(localInk, index) in data" :key="index"  class="box">
              <img :src="localInk.png" class="image">
               <div>
@@ -21,9 +12,6 @@
             </el-card>
 
         </div>
-       
-      </el-dialog>
-    </div>
   </template>
   
   <script>
@@ -31,7 +19,7 @@
   
   export default {
     
-  name: 'browse-inks',
+  name: 'ink-list',
   data() {
       return {
         centerDialogVisible: false,
@@ -50,13 +38,10 @@
     ])
   },
   props: {
-    uselocal: Boolean,
+    useLocals: Boolean,
     useModels : Boolean,
   },
     methods : {
-      display(){
-        this.centerDialogVisible =  true;
-      },
       select(idx){
         this.importStrokeGroups(this.data[idx].strokeGroups);
         this.centerDialogVisible =  false;
@@ -66,12 +51,8 @@
         this.$store.commit('removeLocalContentItem',idx);
       },
       importStrokeGroups(strokeGroups){
-        //With interactive mode TODO manage interactive mode
-        //this.$parent.$parent.$refs.vueEditor.editor.pointerEvents(pointerEvents);
-        const editor = this.$parent.$parent.$refs.vueEditor.editor;
-        editor.clear();
-        editor.eastereggs.importStrokeGroups(editor, strokeGroups);
-        editor.forceChange();
+        this.$store.commit('updateStrokeGroups', strokeGroups);
+        this.$router.push({ path: '/write' });
       }
     }
 }
@@ -110,10 +91,7 @@
     width: 100%;
     display: block;
   }
-
-  </style>
-  <style>
-  .el-dialog {
+   .el-dialog {
     max-width: 90vw;
   }
   .modalcontainer{
@@ -125,5 +103,7 @@
   .selector {
     padding: 20px;
   }
+
   </style>
+
   

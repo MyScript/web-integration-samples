@@ -266,11 +266,7 @@ export default {
       },
       convert(){
         //FIXME Check at the end if this usage of $parent.$parent could not be avoided elegantly
-        const datas = {
-          rawStrokes : this.$parent.$parent.$parent.$refs.vueEditor.editor.model.rawStrokes,
-          strokeGroups : this.$parent.$parent.$parent.$refs.vueEditor.editor.model.strokeGroups,
-        };
-        store.commit('updateCurrentContent',datas);
+        
         store.commit('updateStrokeGroups', this.$parent.$parent.$parent.$refs.vueEditor.getStrokeGroups());
         
         const newInterpretationOptions = {
