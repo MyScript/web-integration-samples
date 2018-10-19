@@ -1,7 +1,7 @@
 <template>
   <div>
         <div class="strokedisplaymodalcontainer">
-            <el-select v-model="format" placeholder="Format" class="selector" @change="change">
+            <el-select v-model="format" placeholder="Format" class="selector">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -49,7 +49,7 @@
       return {
         centerDialogVisible: false,
         format : '',
-        strokes : '',
+//        strokes : '',
         strokesPlaceHolder: 'Chose a stroke format first',
         options: [{
           value: 'XY',
@@ -63,27 +63,29 @@
         }]
       }
     },
+    computed : {
+      strokes(){
+        const strokeGroups = this.$store.state.strokeGroups;
+        const rawStrokes = [].concat(...strokeGroups.map(strokeGroup => (strokeGroup.strokes)));
+        
+        let ret = "";
+        if(this.format === 'XY'){
+          ret = convertToXY(rawStrokes);
+        }else if (this.format === 'pointerevents'){
+          ret = convertToPointerevents(rawStrokes);
+        } else if(this.format === 'jiix'){
+          ret = "Perfom a recognition to access the JIXX exports.";
+        }
+        return ret;
+      }
+    },
     methods : {
       reset(){
         this.format = '';
         this.strokes = '';
       },
-      display(){
-        this.reset();
-        this.centerDialogVisible =  true;
-      },
       async copy() {
           await this.$copyText(this.strokes);
-      },
-      change(value){
-        const rawStrokes = this.$parent.$parent.$refs.vueEditor.editor.model.rawStrokes;
-        if(value === 'XY'){
-          this.strokes = convertToXY(rawStrokes);
-        }else if (value === 'pointerevents'){
-          this.strokes = convertToPointerevents(rawStrokes);
-        } else if(value === 'jiix'){
-          this.strokes = "Perfom a recognition to access the JIXX exports.";
-        }
       }
     }
 }
@@ -104,7 +106,7 @@
     min-width: 100%;
     max-width: 100%;
     max-height: 80%;
-    height: 70%;
+    height: 70vh;
     
   }
   .selector {

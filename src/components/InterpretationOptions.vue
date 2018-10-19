@@ -266,8 +266,9 @@ export default {
       },
       convert(){
         //FIXME Check at the end if this usage of $parent.$parent could not be avoided elegantly
-        
-        store.commit('updateStrokeGroups', this.$parent.$parent.$parent.$refs.vueEditor.getStrokeGroups());
+        //this.$parent.$parent.$parent.$refs.vueEditor.getStrokeGroups()
+        //const strokeGroups = this.$store.state.strokeGroups;
+        //store.commit('updateStrokeGroups', strokeGroups);
         
         const newInterpretationOptions = {
           partTypeOptionKey : this.partTypeOptionKey,
