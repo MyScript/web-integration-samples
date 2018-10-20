@@ -100,13 +100,9 @@ export default {
         console.log(key, keyPath);
       },
       star(){
-        const datas = {
-          rawStrokes : this.$refs.vueEditor.editor.model.rawStrokes,
-          strokeGroups : this.$refs.vueEditor.editor.model.strokeGroups,
-          png : this.$refs.vueEditor.editor.png,
-          date : new Date(),
-        };
-        store.commit('addLocalContent',datas);
+        //TODO Add the exported results to later on allow a restauration
+
+        store.commit('addLocalContent', this.$refs.vueEditor.editor.png);
         
         this.$message({
           showClose: true,

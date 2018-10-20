@@ -86,7 +86,7 @@
        </template>
        <el-row >
         <el-col :span="24" >
-          <el-button :disabled="requestedMimeTypes.length == 0" type="primary" @click="convert">Convert</el-button>
+          <el-button :disabled="requestedMimeTypes.length == 0" type="primary" @click="convert">Interpret</el-button>
         </el-col>
       </el-row>
 

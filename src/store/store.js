@@ -4,14 +4,22 @@ import models from './models'
 
 Vue.use(Vuex);
 const myStorage = window.localStorage;
-const localStorageLocalContent = JSON.parse(myStorage.getItem('localContent'));
+
+let localStorageLocalContent;
+try{
+  localStorageLocalContent = JSON.parse(myStorage.getItem('localContent'));
+} catch (error){
+  localStorageLocalContent = []
+}
+if(!Array.isArray(localStorageLocalContent)){
+  localStorageLocalContent = [];
+}
 
 const store = new Vuex.Store({
   state: {
     status : "WAITING_CONVERSION_OPTIONS",//"CONVERTING", "CONVERTED","CONTENT-MODIFIED"
     strokeGroups : [],
     recognitionOptions : {},
-    requestedExportResultsTypes : [],
     exportResults : {},
     interpretationOptions : {
       partTypeOptionKey : '',
@@ -19,20 +27,35 @@ const store = new Vuex.Store({
         handwritingMode : false,
         requestedMimeTypes : [],
     },
-    localContent : localStorageLocalContent ? localStorageLocalContent : [],
+    localContent : localStorageLocalContent,
     models,
-    preloadedContent : [],
   },
   mutations: {
+    addLocalContent(state, png){
+      const newLocalContentItem = {
+        strokeGroups : state.strokeGroups,
+        png,
+        date : new Date(),
+        recognitionOptions : state.recognitionOptions,
+        exportResults : state.exportResults,
+        interpretationOptions : state.interpretationOptions,
+        status : state.status,
+      };
+      state.localContent.push(newLocalContentItem);
+      myStorage.setItem('localContent', JSON.stringify(state.localContent));
+    },
+    restoreContext(state, context){
+      state.recognitionOptions = context.recognitionOptions;
+      state.exportResults = context.exportResults;
+      state.interpretationOptions = context.interpretationOptions;
+      state.strokeGroups = context.strokeGroups;
+      state.status = context.status;
+    },
     updateStrokeGroups(state, strokeGroups){
       state.strokeGroups = strokeGroups;
     },
     updateRecognitionOptions(state, recognitionOptions){
       state.recognitionOptions = recognitionOptions;
-    },
-    updateRequestedExportResultsTypes(state, requestedExportResultsTypes){
-      
-      state.requestedExportResultsTypes = requestedExportResultsTypes;
     },
     resetExportResult(state){
       state.exportResults = {};
@@ -45,10 +68,6 @@ const store = new Vuex.Store({
     },
     updateInterpretationOptions(state, interpretationOptions){
       state.interpretationOptions = interpretationOptions;
-    },
-    addLocalContent(state, newLocalContent){
-      state.localContent.push(newLocalContent);
-      myStorage.setItem('localContent', JSON.stringify(newLocalContent));
     },
     removeLocalContentItem(state, idx){
       state.localContent.splice(idx, 1);

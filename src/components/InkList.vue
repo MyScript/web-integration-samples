@@ -43,17 +43,14 @@
   },
     methods : {
       select(idx){
-        this.importStrokeGroups(this.data[idx].strokeGroups);
-        this.centerDialogVisible =  false;
-        return true;
+
+        this.$store.commit('restoreContext', this.data[idx]);
+        //TODO Manage status and get the results
+        this.$router.push({ path: '/write' });
       },
       remove(idx){
         this.$store.commit('removeLocalContentItem',idx);
       },
-      importStrokeGroups(strokeGroups){
-        this.$store.commit('updateStrokeGroups', strokeGroups);
-        this.$router.push({ path: '/write' });
-      }
     }
 }
   </script>
