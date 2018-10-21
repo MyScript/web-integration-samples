@@ -29,11 +29,24 @@ const defaultState = {
   models,
 }
 const store = new Vuex.Store({
-  state : Object.assign({},defaultState),
+  state : {
+    status : "WAITING_CONVERSION_OPTIONS",//"CONVERTING", "CONVERTED","CONTENT-MODIFIED"
+    strokeGroups : [],
+    recognitionOptions : {},
+    exportResults : {},
+    interpretationOptions : {
+      partTypeOptionKey : '',
+        lang: 'en_US',
+        handwritingMode : false,
+        requestedMimeTypes : [],
+    },
+    localContent : localStorageLocalContent,
+    models,
+  },
   mutations: {
     reset(state){
       state.status = defaultState.status;
-      state.strokeGroups = defaultState.strokeGroup;
+      state.strokeGroups = defaultState.strokeGroups;
       state.recognitionOptions = defaultState.recognitionOptions;
       state.exportResults = defaultState.exportResults;
       state.interpretationOptions = defaultState.interpretationOptions;
