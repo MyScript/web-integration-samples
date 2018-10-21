@@ -9,47 +9,34 @@
                 :value="item.value">
               </el-option>
             </el-select>
-          <textarea class="strokedisplayarea" :disabled="format === ''" v-model="strokes" :placeholder="strokesPlaceHolder"></textarea>
+            <el-switch
+              v-model="editionMode"
+              active-text="Edit"
+              inactive-text="View"
+              class="editionSwitch"
+              >
+            </el-switch>
+            <textarea class="strokedisplayarea" :disabled="!this.editionMode" v-model="strokes" :placeholder="strokesPlaceHolder"></textarea>
         </div>
         <span slot="footer" class="dialog-footer">
-          <el-button type="primary"  :disabled="!format" @click="copy">Copy</el-button>
+          <el-button type="primary"  :disabled="!this.editionMode" @click="loadInk">Load ink</el-button>
+          <el-button type="secondary"  :disabled="!format" @click="copy">Copy</el-button>
         </span>
     </div>
   </template>
   
   <script>
-  function convertToXY(rawStrokes){
-    let xycontent = rawStrokes.length + "\n";
-    rawStrokes.forEach(stroke => {
-      xycontent += stroke.x.length + "\n";
-      stroke.x.forEach((x, pos) => xycontent += x + " "+ stroke.y[pos] + "\n")
-    })
-    return xycontent;
-  }
-  
-  function convertToPointerevents(rawStrokes){
-    const pointerEvents = {
-      events : rawStrokes.map(rawStroke => {
-        return {
-          "pointerType": "PEN",
-          "pointerId": rawStroke.pointerId,
-          "x": rawStroke.x,
-          "y": rawStroke.y,
-          "t": rawStroke.t,
-          "p": rawStroke.p
-        };
-      })
-    }
-    return ""+JSON.stringify(pointerEvents, ' ', 2)
-  }
+    import EventBus from '@/event-bus';
+    import strokeConvert from '@/utils/strokeConverter';
+    
   
   export default {
   name: 'pointer-events-display',
    data() {
       return {
-        centerDialogVisible: false,
         format : 'pointerevents',
-//        strokes : '',
+        editionMode : false,
+        importedStrokes : '',
         strokesPlaceHolder: 'Chose a stroke format first',
         options: [
           {
@@ -66,34 +53,84 @@
       }
     },
     computed : {
-      strokes(){
-        const strokeGroups = this.$store.state.strokeGroups;
-        const rawStrokes = [].concat(...strokeGroups.map(strokeGroup => (strokeGroup.strokes)));
-        
-        let ret = "";
-        if(this.format === 'XY'){
-          ret = convertToXY(rawStrokes);
-        }else if (this.format === 'pointerevents'){
-          ret = convertToPointerevents(rawStrokes);
-        } else if(this.format === 'jiix'){
-          ret = "Perfom a recognition to access the JIXX exports.";
+      strokes :{
+        // getter
+        get: function () {
+          if(this.editionMode && this.importedStrokes){
+            return this.importedStrokes;
+          }else{
+            const strokeGroups = this.$store.state.strokeGroups;
+            const rawStrokes = [].concat(...strokeGroups.map(strokeGroup => (strokeGroup.strokes)));
+            
+            let ret = "";
+            if(this.format === 'XY'){
+              ret = strokeConvert.convertRawStrokesToXY(rawStrokes);
+            }else if (this.format === 'pointerevents'){
+              ret = strokeConvert.convertRawStrokesToPointerevents(rawStrokes);
+            } else if(this.format === 'jiix'){
+              ret = "Perfom a recognition to access the JIXX exports.";
+            }
+            return ret;
+          }
+        },
+        // setter
+        set: function (newValue) {
+          this.importedStrokes = newValue;
         }
-        return ret;
       }
     },
     methods : {
-      reset(){
-        this.format = 'pointerevents';
-        this.strokes = '';
-      },
       async copy() {
-          await this.$copyText(this.strokes);
-      }
+        await this.$copyText(this.strokes);
+      },
+      importStrokeGroups(strokeGroups){
+        const context = {
+          strokeGroups
+        }
+        EventBus.$emit('requestClear');
+        this.$store.commit('restoreContext', context);
+        EventBus.$emit('restoreContext');
+      },
+      loadInk(){
+        if(!this.strokes){
+          this.$message({
+            showClose: true,
+            message: 'Please copy/paste strokes first.',
+            type: 'warning'
+          });
+        }else if(this.format === 'XY'){
+          this.importStrokeGroups(strokeConvert.convertXYToStrokeGroup(this.strokes));
+          this.centerDialogVisible = false
+        } else {
+          try{
+            const strokesObj = JSON.parse(this.strokes);
+            if (this.format === 'srokegroups'){
+              this.importStrokeGroups(strokesObj);
+              this.centerDialogVisible = false
+            }else if (this.format === 'pointerevents'){
+              this.importStrokeGroups(strokeConvert.convertPointerEventsToStrokeGroup(strokesObj));
+              this.centerDialogVisible = false
+            } else if(this.format === 'jiix'){
+              this.$message({
+                showClose: true,
+                message: 'Not implemented yet.',
+                type: 'warning'
+              });
+            }
+          } catch(err){
+            this.$message({
+              showClose: true,
+              message: 'Please provide a valid JSON input.\n'+err,
+              type: 'error'
+            });
+          }
+        }
+      },
     }
 }
   </script>
   
-  <style>
+  <style scoped>
  
   .strokedisplaymodalcontainer{
     display: flex;
@@ -107,12 +144,17 @@
     width: 100%;
     min-width: 100%;
     max-width: 100%;
-    max-height: 80%;
-    height: 70vh;
+    max-height: 70%;
+    height: 60vh;
     
   }
   .selector {
     padding: 20px;
+  }
+  
+  .editionSwitch {
+      align-self: center;
+      margin-bottom: 20px;
   }
   </style>
   

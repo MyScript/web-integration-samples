@@ -106,12 +106,12 @@ export default {
 }
 
 .interpretedContent {
-    max-width: 80vmin;
-    max-height: 80vmin;
+    max-width: 100%;
+    max-height: 100%;
 }
 .interpretedContent > div > svg {
-    max-width: 80vmin;
-    max-height: 80vmin;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .controlView {

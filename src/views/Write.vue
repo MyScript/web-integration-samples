@@ -72,7 +72,17 @@ export default {
   computed: mapState([
     'status',
   ]),
+  
   methods:{
+    refreshStrokesInCanvas(){
+        if(this.$store.state.strokeGroups && this.$store.state.strokeGroups.length > 0){
+        //this.$refs.vueEditor.editor.reDraw(store.state.currentContent.rawStrokes,store.state.currentContent.strokeGroups);
+
+        const editor = this.$refs.vueEditor.editor;
+        editor.eastereggs.importStrokeGroups(editor, this.$store.state.strokeGroups);
+        editor.forceChange();
+      }
+    },
     back(){
         this.$router.push({ path: '/' })
       },
@@ -81,15 +91,7 @@ export default {
       this.$router.push({ path: 'interpret' })
     },
     loaded() {
-      if(this.$store.state.strokeGroups && this.$store.state.strokeGroups.length > 0){
-        //this.$refs.vueEditor.editor.reDraw(store.state.currentContent.rawStrokes,store.state.currentContent.strokeGroups);
-
-        const editor = this.$refs.vueEditor.editor;
-        //editor.clear();
-        editor.eastereggs.importStrokeGroups(editor, this.$store.state.strokeGroups);
-        editor.forceChange();
-        
-      }
+      this.refreshStrokesInCanvas()
     },
     handleOpen(key, keyPath) {
       // eslint-disable-next-line
@@ -117,6 +119,13 @@ export default {
       }
   },
   mounted() {
+    
+    EventBus.$on('requestClear', () => {
+        this.$refs.vueEditor.editor.clear();
+      });
+    EventBus.$on('restoreContext', () => {
+        this.refreshStrokesInCanvas()
+      });
     EventBus.$on('changed', (evt) => {
       this.firstStroke = evt.canClear;
     });

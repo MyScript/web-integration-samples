@@ -1,23 +1,18 @@
 <template>
         <div class="initialContainer">
-          <h1>Explore Interactive Ink SDK batch mode</h1>
+          <h1>Interactive Ink SDK - Explore batch mode</h1>
           <div  class="wrapper">
             <el-card  class="box">
               <el-button @click="createEmpty" type="primary" size="small" class="button create mainButton">+</el-button>
               <div>Grab ink direclty from the browser</div>
             </el-card>
-              
-            <el-card  class="box">
-              <el-button @click="importStrokes" type="secondary" size="small" class="button import mainButton">Import</el-button>
-              <div>Import pointer events or X/Y strokes - Good to load stroke in a flat file</div>
-            </el-card>
           </div>
           
-          <h3>Models</h3>
+          <h3>Start with strokes from models</h3>
           <ink-list :useModels="true"></ink-list>
           
           
-          <h3>Previously stored inks</h3>
+          <h3>Start with strokes and interpretation results strored from previous sessions</h3>
           <ink-list :useLocals="true"></ink-list>
 
         </div>
@@ -33,6 +28,7 @@
   components: {InkList},
     methods : {
       createEmpty(){
+        this.$store.commit('reset'); 
         this.$router.push({ path: '/write' })
       },
       importStrokes(){

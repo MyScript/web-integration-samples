@@ -49,4 +49,30 @@ function convertPointerEventsToStrokeGroup(pointerEvents){
     return strokeGroups;
 }
 
-export default {convertXYToStrokeGroup, convertPointerEventsToStrokeGroup};
+function convertRawStrokesToXY(rawStrokes){
+  let xycontent = rawStrokes.length + "\n";
+  rawStrokes.forEach(stroke => {
+    xycontent += stroke.x.length + "\n";
+    stroke.x.forEach((x, pos) => xycontent += x + " "+ stroke.y[pos] + "\n")
+  })
+  return xycontent;
+}
+
+function convertRawStrokesToPointerevents(rawStrokes){
+  const pointerEvents = {
+    events : rawStrokes.map(rawStroke => {
+      return {
+        "pointerType": "PEN",
+        "pointerId": rawStroke.pointerId,
+        "x": rawStroke.x,
+        "y": rawStroke.y,
+        "t": rawStroke.t,
+        "p": rawStroke.p
+      };
+    })
+  }
+  return ""+JSON.stringify(pointerEvents, ' ', 2)
+}
+
+
+export default {convertXYToStrokeGroup, convertPointerEventsToStrokeGroup, convertRawStrokesToXY, convertRawStrokesToPointerevents};

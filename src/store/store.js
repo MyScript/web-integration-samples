@@ -14,23 +14,30 @@ try{
 if(!Array.isArray(localStorageLocalContent)){
   localStorageLocalContent = [];
 }
-
-const store = new Vuex.Store({
-  state: {
-    status : "WAITING_CONVERSION_OPTIONS",//"CONVERTING", "CONVERTED","CONTENT-MODIFIED"
-    strokeGroups : [],
-    recognitionOptions : {},
-    exportResults : {},
-    interpretationOptions : {
-      partTypeOptionKey : '',
-        lang: 'en_US',
-        handwritingMode : false,
-        requestedMimeTypes : [],
-    },
-    localContent : localStorageLocalContent,
-    models,
+const defaultState = {
+  status : "WAITING_CONVERSION_OPTIONS",//"CONVERTING", "CONVERTED","CONTENT-MODIFIED"
+  strokeGroups : [],
+  recognitionOptions : {},
+  exportResults : {},
+  interpretationOptions : {
+    partTypeOptionKey : '',
+      lang: 'en_US',
+      handwritingMode : false,
+      requestedMimeTypes : [],
   },
+  localContent : localStorageLocalContent,
+  models,
+}
+const store = new Vuex.Store({
+  state : Object.assign({},defaultState),
   mutations: {
+    reset(state){
+      state.status = defaultState.status;
+      state.strokeGroups = defaultState.strokeGroup;
+      state.recognitionOptions = defaultState.recognitionOptions;
+      state.exportResults = defaultState.exportResults;
+      state.interpretationOptions = defaultState.interpretationOptions;
+    },    
     addLocalContent(state, png){
       const newLocalContentItem = {
         strokeGroups : state.strokeGroups,
@@ -45,11 +52,27 @@ const store = new Vuex.Store({
       myStorage.setItem('localContent', JSON.stringify(state.localContent));
     },
     restoreContext(state, context){
-      state.recognitionOptions = context.recognitionOptions;
-      state.exportResults = context.exportResults;
-      state.interpretationOptions = context.interpretationOptions;
+      if(context.recognitionOptions){
+        state.recognitionOptions = context.recognitionOptions;
+      }else{
+        state.recognitionOptions = defaultState.recognitionOptions;
+      }
+      if(context.exportResults){
+        state.exportResults = context.exportResults;
+      }else{
+        state.exportResults = defaultState.exportResults;
+      }
+      if(context.interpretationOptions){
+        state.interpretationOptions = context.interpretationOptions;
+      } else{
+        state.interpretationOptions = defaultState.interpretationOptions;
+      }
       state.strokeGroups = context.strokeGroups;
-      state.status = context.status;
+      if(context.status){
+        state.status = context.status;
+      }else{
+        state.status = defaultState.status;
+      }
     },
     updateStrokeGroups(state, strokeGroups){
       state.strokeGroups = strokeGroups;
