@@ -53,11 +53,9 @@ export default {
 </script>
 
 <style scoped>
-
-  @media screen and (max-width: 710px) {
-    .nav-group {
-      margin-top: 6px;
-    }
+@media screen and (max-width: 710px) {
+  .nav-group {
+    margin-top: 6px;
   }
-
+}
 </style>

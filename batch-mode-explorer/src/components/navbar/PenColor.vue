@@ -43,27 +43,25 @@ export default {
 </script>
 
 <style scoped>
+.pensettings {
+  text-align: center;
+  user-select: none;
+  margin-right: 12px;
+}
 
-  .pensettings {
-    text-align: center;
-    user-select: none;
-    margin-right: 12px;
-  }
+.color {
+  height: 36px;
+  width: 36px;
+  border: #c0c0c0 1px solid;
+  border-radius: 50%;
+}
 
-  .color {
-    height: 36px;
-    width: 36px;
-    border: #c0c0c0 1px solid;
-    border-radius: 50%;
-  }
-
-  .check {
-    border-bottom: 2px solid black;
-    border-right: 2px solid black;
-    display: inline-block;
-    transform: rotate(45deg);
-    height: 16px;
-    width: 8px;
-  }
-
+.check {
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  display: inline-block;
+  transform: rotate(45deg);
+  height: 16px;
+  width: 8px;
+}
 </style>

@@ -3,7 +3,7 @@
     Thickness
     <a @click="hidePanel" class="delete"></a>
     <div class="flex-container-thickness">
-      <thickness v-for="item in thicknessSettings" :key="item.value" :itemStyle="item.style" :value="item.value" :active="item.value === 1 ? true : ''"/>
+      <thickness v-for="item in thicknessSettings" :key="item.value" :itemStyle="item.style" :value="item.value" :active="item.value === 1 ? true : ''" />
     </div>
   </div>
 </template>
@@ -52,21 +52,19 @@ export default {
 </script>
 
 <style scoped>
-
-  @media screen and (max-width: 430px) {
-    .notification {
-      right: 12px;
-      top: 96px;
-    }
-  }
-
-  @media screen and (min-width: 430px) {
-    .notification {
-      top: 56px;
-    }
-  }
+@media screen and (max-width: 430px) {
   .notification {
-    display: initial;
+    right: 12px;
+    top: 96px;
   }
+}
 
+@media screen and (min-width: 430px) {
+  .notification {
+    top: 56px;
+  }
+}
+.notification {
+  display: initial;
+}
 </style>

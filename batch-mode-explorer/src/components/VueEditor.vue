@@ -15,7 +15,7 @@ import { attach, detach } from '@/utils/custom_grabber';
 
 export default {
   name: 'vue-editor',
-  props: ['diagramData','noLogo'],
+  props: ['diagramData', 'noLogo'],
   data() {
     return {
       editor: {},
@@ -54,14 +54,14 @@ export default {
       if (
         this.exports &&
         this.exports[
-          'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation'
         ] &&
         this.saveRequested
       ) {
         const blob = new Blob(
           [
             this.exports[
-              'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
             ],
           ],
           {
@@ -82,7 +82,7 @@ export default {
           : '',
       };
     },
-    getStrokeGroups(){
+    getStrokeGroups() {
       return this.editor.model.strokeGroups;
     }
   },
@@ -170,7 +170,7 @@ export default {
       if (
         this.exports &&
         this.exports[
-          'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation'
         ]
       ) {
         const iOS =
@@ -178,7 +178,7 @@ export default {
         if (iOS) {
           const blob = new Blob([
             this.exports[
-              'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
             ],
           ]);
           FileSaver.saveAs(blob, 'myscript-diagram.pptx');
@@ -186,7 +186,7 @@ export default {
           const blob = new Blob(
             [
               this.exports[
-                'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+              'application/vnd.openxmlformats-officedocument.presentationml.presentation'
               ],
             ],
             {

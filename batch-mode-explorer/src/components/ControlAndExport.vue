@@ -9,21 +9,21 @@
       <el-row>
         <el-col :span="24">
           <el-select v-model="requestedMimeType">
-            <el-option v-for="requestedMimeType in interpretationOptions.requestedMimeTypes" :key="requestedMimeType" :label="requestedMimeType" :value="requestedMimeType" >
+            <el-option v-for="requestedMimeType in interpretationOptions.requestedMimeTypes" :key="requestedMimeType" :label="requestedMimeType" :value="requestedMimeType">
             </el-option>
           </el-select>
         </el-col>
       </el-row>
-       <el-row>
+      <el-row>
         <el-col :span="24">
           <div v-if="status === 'CONVERTING'">
-            <spinner size="large" message="Interpreting..."/>
+            <spinner size="large" message="Interpreting..." />
             <div class="explaination">Your input is actually interpreated by MyScript Cloud</div>
           </div>
           <div class="controlView" v-if="exportResults[requestedMimeType]">
-            <img v-if="requestedMimeType.startsWith('image/png') || requestedMimeType.startsWith('image/jpeg')"  class="interpretedContent" :src="exportResults[requestedMimeType]"/>
-            <vue-json-pretty  v-else-if="requestedMimeType.startsWith('application/vnd.myscript.jiix')" :data="exportResults[requestedMimeType]" class="interpretedContent"></vue-json-pretty>
-            <div v-else-if="requestedMimeType.startsWith('image/svg')"  class="interpretedContent">
+            <img v-if="requestedMimeType.startsWith('image/png') || requestedMimeType.startsWith('image/jpeg')" class="interpretedContent" :src="exportResults[requestedMimeType]" />
+            <vue-json-pretty v-else-if="requestedMimeType.startsWith('application/vnd.myscript.jiix')" :data="exportResults[requestedMimeType]" class="interpretedContent"></vue-json-pretty>
+            <div v-else-if="requestedMimeType.startsWith('image/svg')" class="interpretedContent">
               <div v-html="exportResults[requestedMimeType]"></div>
             </div>
             <div v-else-if="requestedMimeType.startsWith('application/vnd')" class="explaination">
@@ -35,7 +35,7 @@
           </div>
           <el-button v-if="exportResults[requestedMimeType]" type="primary" icon="el-icon-download" circle @click="download" class="dl-button"></el-button>
         </el-col>
-       </el-row>
+      </el-row>
     </el-main>
   </el-container>
 </template>
@@ -53,9 +53,9 @@ export default {
     Spinner,
     VueJsonPretty
   },
-  data(){
+  data() {
     return {
-      requestedMimeType : '',
+      requestedMimeType: '',
     }
   },
   computed: mapState([
@@ -65,29 +65,29 @@ export default {
     'status'
   ]),
   methods: {
-    download(){
+    download() {
       this.$message({
-          showClose: true,
-          message: 'Not implemented yet.',
-          type: 'warning'
-        });
+        showClose: true,
+        message: 'Not implemented yet.',
+        type: 'warning'
+      });
     },
-    reconvert(){
+    reconvert() {
       this.$message({
-                showClose: true,
-                message: 'Not implemented yet.',
-                type: 'warning'
-              });
+        showClose: true,
+        message: 'Not implemented yet.',
+        type: 'warning'
+      });
     }
   },
-  mounted(){
+  mounted() {
     this.requestedMimeType = this.interpretationOptions.requestedMimeTypes[0];
     EventBus.$on('requestedMimeTypesChanged', () => {
       this.requestedMimeType = this.interpretationOptions.requestedMimeTypes[0];
     })
-    
+
   }
-  
+
 }
 </script>
 <style>
@@ -106,12 +106,12 @@ export default {
 }
 
 .interpretedContent {
-    max-width: 100%;
-    max-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 .interpretedContent > div > svg {
-    max-width: 100%;
-    max-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .controlView {
@@ -119,9 +119,9 @@ export default {
   margin: 5px;
   overflow: auto;
 }
-.explaination{
+.explaination {
   font-size: 0.8em;
-  color: #757B7F;
+  color: #757b7f;
 }
 </style>
 <style scoped>
@@ -130,10 +130,9 @@ export default {
 }
 
 .takecare {
-    border: solid 1px lightgrey;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #E6A23C;
+  border: solid 1px lightgrey;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #e6a23c;
 }
-
 </style>

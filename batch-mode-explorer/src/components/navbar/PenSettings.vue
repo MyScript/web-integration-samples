@@ -1,21 +1,19 @@
 <template>
   <div class="nav-group left-separation">
-    <button @click="disableEraser" id="pen" class="nav-btn btn-fab-mini tools"
-            :class="{ penDisabled: !eraserDisabled, penEnabled: eraserDisabled }">
+    <button @click="disableEraser" id="pen" class="nav-btn btn-fab-mini tools" :class="{ penDisabled: !eraserDisabled, penEnabled: eraserDisabled }">
       <img src="@/static/img/pen.svg">
     </button>
-    <button @click="enableEraser" id="eraser" class="nav-btn btn-fab-mini tools"
-            :class="{ eraserEnabled: !eraserDisabled, eraserDisabled: eraserDisabled }">
+    <button @click="enableEraser" id="eraser" class="nav-btn btn-fab-mini tools" :class="{ eraserEnabled: !eraserDisabled, eraserDisabled: eraserDisabled }">
       <img src="@/static/img/eraser.svg">
     </button>
     <div @click="showThicknessPanel" class="pensettings thickness left-separation" ref="thickness">
       <div class="thickness-icon" :style="activeThickness.itemStyle"></div>
       <span>{{activeThickness.value}}</span>
     </div>
-    <thickness-panel id="thickness-panel" v-show="displayThicknessPanel" :style="{ left: thicknessPanelLeft }"/>
+    <thickness-panel id="thickness-panel" v-show="displayThicknessPanel" :style="{ left: thicknessPanelLeft }" />
     <div class="colors left-separation">
-      <pen-color v-for="color in colors" :color="color" :checked="color === '#000000'" :key="color"/>
-      <color-picker/>
+      <pen-color v-for="color in colors" :color="color" :checked="color === '#000000'" :key="color" />
+      <color-picker />
     </div>
   </div>
 </template>
@@ -97,29 +95,27 @@ export default {
 </script>
 
 <style scoped>
-
-  @media only screen and (max-width : 580px) {
-    .nav-group {
-      width: 100%;
-    }
+@media only screen and (max-width: 580px) {
+  .nav-group {
+    width: 100%;
   }
+}
 
-  .eraserEnabled {
-    border-bottom: #1A9FFF 2px solid;
-  }
+.eraserEnabled {
+  border-bottom: #1a9fff 2px solid;
+}
 
-  .penDisabled {
-    border-bottom: initial;
-    padding-top: 0;
-  }
+.penDisabled {
+  border-bottom: initial;
+  padding-top: 0;
+}
 
-  .eraserDisabled {
-    border-bottom: initial;
-  }
+.eraserDisabled {
+  border-bottom: initial;
+}
 
-  .penEnabled {
-    border-bottom: #1A9FFF 2px solid;
-    padding-top: 2px;
-  }
-
+.penEnabled {
+  border-bottom: #1a9fff 2px solid;
+  padding-top: 2px;
+}
 </style>

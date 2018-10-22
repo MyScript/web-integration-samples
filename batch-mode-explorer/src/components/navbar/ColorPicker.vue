@@ -4,7 +4,7 @@
       <span v-if="colorChecked" class="check" :style="{ borderColor: tickColor }"></span>
       <img v-else src="@/static/img/add.svg">
     </button>
-    <sketch-picker id="color-picker" class="picker" v-model="colors" v-show="showPicker" @input="updateColor"/>
+    <sketch-picker id="color-picker" class="picker" v-model="colors" v-show="showPicker" @input="updateColor" />
   </div>
 </template>
 
@@ -60,41 +60,38 @@ export default {
 </script>
 
 <style scoped>
-
-  @media screen and (max-width: 980px) {
-    .picker {
-      right: 12px;
-    }
-  }
-
-  @media only screen and (max-width : 580px) {
-    .pensettings {
-      display: none;
-    }
-  }
-
-
+@media screen and (max-width: 980px) {
   .picker {
-    z-index: 40;
-    width: 245px;
-    position: absolute;
+    right: 12px;
   }
+}
 
-  .color-picker {
-    height: 36px;
-    width: 36px;
-    border: #c0c0c0 1px dashed;
-    border-radius: 50%;
+@media only screen and (max-width: 580px) {
+  .pensettings {
+    display: none;
   }
+}
 
-  .color-picker:focus {
-    outline: none;
-  }
+.picker {
+  z-index: 40;
+  width: 245px;
+  position: absolute;
+}
 
-  .color-picker > img {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-  }
+.color-picker {
+  height: 36px;
+  width: 36px;
+  border: #c0c0c0 1px dashed;
+  border-radius: 50%;
+}
 
+.color-picker:focus {
+  outline: none;
+}
+
+.color-picker > img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
 </style>

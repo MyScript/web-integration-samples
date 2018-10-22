@@ -17,7 +17,7 @@
           </el-select>
         </el-col>
       </el-row>
-      
+
       <el-row>
         <el-col :span="24" class="mimeTypes">
           <el-tooltip v-for="mimeKey in partType.supportedMimeTypes" :key="mimeKey.key" :content="formatLabel(mimeKey)" placement="top" effect="light" class="el-checkbox">
@@ -35,64 +35,63 @@
         <template v-if="partType.richJiiXOptions">
           <el-row>
             <el-col :span="24">
-              <el-switch  v-model="textRecoOn" active-text="Activate text recognition" >
+              <el-switch v-model="textRecoOn" active-text="Activate text recognition">
               </el-switch>
             </el-col>
           </el-row>
           <el-row>
             <el-col :span="24">
-              <el-switch  v-model="shapeRecoOn" active-text="Activate shape recognition" >
+              <el-switch v-model="shapeRecoOn" active-text="Activate shape recognition">
               </el-switch>
             </el-col>
           </el-row>
         </template>
         <el-row>
           <el-col :span="24">
-            <el-switch  v-model="jiixWithStrokes" active-text="With strokes" >
+            <el-switch v-model="jiixWithStrokes" active-text="With strokes">
             </el-switch>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-switch  v-model="jiixWithWords" active-text="With words">
+            <el-switch v-model="jiixWithWords" active-text="With words">
             </el-switch>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-switch  v-model="jiixWithChars" active-text="With chars" >
+            <el-switch v-model="jiixWithChars" active-text="With chars">
             </el-switch>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-switch  v-model="jiixWithBoudingBox" active-text="With bouding boxes" >
+            <el-switch v-model="jiixWithBoudingBox" active-text="With bouding boxes">
             </el-switch>
           </el-col>
         </el-row>
       </template>
       <template v-if="requestedMimeTypes.includes('image/jpeg') || requestedMimeTypes.includes('image/png')">
+        <el-row>
+          <el-col :span="24">
+            <el-switch v-model="overideDefaultThemeStyle" active-text="Overide default theme" inactive-text="">
+            </el-switch>
+          </el-col>
+        </el-row>
+        <el-row v-if="overideDefaultThemeStyle">
+          <el-col :span="24">
+            <el-input type="textarea" v-model="styleshet" size="medium"></el-input>
+          </el-col>
+        </el-row>
+      </template>
       <el-row>
         <el-col :span="24">
-          <el-switch  v-model="overideDefaultThemeStyle" active-text="Overide default theme" inactive-text="">
-          </el-switch>
-        </el-col>
-      </el-row>
-      <el-row v-if="overideDefaultThemeStyle">
-        <el-col :span="24">
-          <el-input type="textarea" v-model="styleshet" size="medium"></el-input>
-        </el-col>
-      </el-row>
-       </template>
-       <el-row >
-        <el-col :span="24" >
           <el-button :disabled="requestedMimeTypes.length == 0" type="primary" @click="convert">Interpret</el-button>
         </el-col>
       </el-row>
 
     </el-main>
     <el-footer>
-     
 
     </el-footer>
   </el-container>
@@ -126,72 +125,72 @@ const defaultTheme = {
 };
 
 const mimeTypesLabels = {
-  jiix : {label : "The JSON iink format.\n By far the most complete format.", mime : "application/vnd.myscript.jiix"},
-  text : {label : "The plain text format", mime : "text/plain"},
-  latex : {label : "latex", mime : "application/x-latex"},
-  mathml : {label : "mathml", mime : "application/mathml+xml"},
-  word : {label : "word", mime : ""},
-  jpeg : {label : "jpeg", mime : "image/jpeg"},
-  png : {label : "png", mime : "image/png"},
-  pptx : {label : "pptx", mime : "application/vnd.openxmlformats-officedocument.presentationml.presentation"},
-  svg : {label : "svg", mime : "image/svg+xml"},
-  graphml : {label : "GraphML", mime : "application/graphml+xml"},
+  jiix: { label: "The JSON iink format.\n By far the most complete format.", mime: "application/vnd.myscript.jiix" },
+  text: { label: "The plain text format", mime: "text/plain" },
+  latex: { label: "latex", mime: "application/x-latex" },
+  mathml: { label: "mathml", mime: "application/mathml+xml" },
+  word: { label: "word", mime: "" },
+  jpeg: { label: "jpeg", mime: "image/jpeg" },
+  png: { label: "png", mime: "image/png" },
+  pptx: { label: "pptx", mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation" },
+  svg: { label: "svg", mime: "image/svg+xml" },
+  graphml: { label: "GraphML", mime: "application/graphml+xml" },
 }
 const partTypeOptions = {
-  TEXT : {
-    label : "Text",
-    interactive : true,
-    langSelector : true,
-    convertSelector : true,
+  TEXT: {
+    label: "Text",
+    interactive: true,
+    langSelector: true,
+    convertSelector: true,
     supportedMimeTypes: [
-      {key : "jiix", available : true},
-      {key : "text", available : true},
-      {key : "word", available : false},
-      {key : "jpeg", available : true},
-      {key : "png", available : true},
+      { key: "jiix", available: true },
+      { key: "text", available: true },
+      { key: "word", available: false },
+      { key: "jpeg", available: true },
+      { key: "png", available: true },
     ]
   },
-  MATH : {
-    label : "Math",
-    interactive : true,
-    langSelector : false,
-    convertSelector : true,
+  MATH: {
+    label: "Math",
+    interactive: true,
+    langSelector: false,
+    convertSelector: true,
     supportedMimeTypes: [
-      {key : "jiix", available : true},
-      {key : "latex", available : true},
-      {key : "mathml", available : false},
-      {key : "jpeg", available : true},
-      {key : "png", available : true},
+      { key: "jiix", available: true },
+      { key: "latex", available: true },
+      { key: "mathml", available: false },
+      { key: "jpeg", available: true },
+      { key: "png", available: true },
     ]
   },
-  "Raw Content" : {
-    label : "Raw-content",
-    interactive : false,
-    langSelector : true,
-    convertSelector : false,
-    richJiiXOptions : true,
+  "Raw Content": {
+    label: "Raw-content",
+    interactive: false,
+    langSelector: true,
+    convertSelector: false,
+    richJiiXOptions: true,
     supportedMimeTypes: [
-      {key : "jiix", available : true},
-      {key : "jpeg", available : true},
-      {key : "png", available : true},
+      { key: "jiix", available: true },
+      { key: "jpeg", available: true },
+      { key: "png", available: true },
     ]
   },
-  DIAGRAM : {
-    label : "Diagram",
-    interactive : false,
-    langSelector : true,
-    convertSelector : true,
+  DIAGRAM: {
+    label: "Diagram",
+    interactive: false,
+    langSelector: true,
+    convertSelector: true,
     supportedMimeTypes: [
-      {key : "jiix", available : true},
-      {key : "svg", available : true},
-      {key : "graphml", available : true},
-      {key : "pptx", available : true},
-      {key : "jpeg", available : true},
-      {key : "png", available : true},
-      
+      { key: "jiix", available: true },
+      { key: "svg", available: true },
+      { key: "graphml", available: true },
+      { key: "pptx", available: true },
+      { key: "jpeg", available: true },
+      { key: "png", available: true },
+
     ]
   },
-  };
+};
 
 //TODO Manage style
 //TODO Display in different colors the interpretation options
@@ -205,92 +204,92 @@ export default {
     
   },*/
   data() {
-      return {
-        partTypeOptions,
-        mimeTypesLabels,
-        langList,
-        partTypeOptionKey : '',
-        lang: 'en_US',
-        handwritingMode : false,
-        requestedMimeTypes : [],
-        textRecoOn : false,
-        shapeRecoOn : false,
-        jiixWithStrokes : false,
-        jiixWithWords : false,
-        jiixWithChars : false,
-        jiixWithBoudingBox : false,
-        overideDefaultThemeStyle : false,
-        styleshet : JSON.stringify(defaultTheme, ' ', 2),
-      }
-    },
-    created(){
-      this.partTypeOptionKey = this.interpretationOptions.partTypeOptionKey;
-        this.lang = this.interpretationOptions.lang;
-        this.handwritingMode = this.interpretationOptions.handwritingMode;
-        this.requestedMimeTypes = this.interpretationOptions.requestedMimeTypes;
-    },
-    computed : {
-      partType(){
-        if(this.partTypeOptionKey === ''){
-          return "";
-        }else{
-          return this.partTypeOptions[this.partTypeOptionKey];
-        }
-      },
-      ...mapState([
-        'status','interpretationOptions'
-      ])
-    },
-    methods : {
-      partTypeChanged(partType){
-        this.requestedMimeTypes = [];
-        this.handwritingMode = false;
-        if(partType === 'MATH'){
-          this.lang = '';
-        }else if (this.lang === ''){
-          this.lang = 'en_US';
-        }
-        return true;
-      },
-      formatLabel(mimeKey){
-        return mimeTypesLabels[mimeKey.key].label;
-      },
-      mimeFromMimeKey(mimeType){
-        return mimeTypesLabels[mimeType.key].mime;
-      },
-      convert(){
-        //FIXME Check at the end if this usage of $parent.$parent could not be avoided elegantly
-        //this.$parent.$parent.$parent.$refs.vueEditor.getStrokeGroups()
-        //const strokeGroups = this.$store.state.strokeGroups;
-        //store.commit('updateStrokeGroups', strokeGroups);
-        
-        const newInterpretationOptions = {
-          partTypeOptionKey : this.partTypeOptionKey,
-          lang: this.lang,
-          handwritingMode : this.handwritingMode,
-          requestedMimeTypes : this.requestedMimeTypes,
-          textRecoOn : this.textRecoOn,
-          shapeRecoOn : this.shapeRecoOn,
-          jiixWithStrokes : this.jiixWithStrokes,
-          jiixWithWords : this.jiixWithWords,
-          jiixWithChars : this.jiixWithChars,
-          jiixWithBoudingBox : this.jiixWithBoudingBox,
-          
-        };
-        if(this.overideDefaultThemeStyle){
-          this.interpretationOptions.styleshet = JSON.parse(this.styleshet);
-        }
-        
-        store.commit('resetExportResult');
-        store.commit('updateInterpretationOptions', newInterpretationOptions);
-        // eslint-disable-next-line
-        recognizer.launchExportAndUpdateStore(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, newInterpretationOptions, this.$store);
-        this.$store.commit('switchToConvertingStatus');
-        
-        EventBus.$emit('viewTabModificationRequested', 'interpretation');
-        EventBus.$emit('requestedMimeTypesChanged',this.requestedMimeTypes);
-      }
+    return {
+      partTypeOptions,
+      mimeTypesLabels,
+      langList,
+      partTypeOptionKey: '',
+      lang: 'en_US',
+      handwritingMode: false,
+      requestedMimeTypes: [],
+      textRecoOn: false,
+      shapeRecoOn: false,
+      jiixWithStrokes: false,
+      jiixWithWords: false,
+      jiixWithChars: false,
+      jiixWithBoudingBox: false,
+      overideDefaultThemeStyle: false,
+      styleshet: JSON.stringify(defaultTheme, ' ', 2),
     }
+  },
+  created() {
+    this.partTypeOptionKey = this.interpretationOptions.partTypeOptionKey;
+    this.lang = this.interpretationOptions.lang;
+    this.handwritingMode = this.interpretationOptions.handwritingMode;
+    this.requestedMimeTypes = this.interpretationOptions.requestedMimeTypes;
+  },
+  computed: {
+    partType() {
+      if (this.partTypeOptionKey === '') {
+        return "";
+      } else {
+        return this.partTypeOptions[this.partTypeOptionKey];
+      }
+    },
+    ...mapState([
+      'status', 'interpretationOptions'
+    ])
+  },
+  methods: {
+    partTypeChanged(partType) {
+      this.requestedMimeTypes = [];
+      this.handwritingMode = false;
+      if (partType === 'MATH') {
+        this.lang = '';
+      } else if (this.lang === '') {
+        this.lang = 'en_US';
+      }
+      return true;
+    },
+    formatLabel(mimeKey) {
+      return mimeTypesLabels[mimeKey.key].label;
+    },
+    mimeFromMimeKey(mimeType) {
+      return mimeTypesLabels[mimeType.key].mime;
+    },
+    convert() {
+      //FIXME Check at the end if this usage of $parent.$parent could not be avoided elegantly
+      //this.$parent.$parent.$parent.$refs.vueEditor.getStrokeGroups()
+      //const strokeGroups = this.$store.state.strokeGroups;
+      //store.commit('updateStrokeGroups', strokeGroups);
+
+      const newInterpretationOptions = {
+        partTypeOptionKey: this.partTypeOptionKey,
+        lang: this.lang,
+        handwritingMode: this.handwritingMode,
+        requestedMimeTypes: this.requestedMimeTypes,
+        textRecoOn: this.textRecoOn,
+        shapeRecoOn: this.shapeRecoOn,
+        jiixWithStrokes: this.jiixWithStrokes,
+        jiixWithWords: this.jiixWithWords,
+        jiixWithChars: this.jiixWithChars,
+        jiixWithBoudingBox: this.jiixWithBoudingBox,
+
+      };
+      if (this.overideDefaultThemeStyle) {
+        this.interpretationOptions.styleshet = JSON.parse(this.styleshet);
+      }
+
+      store.commit('resetExportResult');
+      store.commit('updateInterpretationOptions', newInterpretationOptions);
+      // eslint-disable-next-line
+      recognizer.launchExportAndUpdateStore(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, newInterpretationOptions, this.$store);
+      this.$store.commit('switchToConvertingStatus');
+
+      EventBus.$emit('viewTabModificationRequested', 'interpretation');
+      EventBus.$emit('requestedMimeTypesChanged', this.requestedMimeTypes);
+    }
+  }
 }
 
 </script>
@@ -303,13 +302,12 @@ export default {
 }
 .mimeTypes {
   display: grid;
-    grid-template-columns: 30% 30% 30%;
-    grid-gap: 5px;
+  grid-template-columns: 30% 30% 30%;
+  grid-gap: 5px;
 }
-
 </style>
 <style>
-.el-textarea__inner{
+.el-textarea__inner {
   height: 200px;
 }
 </style>
