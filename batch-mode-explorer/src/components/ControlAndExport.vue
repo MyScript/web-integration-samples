@@ -3,7 +3,7 @@
     <el-main>
       <el-row v-if="status === 'CONTENT-MODIFIED'">
         <el-col :span="24">
-          <div class="takecare">The content have been modified since. Please request a new interpretation.</div>
+          <div class="takecare">The content has been modified. Please request a new interpretation.</div>
         </el-col>
       </el-row>
       <el-row>

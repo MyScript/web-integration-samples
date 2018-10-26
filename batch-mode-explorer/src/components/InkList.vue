@@ -1,15 +1,19 @@
 <template>
   <div class="wrapper">
-    <el-card v-for="(localInk, index) in data" :key="index" class="box">
+    <el-button v-for="(localInk, index) in data" :key="index" @click="select(index)" type="secondary" class="button box">
       <img :src="localInk.png" class="image">
-      <div>
-        <time class="time">{{ localInk.date }}</time>
-        <div class="bottom clearfix">
-          <el-button @click="select(index)" type="primary" size="small" class="button">Load</el-button>
-          <el-button v-if="!useModels" @click="remove(index)" size="small" icon="el-icon-delete" class="button button-right"></el-button>
-        </div>
+      <div class="bottom">
+        <time class="time">{{ formatDate(localInk.date) }}</time>
+        <el-button v-if="!useModels" @click.stop="remove(index)" size="small" icon="el-icon-delete" class="button button-right"></el-button>
       </div>
-    </el-card>
+    </el-button>
+    
+    <el-button v-if="Object.keys(data).length === 0"  type="secondary" class="button box starCard" :disabled="true">
+      <div class="mainSign starSign"><i class="el-icon-star-off"></i></div>
+      <div>Use the star button to visualize your inks later</div>
+    </el-button>
+    
+
 
   </div>
 </template>
@@ -47,59 +51,22 @@ export default {
       this.$store.commit('restoreContext', this.data[idx]);
       //TODO Manage status and get the results
       this.$router.push({ path: '/write' });
+      return false;
     },
     remove(idx) {
       this.$store.commit('removeLocalContentItem', idx);
     },
+    formatDate(aDate) {
+      const parsedDate = new Date(aDate);
+      //return parsedDate;
+      return (parsedDate.toDateString());
+    }
   }
 }
 </script>
   
-  <style scoped>
-.wrapper {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-gap: 10px;
-}
-
-.box {
-  padding: 10px;
-}
-
-.time {
-  font-size: 1em;
-  color: #999;
-}
-.image {
-  min-width: 100%;
-  max-width: 100%;
-}
-
-.bottom {
-  margin-top: 13px;
-  line-height: 12px;
-}
-
-.button-right {
-  float: right;
-}
-
-.image {
-  width: 100%;
-  display: block;
-}
-.el-dialog {
-  max-width: 90vw;
-}
-.modalcontainer {
-  display: flex;
-  flex: 1;
-  padding: 10px;
-  flex-direction: column;
-}
-.selector {
-  padding: 20px;
-}
+<style scoped>
+@import '../static/inkList.css';
 </style>
 
   

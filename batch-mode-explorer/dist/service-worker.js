@@ -11,10 +11,10 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.4d45f65a697b73d467283d7ff7504ace.js"
+  "precache-manifest.35e6d4c65463daddc1cbc5f2420bd357.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "batch-mode-explorer"});

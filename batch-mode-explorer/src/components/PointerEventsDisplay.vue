@@ -86,7 +86,7 @@ export default {
       if (!this.strokes) {
         this.$message({
           showClose: true,
-          message: 'Please copy/paste strokes first.',
+          message: 'Please copy/paste strokes',
           type: 'warning'
         });
       } else if (this.format === 'XY') {

@@ -66,7 +66,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-switch v-model="jiixWithBoudingBox" active-text="With bouding boxes">
+            <el-switch v-model="jiixWithBoudingBox" active-text="With bounding boxes">
             </el-switch>
           </el-col>
         </el-row>
@@ -74,11 +74,11 @@
       <template v-if="requestedMimeTypes.includes('image/jpeg') || requestedMimeTypes.includes('image/png')">
         <el-row>
           <el-col :span="24">
-            <el-switch v-model="overideDefaultThemeStyle" active-text="Overide default theme" inactive-text="">
+            <el-switch v-model="overrideDefaultThemeStyle" active-text="Override default theme" inactive-text="">
             </el-switch>
           </el-col>
         </el-row>
-        <el-row v-if="overideDefaultThemeStyle">
+        <el-row v-if="overrideDefaultThemeStyle">
           <el-col :span="24">
             <el-input type="textarea" v-model="styleshet" size="medium"></el-input>
           </el-col>
@@ -158,7 +158,7 @@ const partTypeOptions = {
     supportedMimeTypes: [
       { key: "jiix", available: true },
       { key: "latex", available: true },
-      { key: "mathml", available: false },
+      { key: "mathml", available: true },
       { key: "jpeg", available: true },
       { key: "png", available: true },
     ]
@@ -218,7 +218,7 @@ export default {
       jiixWithWords: false,
       jiixWithChars: false,
       jiixWithBoudingBox: false,
-      overideDefaultThemeStyle: false,
+      overrideDefaultThemeStyle: false,
       styleshet: JSON.stringify(defaultTheme, ' ', 2),
     }
   },
@@ -276,7 +276,7 @@ export default {
         jiixWithBoudingBox: this.jiixWithBoudingBox,
 
       };
-      if (this.overideDefaultThemeStyle) {
+      if (this.overrideDefaultThemeStyle) {
         this.interpretationOptions.styleshet = JSON.parse(this.styleshet);
       }
 

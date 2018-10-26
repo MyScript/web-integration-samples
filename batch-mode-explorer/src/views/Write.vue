@@ -29,7 +29,7 @@
           <interpretation-options></interpretation-options>
         </el-tab-pane>
         <el-tab-pane label="Interpretation" name="interpretation">
-          <div v-if="status === 'WAITING_CONVERSION_OPTIONS'">Specify the content type first</div>
+          <div v-if="status === 'WAITING_CONVERSION_OPTIONS'">Please specify the content type</div>
           <control-and-export v-else></control-and-export>
         </el-tab-pane>
       </el-tabs>

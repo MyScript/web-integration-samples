@@ -1,0 +1,63 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 10px;
+  margin-bottom: 20px;
+}
+
+.box {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #ebeef5;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  min-height: 250px;
+  max-height: 250px;
+}
+
+.time {
+  font-size: 1em;
+  color: #999;
+  margin: 10px;
+}
+.image {
+  max-width: 100%;
+  max-height: calc(100% - 60px);
+
+  display: block;
+}
+
+.bottom {
+  width: 90%;
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 13px;
+  line-height: 12px;
+}
+
+.button-right {
+  float: right;
+}
+
+.button {
+  margin-left: 10px!important;
+}
+
+.mainSign {
+  min-height: 123px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 120px;
+}
+.starSign {
+  font-size: 80px;
+}
+
+.starCard {
+  cursor: auto!important;
+}
