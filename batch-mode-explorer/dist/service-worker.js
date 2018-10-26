@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.35e6d4c65463daddc1cbc5f2420bd357.js"
+  "precache-manifest.d5bbd8c3a0c71ced5c8f9f1f64ab04b4.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "batch-mode-explorer"});

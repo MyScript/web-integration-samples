@@ -4,6 +4,7 @@ import router from './router'
 import store from './store/store'
 import './plugins/element.js'
 import VueClipboard from 'vue-clipboard2'
+import './registerServiceWorker'
 
 Vue.config.productionTip = false
 new Vue({
