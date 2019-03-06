@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import * as MyScriptJS from 'myscript/src/myscript'
+import * as MyScriptJS from 'myscript'
 import 'myscript/dist/myscript.min.css';
 
 const editorStyle = {
