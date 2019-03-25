@@ -5,8 +5,11 @@ import * as MyScriptJS from 'myscript'
 import 'myscript/dist/myscript.min.css';
 
 const editorStyle = {
-  'minWidth': '500px',
-  'minHeight': '500px',
+  'minWidth': '100px',
+  'minHeight': '100px',
+  'width': '100vw',
+  'height': 'calc(100vh - 190px)',
+  'touch-action': 'none',
 };
 
 class App extends Component {
@@ -32,8 +35,8 @@ class App extends Component {
         server: {
           scheme: 'https',
           host: 'webdemoapi.myscript.com',
-          applicationKey: 'xxxxxx',
-          hmacKey: 'xxxxxx',
+          applicationKey: '1463c06b-251c-47b8-ad0b-ba05b9a3bd01',
+          hmacKey: '60ca101a-5e6d-4159-abc5-2efcbecce059',
         },
       },
     });
