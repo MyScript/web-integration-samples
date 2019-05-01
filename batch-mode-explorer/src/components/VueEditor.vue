@@ -1,6 +1,6 @@
 <template>
   <div class="vueEditor">
-    <div :style="{display: displayStyle}" class="editor" @pointerdown="pointerDown" @loaded="loaded" @changed="changed($event)" @exported="exported($event)" touch-action="none" ref="editor"></div>
+    <div :style="{display: displayStyle, 'touch-action':'none'}" class="editor" @pointerdown="pointerDown" @loaded="loaded" @changed="changed($event)" @exported="exported($event)" touch-action="none" ref="editor"></div>
     <div v-if="!this.noLogo" class="editor-logo"></div>
   </div>
 </template>
