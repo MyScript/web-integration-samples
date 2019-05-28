@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useRef, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import * as MyScriptJS from 'myscript'
@@ -12,21 +12,12 @@ const editorStyle = {
   'touch-action': 'none',
 };
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <div style={editorStyle} ref="editor" touch-action="none">
-        </div>
-      </div>
-    );
-  }
-  componentDidMount() {
-    this.editor = MyScriptJS.register(this.refs.editor, {
+const App = () => {
+  const editorRef = useRef(null);
+
+  useEffect(() => {
+    let editor = editorRef.current;
+    editor = MyScriptJS.register(editorRef.current, {
       recognitionParams: {
         type: 'TEXT',
         protocol: 'WEBSOCKET',
@@ -38,9 +29,20 @@ class App extends Component {
           hmacKey: '60ca101a-5e6d-4159-abc5-2efcbecce059',
         },
       },
-    });
-    window.addEventListener("resize", () => {this.editor.resize()});
-  }
+    } );
+    window.addEventListener("resize", () => {editor && editor.resize()});
+  }, []);
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1 className="App-title">Welcome to React</h1>
+      </header>
+      <div style={editorStyle} ref={editorRef} touch-action="none">
+      </div>
+    </div>
+  );
 }
 
 export default App;
