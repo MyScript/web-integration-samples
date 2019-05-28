@@ -29,7 +29,7 @@ export default App = () => {
           hmacKey: '60ca101a-5e6d-4159-abc5-2efcbecce059',
         }
       }
-    } );
+    });
     window.addEventListener("resize", () => {editor && editor.resize()});
   }, []);
 
