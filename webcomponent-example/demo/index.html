@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      background: #fafafa;
+    }
+    iink-element {
+      border: solid grey 2px;
+    }
+    #recoResults {
+      width: 99%;
+      height: 150px;
+    }
+  </style>
+</head>
+<body>
+  <div id="demo">
+    <!-- This is a simple example, for configuration adjustment,
+      you should create properties to wrap configuration or define it directly on component
+      
+      Here we support `params`to inject configuration :
+      ex for MATH : params='{"iink":{"math":{"mimeTypes":["application/x-latex","application/vnd.myscript.jiix"]},"export":{"jiix":{"strokes":true}}}}'
+    -->
+    <iink-element 
+      type="TEXT" 
+      applicationKey="YOUR_APP_KEY" 
+      hmacKey="YOUR_HMAC_KEY"
+    >
+    </iink-element>
+    Recognition results as JIIX read from the component event
+    <textarea id="recoResults"></textarea>
+  </div>
+
+  <script type="module">
+    import '../iink-element.js';
+
+    window.addEventListener('load', () => {
+      const iinkElement = document.querySelector('iink-element')
+      const recoResults = document.querySelector('#recoResults')
+      iinkElement.addEventListener('exported', (evt) => {
+        if (evt.detail.exports && evt.detail.exports['application/vnd.myscript.jiix']) {
+          recoResults.innerHTML = evt.detail.exports['application/vnd.myscript.jiix']
+        }
+      })
+    })
+  </script>
+</body>
+</html>
