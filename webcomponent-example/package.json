@@ -1,0 +1,55 @@
+{
+  "name": "iink-element",
+  "version": "0.0.1",
+  "description": "Webcomponent iink-element following open-wc recommendations",
+  "author": "MyScript",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.js",
+  "scripts": {
+    "start": "es-dev-server --app-index demo/index.html --node-resolve --preserve-symlinks --watch",
+    "start:compatibility": "es-dev-server --app-index demo/index.html --compatibility all --node-resolve --open --watch",
+    "lint:eslint": "eslint --ext .js,.html . --ignore-path .gitignore",
+    "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",
+    "lint:prettier": "prettier \"**/*.js\" --check --ignore-path .gitignore",
+    "format:prettier": "prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "storybook": "start-storybook -p 9001",
+    "storybook:build": "build-storybook -o _site -s storybook-static"
+  },
+  "dependencies": {
+    "lit-element": "^2.0.1",
+    "lit-html": "^1.0.0",
+    "iink-js": "git+https://scm.corp.myscript.com/scm/ws/iink-js.git#1.4",
+    "resize-observer-polyfill": "^1.5.1"
+  },
+  "devDependencies": {
+    "@open-wc/demoing-storybook": "^0.4.0",
+    "@open-wc/eslint-config": "^1.0.0",
+    "@open-wc/prettier-config": "^0.1.10",
+    "es-dev-server": "^1.5.0",
+    "eslint": "^6.1.0",
+    "husky": "^1.0.0",
+    "lint-staged": "^8.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@open-wc/eslint-config",
+      "eslint-config-prettier"
+    ]
+  },
+  "prettier": "@open-wc/prettier-config",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

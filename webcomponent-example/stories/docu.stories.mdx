@@ -1,0 +1,44 @@
+import { Story, Preview, Meta, Props } from '@storybook/addon-docs/blocks';
+import { html } from 'lit-html';
+
+import '../iink-element.js';
+
+<Meta title="Card|Docs" />
+
+# iink-js Wc
+
+A component for...
+
+## Features:
+
+- a
+- b
+- ...
+
+## How to use
+
+### Installation
+
+```bash
+yarn add iink-element
+```
+
+```js
+import 'iink-element/iink-element.js';
+```
+
+<Preview withToolbar>
+  <Story name="Simple" height="220px">
+    {html`
+      <iink-element></iink-element>
+    `}
+  </Story>
+</Preview>
+
+## API
+
+<Props of="iink-element" />
+
+## Playground
+
+Please select "Card Playground" story and open the knobs panel.
