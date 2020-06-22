@@ -1,20 +1,26 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import HelloWorld from '@/components/HelloWorld';
-import MyScriptJSVueComponent from '@/components/myscriptjs-vue-component';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
 
-Vue.use(Router);
+Vue.use(VueRouter)
 
-export default new Router({
-  routes: [{
+const routes = [
+  {
     path: '/',
-    name: 'HelloWorld',
-    component: HelloWorld,
+    name: 'Home',
+    component: Home
   },
   {
-    path: '/myscript-js',
-    name: 'MyScriptJSVueComponent',
-    component: MyScriptJSVueComponent,
-  },
-  ],
-});
+    path: '/iink',
+    name: 'Editor',
+    component: () => import(/* webpackChunkName: "editor" */ '@/components/Editor.vue')
+  }
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
+})
+
+export default router

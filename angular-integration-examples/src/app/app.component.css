@@ -1,10 +1,8 @@
-@import '~myscript/dist/myscript.min.css';
-
 #editor {
-  margin: auto;
-  min-width: 500px;
-  max-width: 500px;
-  min-height: 500px;
-  max-height: 500px;
-  border: 1px lightgrey solid;
-}
+    margin: auto;
+    min-width: 500px;
+    max-width: 500px;
+    min-height: 500px;
+    max-height: 500px;
+    border: 1px lightgrey solid;
+  }

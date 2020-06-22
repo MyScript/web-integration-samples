@@ -1,32 +1,21 @@
-import React, { Component } from 'react';
+import React, { useRef, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import * as MyScriptJS from 'myscript'
-import 'myscript/dist/myscript.min.css';
+import * as iink from 'iink-js';
 
-const editorStyle = {
-  'minWidth': '100px',
-  'minHeight': '100px',
-  'width': '100vw',
-  'height': 'calc(100vh - 190px)',
-  'touch-action': 'none',
-};
+function App() {
+  const editorRef = useRef(null);
+  const editorStyle = {
+    'minWidth': '100px',
+    'minHeight': '100px',
+    'width': '100vw',
+    'height': 'calc(100vh - 190px)',
+    'touchAction': 'none',
+  };
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <div style={editorStyle} ref="editor" touch-action="none">
-        </div>
-      </div>
-    );
-  }
-  componentDidMount() {
-    this.editor = MyScriptJS.register(this.refs.editor, {
+  useEffect(() => {
+    let editor = editorRef.current;
+    editor = iink.register(editorRef.current, {
       recognitionParams: {
         type: 'TEXT',
         protocol: 'WEBSOCKET',
@@ -39,8 +28,26 @@ class App extends Component {
         },
       },
     });
-    window.addEventListener("resize", () => {this.editor.resize()});
-  }
+    window.addEventListener('resize', () => { 
+      editor.resize() 
+    });
+
+    return () => {
+      window.removeEventListener('resize', () => { editor.resize() });
+      this.editor.close();
+    }
+  }, []);
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1 className="App-title">Welcome to React</h1>
+      </header>
+      <div style={editorStyle} ref={editorRef} touch-action="none">
+      </div>
+    </div>
+  )
 }
 
 export default App;

@@ -1,20 +1,17 @@
-import { Component, AfterViewInit, ViewChild,  ElementRef, ViewEncapsulation} from '@angular/core';
-import * as MyScriptJS from 'myscript';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import * as iink from 'iink-js';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChild("tref", {read: ElementRef}) domEditor: ElementRef;
   title = 'app';
   editor;
   ngAfterViewInit() : void {
-    // your code
-     console.log(this.domEditor.nativeElement);
-     this.editor = MyScriptJS.register(this.domEditor.nativeElement, {
+     this.editor = iink.register(this.domEditor.nativeElement, {
       recognitionParams: {
         type: 'TEXT',
         protocol: 'WEBSOCKET',
@@ -25,7 +22,10 @@ export class AppComponent  implements AfterViewInit {
           applicationKey: 'xxxx',
           hmacKey: 'xxxx',
         },
-      },
+      }
     });
+  };
+  ngOnDestroy() : void {
+      this.editor.close();
   }
 }
