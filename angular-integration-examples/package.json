@@ -19,7 +19,7 @@
     "@angular/platform-browser": "~9.1.7",
     "@angular/platform-browser-dynamic": "~9.1.7",
     "@angular/router": "~9.1.7",
-    "iink-js": "git+https://scm.corp.myscript.com/scm/ws/iink-js.git#1.4",
+    "iink-js": "^1.4.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
