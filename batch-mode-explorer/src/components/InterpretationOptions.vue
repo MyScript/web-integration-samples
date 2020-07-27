@@ -257,7 +257,7 @@ export default {
     mimeFromMimeKey(mimeType) {
       return mimeTypesLabels[mimeType.key].mime;
     },
-    convert() {
+    async convert() {
       //FIXME Check at the end if this usage of $parent.$parent could not be avoided elegantly
       //this.$parent.$parent.$parent.$refs.vueEditor.getStrokeGroups()
       //const strokeGroups = this.$store.state.strokeGroups;
@@ -282,11 +282,12 @@ export default {
 
       store.commit('resetExportResult');
       store.commit('updateInterpretationOptions', newInterpretationOptions);
-      // eslint-disable-next-line
-      recognizer.launchExportAndUpdateStore(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, newInterpretationOptions, this.$store);
+      
       this.$store.commit('switchToConvertingStatus');
-
       EventBus.$emit('viewTabModificationRequested', 'interpretation');
+
+      await recognizer.launchExportAndUpdateStore(this.$store.state.strokeGroups, this.partTypeOptionKey, this.requestedMimeTypes, newInterpretationOptions, this.$store);
+
       EventBus.$emit('requestedMimeTypesChanged', this.requestedMimeTypes);
     }
   }
