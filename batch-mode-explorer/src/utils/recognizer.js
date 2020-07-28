@@ -1,9 +1,9 @@
-import MyScript from 'myscript/dist/myscript.esm';
+import iink from 'iink-js/dist/iink.esm';
 
 // Creating a recognizer
-const iinkRecognizer = MyScript.DefaultBehaviors.recognizerList.filter(x => {
+const iinkRecognizer = iink.DefaultBehaviors.recognizerList.find(x => {
   const infos = x.getInfo();
-  return infos.apiVersion === 'V4' && infos.protocol === 'REST';
+  return infos.protocol === 'REST';
 });
 
 const convertBlobToBase64 = (blob) => new Promise((resolve, reject) => {
@@ -16,19 +16,19 @@ const convertBlobToBase64 = (blob) => new Promise((resolve, reject) => {
 });
 
 
-export function launchExportAndUpdateStore(strokeGroups, type, mimeTypes, interpretationOptions, store) {
-  launchExport(strokeGroups, type, mimeTypes, interpretationOptions, buildStoreCallback(store))
+export async function launchExportAndUpdateStore(strokeGroups, type, mimeTypes, interpretationOptions, store) {
+  await launchExport(strokeGroups, type, mimeTypes, interpretationOptions, buildStoreCallback(store))
 }
 
-export default function launchExport(strokeGroups, type, mimeTypes, interpretationOptions, recognitionCallback) {
+export default async function launchExport(strokeGroups, type, mimeTypes, interpretationOptions, recognitionCallback) {
   // Creating a empty model
-  const model = MyScript.InkModel.createModel();
+  const model = iink.InkModel.createModel();
   // Filling the model with the stroke groups
   model.strokeGroups = strokeGroups;
 
   // Creating a recognizer context with the configuration attached
-  const recognizerContext = MyScript.RecognizerContext.createEmptyRecognizerContext({
-    configuration: MyScript.DefaultConfiguration
+  const recognizerContext = iink.RecognizerContext.createEmptyRecognizerContext({
+    configuration: iink.DefaultConfiguration
   });
   
   const configuration = recognizerContext.editor.configuration;
@@ -43,19 +43,19 @@ export default function launchExport(strokeGroups, type, mimeTypes, interpretati
   
   configuration.recognitionParams.type = type;
   configuration.recognitionParams.protocol = 'REST';
-  configuration.recognitionParams.v4.lang = interpretationOptions.lang;
+  configuration.recognitionParams.iink.lang = interpretationOptions.lang;
   configuration.recognitionParams.server = {
     scheme: 'https',
     host: 'webdemoapi.myscript.com',
     applicationKey: '515131ab-35fa-411c-bb4d-3917e00faf60',
     hmacKey: '54b2ca8a-6752-469d-87dd-553bb450e9ad'
   };
-  configuration.recognitionParams.v4.export.jiix['bounding-box'] = interpretationOptions.jiixWithBoudingBox;
-  configuration.recognitionParams.v4.export.jiix.strokes = interpretationOptions.jiixWithStrokes;
-  configuration.recognitionParams.v4.export.jiix.text.chars	 = interpretationOptions.jiixWithChars;
-  configuration.recognitionParams.v4.export.jiix.text.words = interpretationOptions.jiixWithWords;
-  configuration.recognitionParams.v4['raw-content'].recognition.text = interpretationOptions.textRecoOn;
-  configuration.recognitionParams.v4['raw-content'].recognition.shape = interpretationOptions.shapeRecoOn;
+  configuration.recognitionParams.iink.export.jiix['bounding-box'] = interpretationOptions.jiixWithBoudingBox;
+  configuration.recognitionParams.iink.export.jiix.strokes = interpretationOptions.jiixWithStrokes;
+  configuration.recognitionParams.iink.export.jiix.text.chars	 = interpretationOptions.jiixWithChars;
+  configuration.recognitionParams.iink.export.jiix.text.words = interpretationOptions.jiixWithWords;
+  configuration.recognitionParams.iink['raw-content'].recognition.text = interpretationOptions.textRecoOn;
+  configuration.recognitionParams.iink['raw-content'].recognition.shape = interpretationOptions.shapeRecoOn;
   
   
   // Assigning a theme to the document
@@ -63,13 +63,22 @@ export default function launchExport(strokeGroups, type, mimeTypes, interpretati
   if(interpretationOptions.styleshet){
     recognizerContext.editor.theme = interpretationOptions.styleshet;
   }else{
-    recognizerContext.editor.theme = MyScript.DefaultTheme;
+    recognizerContext.editor.theme = iink.DefaultTheme;
   }
 
 
 
   // Triggering the recognition
-  iinkRecognizer[0].export_(recognizerContext, model, recognitionCallback, mimeTypes);
+  try {
+    const values = await iinkRecognizer.export_(recognizerContext, model, mimeTypes)
+    if (values) {
+      values.forEach((value) => {
+        recognitionCallback(undefined, value);
+      })
+    }
+  } catch (error) {
+    recognitionCallback(error, undefined)
+  }
 }
 
 function buildStoreCallback(store){
@@ -94,10 +103,10 @@ function buildStoreCallback(store){
             exportValue: exp
           }))
         } else {
-        store.commit('persistExportResult', {
-          type: mimeType,
-          exportValue: exportValue
-        })
+          store.commit('persistExportResult', {
+            type: mimeType,
+            exportValue: exportValue
+          })
         }
       })
     }

@@ -9,7 +9,7 @@
 /* eslint-disable import/no-named-as-default-member,no-underscore-dangle,no-undef,no-console */
 
 
-import MyScript from 'myscript/dist/myscript.esm';
+import iink from 'iink-js/dist/iink.esm';
 import EventBus from '@/event-bus';
 import { attach, detach } from '@/utils/custom_grabber';
 
@@ -112,7 +112,7 @@ export default {
         },
       },
     };
-    this.editor = MyScript.register(
+    this.editor = iink.register(
       this.$refs.editor,
       this.defaultConfiguration,
       undefined,
@@ -237,9 +237,6 @@ export default {
 };
 </script>
 
-<style>
-@import '../../node_modules/myscript/dist/myscript.min.css';
-</style>
 <style scoped>
 .vueEditor {
   height: 100%;
