@@ -25,6 +25,6 @@
   },
   "dependencies": {
     "immutable": "^3.8.1",
-    "lodash": "^4.11.1"
+    "lodash": "^4.17.21"
   }
 }
